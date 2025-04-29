@@ -6,7 +6,13 @@
 // console.log(isMarried);
 // console.log(age);
 // let fullName: string = "John Doe";
-const salary = 10000;
-const bonus = "5000";
-const totalSalary = salary + bonus;
-console.log(totalSalary);
+// const salary: number = 10000;
+// const bonus: string = "5000";
+// const totalSalary: number = salary + bonus;
+// console.log(totalSalary);
+// const isMarried: boolean = false;
+function getName(firstName, lastName) {
+  return `hello ${firstName} ${lastName}`;
+}
+const person1 = getName("Muhriddin", "Davlatov");
+console.log(person1);

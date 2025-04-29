@@ -38,3 +38,46 @@ let isMarried: boolean = false;
 ```
 
 - o'zgaruvchilarga typelar shu ko'rinishda beriladi
+
+---
+
+# **3-dars Function type**
+
+```ts
+function getName(firstName: string, lastName: string) {
+  console.log(`hello ${firstName} ${lastName}`);
+}
+
+getName("Muhriddin", "Davlatov");
+```
+
+- funksiya parametrlariga type berish
+- parametr nomidan so'ng `:` belgisi orqali amalga oshiriladi
+
+```ts
+function getName(firstName: string, lastName: string): string {
+  return `hello ${firstName} ${lastName}`;
+}
+
+const person1 = getName("Muhriddin", "Davlatov");
+console.log(person1);
+```
+
+- Funksyaning o'zi qanday qiymat qaytarishini belgilash
+- `getName(): string` - shnday amalga oshiriladi
+- agar hech narsa qaytarmasa `void` bo'ladi
+
+```ts
+const getAdult = (age: number): boolean => {
+  if (age > 18) {
+    return true;
+  }
+
+  return false;
+};
+
+const isAdult = getAdult(20);
+console.log(isAdult);
+```
+
+- Arrow Funcshinda type berish
