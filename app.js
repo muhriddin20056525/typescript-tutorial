@@ -1,7 +1,12 @@
 "use strict";
-const fullName = "John Doe";
-let isMarried = true;
-let age = 20;
-console.log(fullName);
-console.log(isMarried);
-console.log(age);
+// const fullName: string = "John Doe";
+// let isMarried: boolean = true;
+// let age: number = 20;
+// console.log(fullName);
+// console.log(isMarried);
+// console.log(age);
+// let fullName: string = "John Doe";
+const salary = 10000;
+const bonus = "5000";
+const totalSalary = salary + bonus;
+console.log(totalSalary);

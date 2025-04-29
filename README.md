@@ -26,3 +26,15 @@ tsc
 ```
 
 - `ts` faylni `js` faylga kompilayetsiya qiladi
+
+---
+
+# **2-dars TypeScript asosiy type**
+
+```ts
+let fullName: string = "John Doe";
+let age: number = 20;
+let isMarried: boolean = false;
+```
+
+- o'zgaruvchilarga typelar shu ko'rinishda beriladi
