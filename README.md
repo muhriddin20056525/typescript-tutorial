@@ -81,3 +81,28 @@ console.log(isAdult);
 ```
 
 - Arrow Funcshinda type berish
+
+---
+
+# **4-dars Object type**
+
+```ts
+const person = {
+  firstName: "Samar",
+  lastName: "Badriddinov",
+  city: "Tashkent",
+  skills: {
+    programming: "JavaScript",
+    design: "Figma",
+  },
+};
+
+function getName(data: { firstName: string; lastName: string }): string {
+  return `hello ${data.firstName} ${data.lastName}`;
+}
+
+const person1 = getName(person);
+console.log(person1);
+```
+
+- Object yaratib uni funksiyaga argument sifatida berish va funksiya argumentida kerakli xossalarni typelarini ko'rsatish

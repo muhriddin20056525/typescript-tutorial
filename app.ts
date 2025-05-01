@@ -22,13 +22,30 @@
 // const person1 = getName("Muhriddin", "Davlatov");
 // console.log(person1);
 
-const getAdult = (age: number): boolean => {
-  if (age > 18) {
-    return true;
-  }
+// const getAdult = (age: number): boolean => {
+//   if (age > 18) {
+//     return true;
+//   }
 
-  return false;
+//   return false;
+// };
+
+// const isAdult = getAdult(20);
+// console.log(isAdult);
+
+const person = {
+  firstName: "Samar",
+  lastName: "Badriddinov",
+  city: "Tashkent",
+  skills: {
+    programming: "JavaScript",
+    design: "Figma",
+  },
 };
 
-const isAdult = getAdult(20);
-console.log(isAdult);
+function getName(data: { firstName: string; lastName: string }): string {
+  return `hello ${data.firstName} ${data.lastName}`;
+}
+
+const person1 = getName(person);
+console.log(person1);
