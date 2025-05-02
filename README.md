@@ -106,3 +106,20 @@ console.log(person1);
 ```
 
 - Object yaratib uni funksiyaga argument sifatida berish va funksiya argumentida kerakli xossalarni typelarini ko'rsatish
+
+---
+
+# **5-dars Array**
+
+```ts
+const cars: string[] = ["BMW", "Audi", "Mercedes"];
+const numbers: number[] = [12, 3, 4, 5, 6];
+```
+
+- Arrayga type berish
+
+```ts
+const mixed: (string | number)[] = [1, "Hello", 2, "World"];
+```
+
+- Arrayga bir nechta malumot turini type sifatida ko'rsatish
