@@ -123,3 +123,48 @@ const mixed: (string | number)[] = [1, "Hello", 2, "World"];
 ```
 
 - Arrayga bir nechta malumot turini type sifatida ko'rsatish
+
+---
+
+# **6-dars Tupe**
+
+`Tupe` - bu o'zgarmas uzunlikdagi va turli malumot turlarini o'z ichiga olagan massiv hisoblanadi. `Tupe` orqali malum bir tartibda va aniq turlarga ega elementlarni saqlashimiz mumkin
+
+```ts
+const person: [string, number] = ["Samar Badriddinov", 22];
+```
+
+- Massivga ushbu usulda type berilsa bu tupe deyiladi
+
+```ts
+let cordinate: [number, string | number] = [98, 12];
+```
+
+- `Tupe` ni `union` type bilan ishlatish
+- Birinchi qiymat har doin `number` bo'lishi kerak 2 qiymat esa yoki `string` yoki `number` bo'lishi kerak
+
+```ts
+function getInfo(): [string, number] {
+  return ["hello", 36];
+}
+
+const logger = getInfo();
+console.log(logger);
+```
+
+- Funksiyalarda `Tupe` dan foydalanish
+- Ushbu funksiya har doim 1-qiymati `string` va 2-qiymati `number` bo'lgan array qaytaradi
+
+```ts
+function getInfo(): [string, number] {
+  return ["Samar Badriddinov", 24];
+}
+
+const logger = getInfo();
+
+const [fullName, age] = logger;
+
+console.log(fullName, age);
+```
+
+- `logger` funksiyasi qaytargan array malumotlarini destruktizatsiya qilish

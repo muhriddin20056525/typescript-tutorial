@@ -50,7 +50,26 @@
 // const person1 = getName(person);
 // console.log(person1);
 
-const cars: string[] = ["BMW", "Audi", "Mercedes"];
-const numbers: number[] = [12, 3, 4, 5, 6];
+// const cars: string[] = ["BMW", "Audi", "Mercedes"];
+// const numbers: number[] = [12, 3, 4, 5, 6];
 
-const mixed: (string | number)[] = [1, "Hello", 2, "World"];
+// const mixed: (string | number)[] = [1, "Hello", 2, "World"];
+
+// const person: [string, number] = ["Samar Badriddinov", 22];
+
+// person.push("sammi");
+
+// console.log(person[0]);
+// console.log(person[1]);
+
+// let cordinate: [number, string | number] = [98, 12];
+
+function getInfo(): [string, number] {
+  return ["Samar Badriddinov", 24];
+}
+
+const logger = getInfo();
+
+const [fullName, age] = logger;
+
+console.log(fullName, age);
