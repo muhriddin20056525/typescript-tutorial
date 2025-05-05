@@ -168,3 +168,25 @@ console.log(fullName, age);
 ```
 
 - `logger` funksiyasi qaytargan array malumotlarini destruktizatsiya qilish
+
+# **7-dars Readonly**
+
+`readonly` — o‘zgaruvchini faqat o‘qish (`read-only`) rejimida qilish uchun ishlatiladi. Ya’ni, bu qiymat bir marta belgilangandan keyin uni o‘zgartirib bo‘lmaydi.
+
+```ts
+let admins: readonly number[] = [1, 2, 3, 4, 5];
+```
+
+- `readonly` - array ni faqat o'qiladigan qildi endi unga hech qanday malumot qo'shib bo'lmaydi
+
+```ts
+let person: readonly [string, number] = ["John", 26];
+```
+
+- `Tupe` shaklidagi arrayga `readonly` berish
+
+```ts
+let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+```
+
+- `readonly` berishning 2-usuli

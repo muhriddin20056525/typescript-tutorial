@@ -64,12 +64,18 @@
 
 // let cordinate: [number, string | number] = [98, 12];
 
-function getInfo(): [string, number] {
-  return ["Samar Badriddinov", 24];
-}
+// function getInfo(): [string, number] {
+//   return ["Samar Badriddinov", 24];
+// }
 
-const logger = getInfo();
+// const logger = getInfo();
 
-const [fullName, age] = logger;
+// const [fullName, age] = logger;
 
-console.log(fullName, age);
+// console.log(fullName, age);
+
+// let admins: readonly number[] = [1, 2, 3, 4, 5];
+
+// let person: readonly [string, number] = ["John", 26];
+
+let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
