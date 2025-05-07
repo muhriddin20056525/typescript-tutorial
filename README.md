@@ -190,3 +190,46 @@ let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
 ```
 
 - `readonly` berishning 2-usuli
+
+---
+
+# **8-dars Enums**
+
+`enum` — bu maxsus ro‘yxat bo‘lib, unga aniq nomlar bilan qiymatlar beriladi. U `object` ga o'xshab ketadi lekin `enum` dagi qiymatlarni o'zgartirib bo'lmaydi
+
+```ts
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+```
+
+- Oddiy `enum` yaratish usuli. Har bir kalitga typescript o'zi qiymat beradi default holatda `0 dan boshlab increment tartibida`
+
+```ts
+enum Direction {
+  Up = 1,
+  Down = 2,
+  Left = 3,
+  Right = 4,
+}
+```
+
+- `Enum` ga qo'lda qiymat berish
+
+```ts
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT",
+}
+
+const move: Direction = Direction.Up;
+console.log(move);
+```
+
+- `Enum` yaratish va undan foydalanish
+- `Enum` qiymati o'zgaruvchiga tenglanganda shu o'zgaruvchining type ham u foydalanayotgan `Enum` ga teng bo'lishi kerak

@@ -78,4 +78,60 @@
 
 // let person: readonly [string, number] = ["John", 26];
 
-let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+// let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+
+// enum Direction {
+//   Up,
+//   Down,
+//   Left,
+//   Right,
+// }
+
+// enum Direction {
+//   Up = 1,
+//   Down = 2,
+//   Left = 3,
+//   Right = 4,
+// }
+
+// enum Direction {
+//   Up = "UP",
+//   Down = "DOWN",
+//   Left = "LEFT",
+//   Right = "RIGHT",
+// }
+
+// const move: Direction = Direction.Up;
+// console.log(move);
+
+// function getDirection(direction: Direction) {
+//   if (direction === Direction.Up) {
+//     return "Moving up";
+//   } else if (direction === Direction.Down) {
+//     return "Moving down";
+//   } else if (direction === Direction.Left) {
+//     return "Moving left";
+//   } else if (direction === Direction.Right) {
+//     return "Moving right";
+//   }
+// }
+
+// const moveUp = getDirection(Direction.Up);
+// console.log(moveUp);
+
+enum StatusCode {
+  OK = 200,
+  NOT_FOUND = 404,
+  INTERNAL_SERVER_ERROR = 500,
+}
+
+function handleRequest(url: string): StatusCode {
+  if (url == "/") return StatusCode.OK;
+
+  if (url == "/server-error") return StatusCode.INTERNAL_SERVER_ERROR;
+
+  return StatusCode.NOT_FOUND;
+}
+
+const homePage = handleRequest("/");
+console.log(homePage);

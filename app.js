@@ -46,9 +46,60 @@
 // console.log(person[0]);
 // console.log(person[1]);
 // let cordinate: [number, string | number] = [98, 12];
-function getInfo() {
-    return ["Samar Badriddinov", 24];
+// function getInfo(): [string, number] {
+//   return ["Samar Badriddinov", 24];
+// }
+// const logger = getInfo();
+// const [fullName, age] = logger;
+// console.log(fullName, age);
+// let admins: readonly number[] = [1, 2, 3, 4, 5];
+// let person: readonly [string, number] = ["John", 26];
+// let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5];
+// enum Direction {
+//   Up,
+//   Down,
+//   Left,
+//   Right,
+// }
+// enum Direction {
+//   Up = 1,
+//   Down = 2,
+//   Left = 3,
+//   Right = 4,
+// }
+// enum Direction {
+//   Up = "UP",
+//   Down = "DOWN",
+//   Left = "LEFT",
+//   Right = "RIGHT",
+// }
+// const move: Direction = Direction.Up;
+// console.log(move);
+// function getDirection(direction: Direction) {
+//   if (direction === Direction.Up) {
+//     return "Moving up";
+//   } else if (direction === Direction.Down) {
+//     return "Moving down";
+//   } else if (direction === Direction.Left) {
+//     return "Moving left";
+//   } else if (direction === Direction.Right) {
+//     return "Moving right";
+//   }
+// }
+// const moveUp = getDirection(Direction.Up);
+// console.log(moveUp);
+var StatusCode;
+(function (StatusCode) {
+    StatusCode[StatusCode["OK"] = 200] = "OK";
+    StatusCode[StatusCode["NOT_FOUND"] = 404] = "NOT_FOUND";
+    StatusCode[StatusCode["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
+})(StatusCode || (StatusCode = {}));
+function handleRequest(url) {
+    if (url == "/")
+        return StatusCode.OK;
+    if (url == "/server-error")
+        return StatusCode.INTERNAL_SERVER_ERROR;
+    return StatusCode.NOT_FOUND;
 }
-const logger = getInfo();
-const [fullName, age] = logger;
-console.log(fullName, age);
+const homePage = handleRequest("/");
+console.log(homePage);
