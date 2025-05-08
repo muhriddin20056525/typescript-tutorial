@@ -119,19 +119,68 @@
 // const moveUp = getDirection(Direction.Up);
 // console.log(moveUp);
 
-enum StatusCode {
-  OK = 200,
-  NOT_FOUND = 404,
-  INTERNAL_SERVER_ERROR = 500,
+// enum StatusCode {
+//   OK = 200,
+//   NOT_FOUND = 404,
+//   INTERNAL_SERVER_ERROR = 500,
+// }
+
+// function handleRequest(url: string): StatusCode {
+//   if (url == "/") return StatusCode.OK;
+
+//   if (url == "/server-error") return StatusCode.INTERNAL_SERVER_ERROR;
+
+//   return StatusCode.NOT_FOUND;
+// }
+
+// const homePage = handleRequest("/");
+// console.log(homePage);
+
+enum Website {
+  Youtube = "Youtube",
+  Facebook = "Facebook",
+  Instagram = "Instagram",
+  Twitter = "Twitter",
 }
 
-function handleRequest(url: string): StatusCode {
-  if (url == "/") return StatusCode.OK;
-
-  if (url == "/server-error") return StatusCode.INTERNAL_SERVER_ERROR;
-
-  return StatusCode.NOT_FOUND;
-}
-
-const homePage = handleRequest("/");
-console.log(homePage);
+let person: {
+  id: number;
+  name: string;
+  isMarried: boolean;
+  username: string;
+  email: string[];
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string | number;
+    geo: [number, number];
+  };
+  phone: number;
+  website: Website;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+} = {
+  id: 2,
+  name: "Ervin Howell",
+  isMarried: false,
+  username: "Antonette",
+  email: ["Shanna@melissa.tv", "info@gmail.com"],
+  address: {
+    street: "Victor Plains",
+    suite: "Suite 879",
+    city: "Wisokyburgh",
+    zipcode: 905667771,
+    geo: [-43.9509, -34.4618],
+  },
+  phone: 12345674,
+  website: Website.Facebook,
+  company: {
+    name: "Deckow-Crist",
+    catchPhrase: "Proactive didactic contingency",
+    bs: "synergize scalable supply-chains",
+  },
+};
