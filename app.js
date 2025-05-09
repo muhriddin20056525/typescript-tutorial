@@ -88,18 +88,92 @@
 // }
 // const moveUp = getDirection(Direction.Up);
 // console.log(moveUp);
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["OK"] = 200] = "OK";
-    StatusCode[StatusCode["NOT_FOUND"] = 404] = "NOT_FOUND";
-    StatusCode[StatusCode["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
-})(StatusCode || (StatusCode = {}));
-function handleRequest(url) {
-    if (url == "/")
-        return StatusCode.OK;
-    if (url == "/server-error")
-        return StatusCode.INTERNAL_SERVER_ERROR;
-    return StatusCode.NOT_FOUND;
+// enum StatusCode {
+//   OK = 200,
+//   NOT_FOUND = 404,
+//   INTERNAL_SERVER_ERROR = 500,
+// }
+// function handleRequest(url: string): StatusCode {
+//   if (url == "/") return StatusCode.OK;
+//   if (url == "/server-error") return StatusCode.INTERNAL_SERVER_ERROR;
+//   return StatusCode.NOT_FOUND;
+// }
+// const homePage = handleRequest("/");
+// console.log(homePage);
+// enum Website {
+//   Youtube = "Youtube",
+//   Facebook = "Facebook",
+//   Instagram = "Instagram",
+//   Twitter = "Twitter",
+// }
+// let person: {
+//   id: number;
+//   name: string;
+//   isMarried: boolean;
+//   username: string;
+//   email: string[];
+//   address: {
+//     street: string;
+//     suite: string;
+//     city: string;
+//     zipcode: string | number;
+//     geo: [number, number];
+//   };
+//   phone: number;
+//   website: Website;
+//   company: {
+//     name: string;
+//     catchPhrase: string;
+//     bs: string;
+//   };
+// } = {
+//   id: 2,
+//   name: "Ervin Howell",
+//   isMarried: false,
+//   username: "Antonette",
+//   email: ["Shanna@melissa.tv", "info@gmail.com"],
+//   address: {
+//     street: "Victor Plains",
+//     suite: "Suite 879",
+//     city: "Wisokyburgh",
+//     zipcode: 905667771,
+//     geo: [-43.9509, -34.4618],
+//   },
+//   phone: 12345674,
+//   website: Website.Facebook,
+//   company: {
+//     name: "Deckow-Crist",
+//     catchPhrase: "Proactive didactic contingency",
+//     bs: "synergize scalable supply-chains",
+//   },
+// };
+// let id: string | number = 1;
+// id = "10";
+// id = 3;
+// id = true;
+// function printId(id: string | number): void {
+//   console.log(`The id is ${id}`);
+// }
+// printId(101);
+// printId("10");
+// printId(false);
+// function getVal(value: string | number): string | number {
+//   if (typeof value === "string") {
+//     return value.toUpperCase();
+//   } else if (typeof value === "number") {
+//     return value.toFixed(2);
+//   }
+//   return `Unknown type: ${value}`;
+// }
+// console.log(getVal("Hello"));
+// console.log(getVal(1));
+function logError(error) {
+    if (Array.isArray(error)) {
+        error.forEach((e) => console.log(e));
+    }
+    else {
+        console.error(error);
+    }
 }
-const homePage = handleRequest("/");
-console.log(homePage);
+logError("This is an error");
+logError(["Error 1", "Error 2"]);

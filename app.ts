@@ -136,51 +136,102 @@
 // const homePage = handleRequest("/");
 // console.log(homePage);
 
-enum Website {
-  Youtube = "Youtube",
-  Facebook = "Facebook",
-  Instagram = "Instagram",
-  Twitter = "Twitter",
-}
+// enum Website {
+//   Youtube = "Youtube",
+//   Facebook = "Facebook",
+//   Instagram = "Instagram",
+//   Twitter = "Twitter",
+// }
 
-let person: {
-  id: number;
-  name: string;
-  isMarried: boolean;
-  username: string;
-  email: string[];
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string | number;
-    geo: [number, number];
-  };
-  phone: number;
-  website: Website;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-} = {
-  id: 2,
-  name: "Ervin Howell",
-  isMarried: false,
-  username: "Antonette",
-  email: ["Shanna@melissa.tv", "info@gmail.com"],
-  address: {
-    street: "Victor Plains",
-    suite: "Suite 879",
-    city: "Wisokyburgh",
-    zipcode: 905667771,
-    geo: [-43.9509, -34.4618],
-  },
-  phone: 12345674,
-  website: Website.Facebook,
-  company: {
-    name: "Deckow-Crist",
-    catchPhrase: "Proactive didactic contingency",
-    bs: "synergize scalable supply-chains",
-  },
-};
+// let person: {
+//   id: number;
+//   name: string;
+//   isMarried: boolean;
+//   username: string;
+//   email: string[];
+//   address: {
+//     street: string;
+//     suite: string;
+//     city: string;
+//     zipcode: string | number;
+//     geo: [number, number];
+//   };
+//   phone: number;
+//   website: Website;
+//   company: {
+//     name: string;
+//     catchPhrase: string;
+//     bs: string;
+//   };
+// } = {
+//   id: 2,
+//   name: "Ervin Howell",
+//   isMarried: false,
+//   username: "Antonette",
+//   email: ["Shanna@melissa.tv", "info@gmail.com"],
+//   address: {
+//     street: "Victor Plains",
+//     suite: "Suite 879",
+//     city: "Wisokyburgh",
+//     zipcode: 905667771,
+//     geo: [-43.9509, -34.4618],
+//   },
+//   phone: 12345674,
+//   website: Website.Facebook,
+//   company: {
+//     name: "Deckow-Crist",
+//     catchPhrase: "Proactive didactic contingency",
+//     bs: "synergize scalable supply-chains",
+//   },
+// };
+
+// let id: string | number = 1;
+// id = "10";
+// id = 3;
+// id = true;
+
+// function printId(id: string | number): void {
+//   console.log(`The id is ${id}`);
+// }
+
+// printId(101);
+// printId("10");
+// printId(false);
+
+// function getVal(value: string | number): string | number {
+//   if (typeof value === "string") {
+//     return value.toUpperCase();
+//   } else if (typeof value === "number") {
+//     return value.toFixed(2);
+//   }
+
+//   return `Unknown type: ${value}`;
+// }
+
+// console.log(getVal("Hello"));
+// console.log(getVal(1));
+
+// function logError(error: string | string[]) {
+//   if (Array.isArray(error)) {
+//     error.forEach((e) => console.log(e));
+//   } else {
+//     console.error(error);
+//   }
+// }
+
+// logError("This is an error");
+// logError(["Error 1", "Error 2"]);
+
+// function logError(error: { message: string } | { error: string }) {
+//   if ("message" in error) {
+//     console.log("Message: ", error.message);
+//   } else {
+//     console.log("Error: ", error.error);
+//   }
+// }
+
+// logError({ message: "Hello" });
+// logError({ error: "This is error" });
+
+let data: (string | number)[] = ["BMW", 1, "Audi", 2];
+console.log(data);

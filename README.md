@@ -233,3 +233,53 @@ console.log(move);
 
 - `Enum` yaratish va undan foydalanish
 - `Enum` qiymati o'zgaruvchiga tenglanganda shu o'zgaruvchining type ham u foydalanayotgan `Enum` ga teng bo'lishi kerak
+
+---
+
+# **9-dars Union type**
+
+`union type` - deb bir elementga bir nechta type berishga aytiladi
+
+```ts
+let id: string | number = 1;
+id = "10"; // true
+id = 3; // true
+id = true; // error
+```
+
+- o'zgaruvchiga union type berish
+
+```ts
+function printId(id: string | number): void {
+  console.log(`The id is ${id}`);
+}
+
+printId(101); // true
+printId("10"); // true
+printId(false); // error
+```
+
+- funksiya parametriga union type berish
+
+```ts
+function logError(error: { message: string } | { error: string }) {
+  if ("message" in error) {
+    console.log("Message: ", error.message);
+  } else {
+    console.log("Error: ", error.error);
+  }
+}
+
+logError({ message: "Hello" });
+logError({ error: "This is error" });
+```
+
+- funksiya parametriga keladigan objectga union type berish
+- `error` objectiga 2 ta `message` yoki `error` kalitlari keladi
+
+```ts
+let data: (string | number)[] = ["BMW", 1, "Audi", 2];
+console.log(data);
+```
+
+- arrayga union type berish
