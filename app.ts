@@ -233,5 +233,22 @@
 // logError({ message: "Hello" });
 // logError({ error: "This is error" });
 
-let data: (string | number)[] = ["BMW", 1, "Audi", 2];
-console.log(data);
+// let data: (string | number)[] = ["BMW", 1, "Audi", 2];
+// console.log(data);
+
+// let statusMessage: "success" | "errror" | "loading" = "success";
+
+// let code: 200 | 400 | 500 = 200;
+
+// let isMarried: true = true;
+
+// function getStatus(status: "success" | "error"): "success" | "error" {
+//   if (status === "success") {
+//     return "success";
+//   }
+
+//   return "error";
+// }
+
+// console.log(getStatus("success"));
+// console.log(getStatus("error"));

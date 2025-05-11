@@ -283,3 +283,38 @@ console.log(data);
 ```
 
 - arrayga union type berish
+
+---
+
+# **10-dars Literal type**
+
+`Literal Type` - deb aniq turdagi qiymatlarga aytiladi. Misol uchun o'zgaruvchi bor va shu o'zgaruvchining aniq qiymatlari bor va shu o'zgaruvchiga belgilangan qiymatlardan tashqari qiymat berib bo'lmaydi.
+
+```ts
+let statusMessage: "success" | "errror" | "loading" = "success";
+```
+
+- literal type yaratish
+- `success | errror | loading` - bu litral typelardir
+
+```ts
+let code: 200 | 400 | 500 = 200;
+```
+
+- Number bilan litral type yaratish
+
+```ts
+function getStatus(status: "success" | "error"): "success" | "error" {
+  if (status === "success") {
+    return "success";
+  }
+
+  return "error";
+}
+
+console.log(getStatus("success"));
+console.log(getStatus("error"));
+```
+
+- funksiyalarda literal typedan foydalanish
+- ushbu funksiya parametr sifatida `"success" | "error"` qabul qiladi va faqatgina `"success" | "error"` qaytarishi mumkin va bu literal type orqali belgilangan
