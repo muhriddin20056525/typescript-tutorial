@@ -318,3 +318,107 @@ console.log(getStatus("error"));
 
 - funksiyalarda literal typedan foydalanish
 - ushbu funksiya parametr sifatida `"success" | "error"` qabul qiladi va faqatgina `"success" | "error"` qaytarishi mumkin va bu literal type orqali belgilangan
+
+---
+
+# **11-dars Type aliases**
+
+`Type aliases` - Typescriptda malum bir turga nom berish va uni qayta ishlatish imkonini beradi.
+
+```ts
+type ID = string | number;
+let userId: ID = 1;
+let productId: ID = "1";
+```
+
+- `Type aliases` elon qilish va undan foydalanish
+- ushbu usulda type elon qilganda undan istalgancha foydalanish mumkin
+
+```ts
+type Person = {
+  firstName: string;
+  lastName: string;
+  age: number;
+  skills: string[];
+};
+
+const user1: Person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 30,
+  skills: ["HTML", "CSS"],
+};
+```
+
+- Objectlarda `Type aliases` bilan ishlash
+
+```ts
+type Logger = (message: string) => string;
+
+const log: Logger = (message) => {
+  return message.toUpperCase();
+};
+
+console.log(log("Hello world"));
+```
+
+- funksiyalarda `Type aliases` bilan ishlash
+- `(message: string)` funksiyaning argumentiga type berish
+
+```ts
+type Person = {
+  firstName: string;
+  lastName: string;
+};
+
+type Employee = {
+  company: string;
+  role: string;
+};
+
+type CompanyWorker = Person & Employee;
+
+const worker1: CompanyWorker = {
+  firstName: "Muhriddin",
+  lastName: "Davlatov",
+  company: "Epam",
+  role: "Software Engineer",
+};
+```
+
+- Bir nechta `Type aliases` elon qilish va ularni birlashtirish
+- `CompanyWorker` type `Person` va `Employee` typelarining xossalariga ham ega
+
+```ts
+type StringArray = string[];
+let names: StringArray = ["Ali", "Vali"];
+```
+
+- Arraylarda `Type aliases` dan foydalnish
+
+```ts
+type Person = {
+  firstName: string;
+  lastName: string;
+};
+
+type PersonList = Person[];
+
+let persons: PersonList = [
+  { firstName: "Muhriddin", lastName: "Davlatov" },
+  { firstName: "Asilbek", lastName: "Davlatov" },
+];
+```
+
+- `PersonList` bu holatda `Person` dan tashkil topgan array bo'ladi
+- `PersonList` array `Person` esa uni ichidagi objectni bildiradi
+
+```ts
+type Person = {
+  firstName: string;
+  lastName: string;
+  wife?: Person;
+};
+```
+
+- `Type aliases` o'z o'ziga murojaat qilishi mumkin

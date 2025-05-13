@@ -2,6 +2,8 @@
 // let isMarried: boolean = true;
 // let age: number = 20;
 
+// import { Person } from "./app.types";
+
 // console.log(fullName);
 // console.log(isMarried);
 // console.log(age);
@@ -252,3 +254,57 @@
 
 // console.log(getStatus("success"));
 // console.log(getStatus("error"));
+
+// type ID = string | number;
+// let userId: ID = 1;
+// let productId: ID = "1";
+
+// const user1: Person = {
+//   firstName: "John",
+//   lastName: "Doe",
+//   age: 30,
+//   skills: ["HTML", "CSS"],
+// };
+
+// type Logger = (message: string) => string;
+
+// const log: Logger = (message) => {
+//   return message.toUpperCase();
+// };
+
+// console.log(log("Hello world"));
+
+// type Person = {
+//   firstName: string;
+//   lastName: string;
+// };
+
+// type Employee = {
+//   company: string;
+//   role: string;
+// };
+
+// type CompanyWorker = Person & Employee;
+
+// const worker1: CompanyWorker = {
+//   firstName: "Muhriddin",
+//   lastName: "Davlatov",
+//   company: "Epam",
+//   role: "Software Engineer",
+// };
+
+// type StringArray = string[];
+// let names: StringArray = ["Ali", "Vali"];
+
+type Person = {
+  firstName: string;
+  lastName: string;
+  wife?: Person;
+};
+
+type PersonList = Person[];
+
+let persons: PersonList = [
+  { firstName: "Muhriddin", lastName: "Davlatov" },
+  { firstName: "Asilbek", lastName: "Davlatov" },
+];
