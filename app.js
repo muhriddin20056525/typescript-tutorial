@@ -2,6 +2,7 @@
 // const fullName: string = "John Doe";
 // let isMarried: boolean = true;
 // let age: number = 20;
+// import { Person } from "./app.types";
 // console.log(fullName);
 // console.log(isMarried);
 // console.log(age);
@@ -167,13 +168,110 @@
 // }
 // console.log(getVal("Hello"));
 // console.log(getVal(1));
-function logError(error) {
-    if (Array.isArray(error)) {
-        error.forEach((e) => console.log(e));
-    }
-    else {
-        console.error(error);
-    }
+// function logError(error: string | string[]) {
+//   if (Array.isArray(error)) {
+//     error.forEach((e) => console.log(e));
+//   } else {
+//     console.error(error);
+//   }
+// }
+// logError("This is an error");
+// logError(["Error 1", "Error 2"]);
+// function logError(error: { message: string } | { error: string }) {
+//   if ("message" in error) {
+//     console.log("Message: ", error.message);
+//   } else {
+//     console.log("Error: ", error.error);
+//   }
+// }
+// logError({ message: "Hello" });
+// logError({ error: "This is error" });
+// let data: (string | number)[] = ["BMW", 1, "Audi", 2];
+// console.log(data);
+// let statusMessage: "success" | "errror" | "loading" = "success";
+// let code: 200 | 400 | 500 = 200;
+// let isMarried: true = true;
+// function getStatus(status: "success" | "error"): "success" | "error" {
+//   if (status === "success") {
+//     return "success";
+//   }
+//   return "error";
+// }
+// console.log(getStatus("success"));
+// console.log(getStatus("error"));
+// type ID = string | number;
+// let userId: ID = 1;
+// let productId: ID = "1";
+// const user1: Person = {
+//   firstName: "John",
+//   lastName: "Doe",
+//   age: 30,
+//   skills: ["HTML", "CSS"],
+// };
+// type Logger = (message: string) => string;
+// const log: Logger = (message) => {
+//   return message.toUpperCase();
+// };
+// console.log(log("Hello world"));
+// type Person = {
+//   firstName: string;
+//   lastName: string;
+// };
+// type Employee = {
+//   company: string;
+//   role: string;
+// };
+// type CompanyWorker = Person & Employee;
+// const worker1: CompanyWorker = {
+//   firstName: "Muhriddin",
+//   lastName: "Davlatov",
+//   company: "Epam",
+//   role: "Software Engineer",
+// };
+// type StringArray = string[];
+// let names: StringArray = ["Ali", "Vali"];
+// type Person = {
+//   firstName: string;
+//   lastName: string;
+//   wife?: Person;
+// };
+// type PersonList = Person[];
+// let persons: PersonList = [
+//   { firstName: "Muhriddin", lastName: "Davlatov" },
+//   { firstName: "Asilbek", lastName: "Davlatov" },
+// ];
+// interface Person {
+//   readonly firstname: string;
+//   readonly lastname: string;
+//   age?: number;
+// }
+// let persons: Person[] = [
+//   {
+//     firstname: "Muhriddin",
+//     lastname: "Davlatov",
+//   },
+//   {
+//     firstname: "Asilbek",
+//     lastname: "Davlatov",
+//   },
+// ];
+// interface Person {
+//   [key: string]: string | number;
+// }
+// const person: Person = {
+//   name: "John",
+//   age: 30,
+// };
+// function logger(text: string): void {
+//   console.log(text);
+// }
+// logger("Hello World");
+// let unusable: void;
+// unusable = "123";
+function logger(text, callback) {
+    console.log(text);
+    callback("Logged " + text);
 }
-logError("This is an error");
-logError(["Error 1", "Error 2"]);
+logger("Hello", (message) => {
+    console.log(message);
+});

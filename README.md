@@ -497,3 +497,25 @@ const person: Person = {
 ```
 
 - Kelayotgan malumot aniq bo'lmasa shu usuldan foydalanish mumkin
+
+---
+
+# **13-dars Void**
+
+`void` - Biz yozgan funksiya hech narsa `return` qilmasa u `void` qaytaradi
+
+```ts
+function logger(text: string): void {
+  console.log(text);
+}
+
+logger("Hello World");
+```
+
+- `void` qaytaradigan funksiya yozish
+
+```ts
+let unusable: void;
+```
+
+- `void` malumot turini o'zgaruvchiga berish mumkin lekin bundan hech qanday foyda yo'q

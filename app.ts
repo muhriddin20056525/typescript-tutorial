@@ -326,11 +326,44 @@
 //   },
 // ];
 
-interface Person {
-  [key: string]: string | number;
-}
+// interface Person {
+//   [key: string]: string | number;
+// }
 
-const person: Person = {
-  name: "John",
-  age: 30,
-};
+// const person: Person = {
+//   name: "John",
+//   age: 30,
+// };
+
+// function logger(text: string): void {
+//   console.log(text);
+// }
+
+// logger("Hello World");
+
+// let unusable: void;
+// unusable = "123";
+
+// function logger(text: string, callback: (message: string) => void) {
+//   console.log(text);
+//   callback("Logged " + text);
+// }
+
+// logger("Hello", (message) => {
+//   return message;
+// });
+
+// interface Calc {
+//   a: number;
+//   b?: number;
+// }
+
+// function calc(data: Calc) {
+//   if (!data.b) {
+//     return data.a;
+//   }
+//   return data.a + data.b;
+// }
+
+// const result = calc({ a: 10, b: 21 });
+// console.log(result);
