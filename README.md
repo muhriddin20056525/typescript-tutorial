@@ -422,3 +422,78 @@ type Person = {
 ```
 
 - `Type aliases` o'z o'ziga murojaat qilishi mumkin
+
+---
+
+# **12-dars Interface**
+
+`Interface` - Type bilan deyarli bir xil ishlaydi. Interface asosan object bilan ishlatiladi. `type ID = string | number` ko'rinishidagi oddiy typelarni `interface` bilan berib bo'lmaydi
+
+```ts
+interface Person {
+  firstname: string;
+  lastname: string;
+}
+```
+
+- `interface` yaratish
+
+```ts
+interface Person {
+  firstname: string;
+  lastname: string;
+}
+
+interface Person {
+  age: number;
+}
+
+let persons: Person[] = [
+  { firstname: "Muhriddin", lastname: "Davlatov", age: 20 },
+  { firstname: "Asilbek", lastname: "Davlatov", age: 16 },
+];
+```
+
+- ushbu holatda ham xatolik chiqmaydi. 2 ta `Person` `interface` birlashadi.
+
+```ts
+interface Person {
+  firstname: string;
+  lastname: string;
+}
+
+interface Employee extends Person {
+  company: string;
+}
+
+let persons: Employee[] = [
+  { firstname: "Muhriddin", lastname: "Davlatov", age: 20 },
+  { firstname: "Asilbek", lastname: "Davlatov", age: 16 },
+];
+```
+
+- Bu yerda `Employee` interface `Person` interfaceidan meros oladi. Yani `Person` interfacining xossalariga ega bo'ladi
+
+```ts
+interface Person {
+  readonly firstname: string;
+  readonly lastname: string;
+  age?: number;
+}
+```
+
+- Interfaceda `Readonly` dan foydalanish
+- `age?` - bu bo'lim majburiy emas.
+
+```ts
+interface Person {
+  [key: string]: string | number;
+}
+
+const person: Person = {
+  name: "John",
+  age: 30,
+};
+```
+
+- Kelayotgan malumot aniq bo'lmasa shu usuldan foydalanish mumkin

@@ -296,15 +296,41 @@
 // type StringArray = string[];
 // let names: StringArray = ["Ali", "Vali"];
 
-type Person = {
-  firstName: string;
-  lastName: string;
-  wife?: Person;
+// type Person = {
+//   firstName: string;
+//   lastName: string;
+//   wife?: Person;
+// };
+
+// type PersonList = Person[];
+
+// let persons: PersonList = [
+//   { firstName: "Muhriddin", lastName: "Davlatov" },
+//   { firstName: "Asilbek", lastName: "Davlatov" },
+// ];
+
+// interface Person {
+//   readonly firstname: string;
+//   readonly lastname: string;
+//   age?: number;
+// }
+
+// let persons: Person[] = [
+//   {
+//     firstname: "Muhriddin",
+//     lastname: "Davlatov",
+//   },
+//   {
+//     firstname: "Asilbek",
+//     lastname: "Davlatov",
+//   },
+// ];
+
+interface Person {
+  [key: string]: string | number;
+}
+
+const person: Person = {
+  name: "John",
+  age: 30,
 };
-
-type PersonList = Person[];
-
-let persons: PersonList = [
-  { firstName: "Muhriddin", lastName: "Davlatov" },
-  { firstName: "Asilbek", lastName: "Davlatov" },
-];
