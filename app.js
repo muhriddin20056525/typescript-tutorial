@@ -268,10 +268,32 @@
 // logger("Hello World");
 // let unusable: void;
 // unusable = "123";
-function logger(text, callback) {
-    console.log(text);
-    callback("Logged " + text);
+// function logger(text: string, callback: (message: string) => void) {
+//   console.log(text);
+//   callback("Logged " + text);
+// }
+// logger("Hello", (message) => {
+//   return message;
+// });
+// interface Calc {
+//   a: number;
+//   b?: number;
+// }
+// function calc(data: Calc) {
+//   if (!data.b) {
+//     return data.a;
+//   }
+//   return data.a + data.b;
+// }
+// const result = calc({ a: 10, b: 21 });
+// console.log(result);
+function logger(value) {
+    if (typeof value === "string") {
+        return value.toUpperCase();
+    }
+    else if (typeof value === "number") {
+        return value.toFixed(2);
+    }
 }
-logger("Hello", (message) => {
-    console.log(message);
-});
+console.log(logger("Muhriddin"));
+console.log(logger(1));

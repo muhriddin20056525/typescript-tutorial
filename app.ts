@@ -367,3 +367,27 @@
 
 // const result = calc({ a: 10, b: 21 });
 // console.log(result);
+
+// function logger(value: unknown) {
+//   if (typeof value === "string") {
+//     return value.toUpperCase();
+//   } else if (typeof value === "number") {
+//     return value.toFixed(2);
+//   }
+// }
+
+// console.log(logger("Muhriddin"));
+// console.log(logger(1));
+
+// let value: unknown = 100;
+// let string: string = value as string;
+
+let person: unknown = {
+  name: "John",
+  age: 20,
+};
+
+if (typeof person === "object") {
+  const obj = person as { name: string; age: number };
+  console.log(obj.name);
+}

@@ -519,3 +519,31 @@ let unusable: void;
 ```
 
 - `void` malumot turini o'zgaruvchiga berish mumkin lekin bundan hech qanday foyda yo'q
+
+---
+
+# **14-dars Unknown**
+
+`unknown` — bu har qanday turdagi qiymatni qabul qiladigan, lekin ishlatishdan oldin tekshirishni talab qiladigan `any` ning xavfsizroq versiyasi hisoblanadi.
+
+```ts
+function logger(value: unknown) {
+  if (typeof value === "string") {
+    return value.toUpperCase();
+  } else if (typeof value === "number") {
+    return value.toFixed(2);
+  }
+}
+
+console.log(logger("Muhriddin"));
+console.log(logger(1));
+```
+
+- `unknown` dan foydalanish
+
+```ts
+let value: unknown = 100;
+let string: string = value as string;
+```
+
+- Bu yerda `unknown` turini `strin` ga o'tkazish ko'rsatilgan
