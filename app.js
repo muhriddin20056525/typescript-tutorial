@@ -2,6 +2,15 @@
 // const fullName: string = "John Doe";
 // let isMarried: boolean = true;
 // let age: number = 20;
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 // import { Person } from "./app.types";
 // console.log(fullName);
 // console.log(isMarried);
@@ -287,13 +296,41 @@
 // }
 // const result = calc({ a: 10, b: 21 });
 // console.log(result);
-function logger(value) {
-    if (typeof value === "string") {
-        return value.toUpperCase();
-    }
-    else if (typeof value === "number") {
-        return value.toFixed(2);
-    }
+// function logger(value: unknown) {
+//   if (typeof value === "string") {
+//     return value.toUpperCase();
+//   } else if (typeof value === "number") {
+//     return value.toFixed(2);
+//   }
+// }
+// console.log(logger("Muhriddin"));
+// console.log(logger(1));
+// let value: unknown = 100;
+// let string: string = value as string;
+// let person: unknown = {
+//   name: "John",
+//   age: 20,
+// };
+// if (typeof person === "object") {
+//   const obj = person as { name: string; age: number };
+//   console.log(obj.name);
+// }
+function throwError(message) {
+    throw new Error(message);
 }
-console.log(logger("Muhriddin"));
-console.log(logger(1));
+function fetchData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch("https://jsonplaceholder.typicode.com/user");
+            if (!response.ok) {
+                throwError("No data found");
+            }
+            const data = yield response.json();
+            console.log(data);
+        }
+        catch (error) {
+            throwError("An error occured");
+        }
+    });
+}
+fetchData();

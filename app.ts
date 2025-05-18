@@ -382,12 +382,31 @@
 // let value: unknown = 100;
 // let string: string = value as string;
 
-let person: unknown = {
-  name: "John",
-  age: 20,
-};
+// let person: unknown = {
+//   name: "John",
+//   age: 20,
+// };
 
-if (typeof person === "object") {
-  const obj = person as { name: string; age: number };
-  console.log(obj.name);
+// if (typeof person === "object") {
+//   const obj = person as { name: string; age: number };
+//   console.log(obj.name);
+// }
+
+function throwError(message: string): never {
+  throw new Error(message);
 }
+
+async function fetchData() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/user");
+    if (!response.ok) {
+      throwError("No data found");
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    throwError("An error occured");
+  }
+}
+
+fetchData();

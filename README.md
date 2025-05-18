@@ -547,3 +547,33 @@ let string: string = value as string;
 ```
 
 - Bu yerda `unknown` turini `strin` ga o'tkazish ko'rsatilgan
+
+---
+
+# **15-dars Never**
+
+`never` turi — hech qachon qiymat qaytarmaydigan funksiyalar yoki holatlar uchun ishlatiladi.
+Bu funksiya hech qachon tugamaydi (masalan, doimiy xatolik beradi yoki cheksiz loopga kiradi)
+
+```ts
+function throwError(message: string): never {
+  throw new Error(message);
+}
+
+async function fetchData() {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/user");
+    if (!response.ok) {
+      throwError("No data found");
+    }
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    throwError("An error occured");
+  }
+}
+
+fetchData();
+```
+
+- `never` dan foydalanib xatolik qaytaradigan funksiya yaratish va uni API so'rovlarda ishlatish
