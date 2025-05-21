@@ -577,3 +577,39 @@ fetchData();
 ```
 
 - `never` dan foydalanib xatolik qaytaradigan funksiya yaratish va uni API so'rovlarda ishlatish
+
+---
+
+# **16-dars Null**
+
+`null` — bu qiymat hali mavjud emasligini bildiruvchi maxsus primitive turdir. null odatda ma’lumot hozircha yo‘qligini yoki bo‘shligini bildiradi. Null b undefined ga o'xshab ketadi lekin `null` da qiymat bo'lmaydi. `undefined` da qiymat bo'lmaydi
+
+```ts
+let x: null = null;
+```
+
+- `null` turida o'zgaruvchi ochish.
+- `null` turida o'zgaruvchi ochish uchun unga qiymat sifatida `null` ni berib qo'yish kerak
+
+```ts
+function logger(msg: string | null) {
+  if (msg !== null) {
+    console.log(msg.toUpperCase());
+  }
+
+  console.log("No message provided");
+}
+
+logger("Hello World");
+logger(null);
+```
+
+- funksiyalarda `null` dan foydalanish
+
+```ts
+let username: string | null = null;
+
+let showUsername = username ?? "Guest";
+```
+
+- `??` agar `username` da `null` bo'lsa shundan keyingi kod ishlaydi

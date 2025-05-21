@@ -392,21 +392,38 @@
 //   console.log(obj.name);
 // }
 
-function throwError(message: string): never {
-  throw new Error(message);
-}
+// function throwError(message: string): never {
+//   throw new Error(message);
+// }
 
-async function fetchData() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/user");
-    if (!response.ok) {
-      throwError("No data found");
-    }
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    throwError("An error occured");
-  }
-}
+// async function fetchData() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/user");
+//     if (!response.ok) {
+//       throwError("No data found");
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     throwError("An error occured");
+//   }
+// }
 
-fetchData();
+// fetchData();
+
+// let x: null = null;
+
+// function logger(msg: string | null) {
+//   if (msg !== null) {
+//     console.log(msg.toUpperCase());
+//   }
+
+//   console.log("No message provided");
+// }
+
+// logger("Hello World");
+// logger(null);
+
+let username: string | null = null;
+
+let showUsername = username ?? "Guest";
