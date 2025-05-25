@@ -613,3 +613,67 @@ let showUsername = username ?? "Guest";
 ```
 
 - `??` agar `username` da `null` bo'lsa shundan keyingi kod ishlaydi
+
+---
+
+# **17-dars Type guards & Asserts**
+
+`Type Casting (Type Assertion)` - Malumotlarni turi bilan ishlashga aytiladi. Yani bitta turdagi malumotni boshqasiga o'tkazishga aytiladi
+
+```ts
+let message: unknown = "Hello World";
+
+let strLength1: number = (<string>message).length;
+console.log(strLength1);
+```
+
+- Bu kod `unknown` tipdagi o‘zgaruvchini `string` deb faraz qilib, uning uzunligini hisoblab, konsolga chiqaradi.
+
+```ts
+let message: unknown = "Hello World";
+let strLength2: number = (message as string).length;
+```
+
+- Bu yerda `message` o‘zgaruvchisi `string` tipiga `type assertion (tipni aniqlashtirish)` yordamida o‘tkazilyapti:
+- `(message as string)` — bu TypeScript'ga: “message bu yerda string deb hisobla” degani.
+- Keyin `.length` metodi orqali string uzunligi olinadi.
+- `"Hello World"` stringining uzunligi `11` bo‘ladi, shuning uchun `strLength2 = 11.`
+
+`Type guards` - o'zgaruvchi bir nechta typega ega bo'lganda uni tekshirishga aytiladi
+
+```ts
+function logger(message: string | number) {
+  if (typeof message === "string") {
+    return message.toUpperCase();
+  } else {
+    return message;
+  }
+}
+```
+
+- funksiya argumentining typini tekshirish
+
+```ts
+class Dog {
+  bark() {
+    console.log("Woof");
+  }
+}
+
+class Cat {
+  meaw() {
+    console.log("Meow");
+  }
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    animal.bark();
+  } else {
+    animal.meaw();
+  }
+}
+```
+
+- Classlardan type sifatida foydalanish
+- `instanceof` yordamida `animal` o‘zgaruvchining aynan qaysi sinfga tegishli ekanligini aniqlanadi.

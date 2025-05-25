@@ -2,15 +2,6 @@
 // const fullName: string = "John Doe";
 // let isMarried: boolean = true;
 // let age: number = 20;
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 // import { Person } from "./app.types";
 // console.log(fullName);
 // console.log(isMarried);
@@ -315,22 +306,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 //   const obj = person as { name: string; age: number };
 //   console.log(obj.name);
 // }
-function throwError(message) {
-    throw new Error(message);
-}
-function fetchData() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch("https://jsonplaceholder.typicode.com/user");
-            if (!response.ok) {
-                throwError("No data found");
-            }
-            const data = yield response.json();
-            console.log(data);
-        }
-        catch (error) {
-            throwError("An error occured");
-        }
-    });
-}
-fetchData();
+// function throwError(message: string): never {
+//   throw new Error(message);
+// }
+// async function fetchData() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/user");
+//     if (!response.ok) {
+//       throwError("No data found");
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     throwError("An error occured");
+//   }
+// }
+// fetchData();
+// let x: null = null;
+// function logger(msg: string | null) {
+//   if (msg !== null) {
+//     console.log(msg.toUpperCase());
+//   }
+//   console.log("No message provided");
+// }
+// logger("Hello World");
+// logger(null);
+// let username: string | null = null;
+// let showUsername = username ?? "Guest";
+let message = "Hello World";
+let strLength1 = message.length;
+console.log(strLength1);

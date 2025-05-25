@@ -424,6 +424,44 @@
 // logger("Hello World");
 // logger(null);
 
-let username: string | null = null;
+// let username: string | null = null;
 
-let showUsername = username ?? "Guest";
+// let showUsername = username ?? "Guest";
+
+// let message: unknown = "Hello World";
+
+// let strLength1: number = (<string>message).length;
+// console.log(strLength1);
+
+// let strLength2: number = (message as string).length;
+
+// function logger(message: string | number) {
+//   if (typeof message === "string") {
+//     return message.toUpperCase();
+//   } else {
+//     return message;
+//   }
+// }
+
+class Dog {
+  bark() {
+    console.log("Woof");
+  }
+}
+
+class Cat {
+  meaw() {
+    console.log("Meow");
+  }
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    animal.bark();
+  } else {
+    animal.meaw();
+  }
+}
+
+makeSound(new Dog());
+makeSound(new Cat());
