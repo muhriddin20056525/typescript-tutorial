@@ -677,3 +677,40 @@ function makeSound(animal: Dog | Cat) {
 
 - Classlardan type sifatida foydalanish
 - `instanceof` yordamida `animal` o‘zgaruvchining aynan qaysi sinfga tegishli ekanligini aniqlanadi.
+
+```ts
+type Car = { speed: number };
+type Plane = { altitude: number };
+
+function getInfo(vehicle: Car | Plane) {
+  if ("speed" in vehicle) {
+    console.log(`Speed: ${vehicle.speed} km/h`);
+  } else {
+    console.log(`Altitude ${vehicle.altitude} metres`);
+  }
+}
+
+getInfo({ speed: 100 });
+getInfo({ altitude: 10000 });
+```
+
+- funksiya argumentiga `type` orqali `type` ko'rsatish va uni tekshirsih
+- Bu yerda funksiya argumentiga `vehicle` ichida `speed` bor yoki yo'qligiga qarab funksiya turli xil natijalar qaytaradi
+
+```ts
+function logNumber(value: unknown): asserts value is number {
+  if (typeof value !== "number") {
+    throw new Error(`value is not a number`);
+  }
+}
+
+const age: unknown = 20;
+
+logNumber(age);
+console.log(age + 10);
+```
+
+- `asserts value is number:`
+  - Agar funksiya chaqirilganda xatolik `(ya'ni throw)` sodir bo‘lmasa, TypeScript value ni number deb hisoblaydi.
+- agar funksiya xatolik qaytarmasa u qaytargan qiymat number deb qaraladi
+- `unknown` istalgan malumot turini qabul qilishi mumkin `: asserts value is number` esa unidan `number` bo'lsagina foydalanish mumkinligni bildiryapdi

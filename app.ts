@@ -443,25 +443,50 @@
 //   }
 // }
 
-class Dog {
-  bark() {
-    console.log("Woof");
-  }
-}
+// class Dog {
+//   bark() {
+//     console.log("Woof");
+//   }
+// }
 
-class Cat {
-  meaw() {
-    console.log("Meow");
-  }
-}
+// class Cat {
+//   meaw() {
+//     console.log("Meow");
+//   }
+// }
 
-function makeSound(animal: Dog | Cat) {
-  if (animal instanceof Dog) {
-    animal.bark();
-  } else {
-    animal.meaw();
-  }
-}
+// function makeSound(animal: Dog | Cat) {
+//   if (animal instanceof Dog) {
+//     animal.bark();
+//   } else {
+//     animal.meaw();
+//   }
+// }
 
-makeSound(new Dog());
-makeSound(new Cat());
+// makeSound(new Dog());
+// makeSound(new Cat());
+
+// type Car = { speed: number };
+// type Plane = { altitude: number };
+
+// function getInfo(vehicle: Car | Plane) {
+//   if ("speed" in vehicle) {
+//     console.log(`Speed: ${vehicle.speed} km/h`);
+//   } else {
+//     console.log(`Altitude ${vehicle.altitude} metres`);
+//   }
+// }
+
+// getInfo({ speed: 100 });
+// getInfo({ altitude: 10000 });
+
+// function logNumber(value: unknown): asserts value is number {
+//   if (typeof value !== "number") {
+//     throw new Error(`value is not a number`);
+//   }
+// }
+
+// const age: unknown = 20;
+
+// logNumber(age);
+// console.log(age + 10);
