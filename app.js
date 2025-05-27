@@ -374,11 +374,79 @@
 // }
 // getInfo({ speed: 100 });
 // getInfo({ altitude: 10000 });
-function logNumber(value) {
-    if (typeof value !== "number") {
-        throw new Error(`value is not a number`);
+// function logNumber(value: unknown): asserts value is number {
+//   if (typeof value !== "number") {
+//     throw new Error(`value is not a number`);
+//   }
+// }
+// const age: unknown = 20;
+// logNumber(age);
+// console.log(age + 10);
+// Interfaces
+var Role;
+(function (Role) {
+    Role[Role["ADMIN"] = 0] = "ADMIN";
+    Role[Role["STUDENT"] = 1] = "STUDENT";
+})(Role || (Role = {}));
+// Role Checking
+function isAdmin(user) {
+    return user.role === Role.ADMIN;
+}
+// Courses List
+const courses = [];
+// Add course
+function addCourse(user, course) {
+    if (isAdmin(user)) {
+        courses.push(course);
+        console.log(`Course added ${course.title}`);
+    }
+    else {
+        console.log(`Only admin can add course`);
     }
 }
-const age = 20;
-logNumber(age);
-console.log(age + 10);
+// Enroll student
+function enrollStudent(user, courseId) {
+    const course = courses.find((course) => courseId === course.id);
+    if (!course) {
+        console.log("Course not found");
+        return;
+    }
+    if (user.role === Role.STUDENT) {
+        course.students.push(user);
+        console.log(`Student enroll ${user.name}`);
+    }
+    else {
+        console.log("Only student enroll");
+    }
+}
+// Student list
+function listStudent(user, courseId) {
+    if (!isAdmin(user)) {
+        console.log("Only admin can see list student");
+        return;
+    }
+    const course = courses.find((course) => course.id === courseId);
+    if (!course) {
+        console.log("Course not found");
+        return;
+    }
+    console.log(`Students in ${course.title}: ${course.students
+        .map((c) => c.name)
+        .join(", ")}`);
+}
+// Practise
+const admin = { id: 1, name: "Admin", role: Role.ADMIN };
+const student1 = { id: 2, name: "Ali", role: Role.STUDENT };
+const student2 = { id: 3, name: "Osman", role: Role.STUDENT };
+const course = {
+    id: 101,
+    title: "Math",
+    description: "Math course",
+    students: [],
+};
+// Call functions
+addCourse(admin, course);
+enrollStudent(student1, course.id);
+enrollStudent(student2, course.id);
+listStudent(admin, course.id);
+console.log(courses);
