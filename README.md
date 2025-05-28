@@ -714,3 +714,28 @@ console.log(age + 10);
   - Agar funksiya chaqirilganda xatolik `(ya'ni throw)` sodir bo‘lmasa, TypeScript value ni number deb hisoblaydi.
 - agar funksiya xatolik qaytarmasa u qaytargan qiymat number deb qaraladi
 - `unknown` istalgan malumot turini qabul qilishi mumkin `: asserts value is number` esa unidan `number` bo'lsagina foydalanish mumkinligni bildiryapdi
+
+---
+
+# **18-dars Create class**
+
+```ts
+// Class elon qilish
+class Car {
+  // Class tashkil topishi kerak bo'lgan xossalarni typelarini elon qilisj
+  name: string;
+  year: Date;
+
+  // constructor yaratish va unga keladigan argumentlarga type berish
+  constructor(name: string, year: Date) {
+    this.name = name;
+    this.year = year;
+  }
+}
+
+// Class yordamida yangi object yaratish
+const toyota = new Car("Toyota", new Date("2001-11-01"));
+console.log(toyota);
+```
+
+- `Class` ga type berish va u asosida object yaratish

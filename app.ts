@@ -493,104 +493,119 @@
 
 // Interfaces
 
-enum Role {
-  ADMIN,
-  STUDENT,
-}
+// enum Role {
+//   ADMIN,
+//   STUDENT,
+// }
 
-interface IUser {
-  id: number;
+// interface IUser {
+//   id: number;
+//   name: string;
+//   role: Role;
+// }
+
+// interface ICourse {
+//   id: number;
+//   title: string;
+//   description: string;
+//   students: IUser[];
+// }
+
+// // Role Checking
+
+// function isAdmin(user: IUser): user is IUser & { role: Role.ADMIN } {
+//   return user.role === Role.ADMIN;
+// }
+
+// // Courses List
+// const courses: ICourse[] = [];
+
+// // Add course
+
+// function addCourse(user: IUser, course: ICourse) {
+//   if (isAdmin(user)) {
+//     courses.push(course);
+//     console.log(`Course added ${course.title}`);
+//   } else {
+//     console.log(`Only admin can add course`);
+//   }
+// }
+
+// // Enroll student
+
+// function enrollStudent(user: IUser, courseId: number) {
+//   const course = courses.find((course) => courseId === course.id);
+
+//   if (!course) {
+//     console.log("Course not found");
+//     return;
+//   }
+
+//   if (user.role === Role.STUDENT) {
+//     course.students.push(user);
+//     console.log(`Student enroll ${user.name}`);
+//   } else {
+//     console.log("Only student enroll");
+//   }
+// }
+
+// // Student list
+
+// function listStudent(user: IUser, courseId: number) {
+//   if (!isAdmin(user)) {
+//     console.log("Only admin can see list student");
+//     return;
+//   }
+
+//   const course = courses.find((course) => course.id === courseId);
+
+//   if (!course) {
+//     console.log("Course not found");
+//     return;
+//   }
+
+//   console.log(
+//     `Students in ${course.title}: ${course.students
+//       .map((c) => c.name)
+//       .join(", ")}`
+//   );
+// }
+
+// // Practise
+
+// const admin: IUser = { id: 1, name: "Admin", role: Role.ADMIN };
+// const student1: IUser = { id: 2, name: "Ali", role: Role.STUDENT };
+// const student2: IUser = { id: 3, name: "Osman", role: Role.STUDENT };
+
+// const course: ICourse = {
+//   id: 101,
+//   title: "Math",
+//   description: "Math course",
+//   students: [],
+// };
+
+// // Call functions
+
+// addCourse(admin, course);
+
+// enrollStudent(student1, course.id);
+// enrollStudent(student2, course.id);
+
+// listStudent(admin, course.id);
+
+// console.log(courses);
+
+class Car {
   name: string;
-  role: Role;
-}
+  year: Date;
 
-interface ICourse {
-  id: number;
-  title: string;
-  description: string;
-  students: IUser[];
-}
-
-// Role Checking
-
-function isAdmin(user: IUser): user is IUser & { role: Role.ADMIN } {
-  return user.role === Role.ADMIN;
-}
-
-// Courses List
-const courses: ICourse[] = [];
-
-// Add course
-
-function addCourse(user: IUser, course: ICourse) {
-  if (isAdmin(user)) {
-    courses.push(course);
-    console.log(`Course added ${course.title}`);
-  } else {
-    console.log(`Only admin can add course`);
+  constructor(name: string, year: Date) {
+    this.name = name;
+    this.year = year;
   }
 }
 
-// Enroll student
+const toyota = new Car("Toyota", new Date("2001-11-01"));
+console.log(toyota);
 
-function enrollStudent(user: IUser, courseId: number) {
-  const course = courses.find((course) => courseId === course.id);
-
-  if (!course) {
-    console.log("Course not found");
-    return;
-  }
-
-  if (user.role === Role.STUDENT) {
-    course.students.push(user);
-    console.log(`Student enroll ${user.name}`);
-  } else {
-    console.log("Only student enroll");
-  }
-}
-
-// Student list
-
-function listStudent(user: IUser, courseId: number) {
-  if (!isAdmin(user)) {
-    console.log("Only admin can see list student");
-    return;
-  }
-
-  const course = courses.find((course) => course.id === courseId);
-
-  if (!course) {
-    console.log("Course not found");
-    return;
-  }
-
-  console.log(
-    `Students in ${course.title}: ${course.students
-      .map((c) => c.name)
-      .join(", ")}`
-  );
-}
-
-// Practise
-
-const admin: IUser = { id: 1, name: "Admin", role: Role.ADMIN };
-const student1: IUser = { id: 2, name: "Ali", role: Role.STUDENT };
-const student2: IUser = { id: 3, name: "Osman", role: Role.STUDENT };
-
-const course: ICourse = {
-  id: 101,
-  title: "Math",
-  description: "Math course",
-  students: [],
-};
-
-// Call functions
-
-addCourse(admin, course);
-
-enrollStudent(student1, course.id);
-enrollStudent(student2, course.id);
-
-listStudent(admin, course.id);
-
-console.log(courses);
+const chevrolet = new Car("Chevrolet", new Date("2005-10-23"));
