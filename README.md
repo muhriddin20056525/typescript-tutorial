@@ -739,3 +739,79 @@ console.log(toyota);
 ```
 
 - `Class` ga type berish va u asosida object yaratish
+
+---
+
+# **19-dars Constructor**
+
+`constructor` — bu klassdan obyekt yaratish paytida avtomatik ishlaydigan maxsus metod. U obyekt yaratilganda unga boshlang‘ich qiymatlar berish uchun ishlatiladi.
+
+```ts
+// class yaratish
+class Car {
+  // classda bo'ladigan xossalarni tiplarini berish
+  name: string;
+  year: Date;
+  isCar: boolean;
+
+  // constructor yaratish va unga keladigan xossalarni tiplash. qiymat sifatida constructorga keladigan qiymatlarni tiplash mumkin lekin constructor nima qaytarishini berib bo'lmaydi
+  constructor(name: string, year: Date) {
+    this.name = name;
+    this.year = year;
+    // constructorga yoziladigan barcha qiymatham argumentidan kelishi shart emas qo'lda berib qo'yish ham mumkin
+    this.isCar = true;
+  }
+}
+```
+
+```ts
+class Car {
+  name: string;
+  year: Date;
+  isCar: boolean;
+
+  // constructor xossalariga default qiymat berish
+  constructor(name: string = "Unknown", year: Date = new Date()) {
+    this.name = name;
+    this.year = year;
+    this.isCar = true;
+  }
+}
+
+// Default qiymat berilgani sababli constructorga qiymat bermasak ham object yaratib beradi
+const chevrolet = new Car();
+```
+
+```ts
+class Car {
+  name!: string;
+  year!: Date;
+
+  // Oddiy usulda keladigan qiymatni tiplash
+  constructor(name: string, year: Date);
+  // Object usulida keladigan qiymatni tiplash
+  constructor(data: { name: string; year: Date });
+
+  // Haqiqiy constructor funksiyasi - yuqoridagi ikkalasini birlashtiradi
+  // nameOrData bu string yoki object bo‘lishi mumkin
+  // year esa faqat birinchi holatda kerak (ikkinchi holatda emas)
+  constructor(nameOrData: string | { name: string; year: Date }, year?: Date) {
+    // constructorga keladigan qiymatlar turiga qarab object tuzish, oddiy formatda kelsa
+    if (typeof nameOrData === "string") {
+      this.name = nameOrData;
+      this.year = year!;
+    } else if (typeof nameOrData === "object") {
+      // object formatida kelsa
+      this.name = nameOrData.name;
+      this.year = nameOrData.year;
+    }
+  }
+}
+
+// Oddiy usulda constructorda qiymat yuborish
+const toyota = new Car("Toyota", new Date("2001-11-01"));
+// Object usulida constructorga qiymat yuborish
+const chevrolet = new Car({ name: "Chevrolet", year: new Date("2001-11-01") });
+```
+
+- Ushbu usulda ham class yaratish mumkin

@@ -461,10 +461,12 @@
 // listStudent(admin, course.id);
 // console.log(courses);
 class Car {
-    constructor(name, year) {
+    constructor(name = "Unknown", year = new Date()) {
         this.name = name;
         this.year = year;
+        this.isCar = true;
     }
 }
 const toyota = new Car("Toyota", new Date("2001-11-01"));
 console.log(toyota);
+const chevrolet = new Car();
