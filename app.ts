@@ -595,24 +595,85 @@
 
 // console.log(courses);
 
-class Car {
-  name!: string;
-  year!: Date;
+// class Car {
+//   name!: string;
+//   year!: Date;
 
-  constructor(name: string, year: Date);
-  constructor(data: { name: string; year: Date });
+//   constructor(name: string, year: Date);
+//   constructor(data: { name: string; year: Date });
 
-  constructor(nameOrData: string | { name: string; year: Date }, year?: Date) {
-    if (typeof nameOrData === "string") {
-      this.name = nameOrData;
-      this.year = year!;
-    } else if (typeof nameOrData === "object") {
-      this.name = nameOrData.name;
-      this.year = nameOrData.year;
+//   constructor(nameOrData: string | { name: string; year: Date }, year?: Date) {
+//     if (typeof nameOrData === "string") {
+//       this.name = nameOrData;
+//       this.year = year!;
+//     } else if (typeof nameOrData === "object") {
+//       this.name = nameOrData.name;
+//       this.year = nameOrData.year;
+//     }
+//   }
+// }
+
+// const toyota = new Car("Toyota", new Date("2001-11-01"));
+
+// const chevrolet = new Car({ name: "Chevrolet", year: new Date("2001-11-01") });
+
+// class Person {
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   greeting(age: number): string {
+//     return `Hello ${this.name} your age ${age}`;
+//   }
+// }
+
+// const user1 = new Person("Muhriddin");
+// console.log(user1.greeting(20));
+
+enum Provider {
+  PAYME,
+  CLICK,
+  UZUM,
+}
+
+enum Status {
+  PENDING,
+  APPROVED,
+  REJECTED,
+}
+
+class Payment {
+  id: Provider;
+  status: Status;
+  createdAt: Date;
+  updatedAt: Date;
+
+  constructor(id: Provider) {
+    this.id = id;
+    this.status = Status.PENDING;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  getLifeTime() {
+    return new Date().getTime() - this.createdAt.getTime();
+  }
+
+  rejectPayment(): void {
+    if (this.status == Status.APPROVED) {
+      throw new Error("Payment is already approved");
     }
+
+    this.status = Status.REJECTED;
+    this.updatedAt = new Date();
   }
 }
 
-const toyota = new Car("Toyota", new Date("2001-11-01"));
+const payme = new Payment(Provider.CLICK);
+payme.rejectPayment();
+console.log(payme);
 
-const chevrolet = new Car({ name: "Chevrolet", year: new Date("2001-11-01") });
+const duration = payme.getLifeTime();
+console.log(duration);

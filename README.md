@@ -815,3 +815,107 @@ const chevrolet = new Car({ name: "Chevrolet", year: new Date("2001-11-01") });
 ```
 
 - Ushbu usulda ham class yaratish mumkin
+
+---
+
+# **20-dars Metods**
+
+`Method` - bu classda aniqlangan funksiyalardir
+
+```ts
+class Person {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  // Bu oddiy funksiya class ichida bo'lgani uchun method deyiladi yani Person classining methodi
+  greeting() {
+    // Class xossalariga this orqali murojaat qilinadi
+    console.log(`Hello I am a ${this.name}`);
+  }
+}
+
+const user1 = new Person("Muhriddin");
+// Class ichidagi methodni chaqirish
+user1.greeting();
+```
+
+- `Class` ichida methodlar yaratish
+
+```ts
+class Person {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  // Parametr qabul qiladigan va string turidagi qiymat qaytaradigan method
+  greeting(age: number): string {
+    return `Hello ${this.name} your age ${age}`;
+  }
+}
+
+const user1 = new Person("Muhriddin");
+console.log(user1.greeting(20));
+```
+
+- Parametrli method yozish
+
+```ts
+// Provider tanlash uchun enum
+enum Provider {
+  PAYME,
+  CLICK,
+  UZUM,
+}
+
+// Holatni aniqlash uchun enum
+enum Status {
+  PENDING,
+  APPROVED,
+  REJECTED,
+}
+
+class Payment {
+  id: Provider;
+  status: Status;
+  createdAt: Date;
+  updatedAt: Date;
+
+  constructor(id: Provider) {
+    this.id = id;
+    // ushbu qiymatlar default yozib qo'yilgan yani constructordan kelmayapdi
+    this.status = Status.PENDING;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+  }
+
+  // Obyekt yaratilganidan beri qancha vaqt o‘tganini millisekundlarda hisoblaydi.
+  getLifeTime() {
+    return new Date().getTime() - this.createdAt.getTime();
+  }
+
+  rejectPayment(): void {
+    // To'lov tasdiqlanganligini tekshiradi agar tasdiqlangan bo'lsa xatolik qaytaradi
+    if (this.status == Status.APPROVED) {
+      throw new Error("Payment is already approved");
+    }
+
+    // Aks holda, status ni REJECTED ga o‘zgartiradi va updatedAt ni hozirgi vaqtga tenglashtiradi.
+    this.status = Status.REJECTED;
+    this.updatedAt = new Date();
+  }
+}
+
+const payme = new Payment(Provider.CLICK);
+payme.rejectPayment();
+console.log(payme);
+
+const duration = payme.getLifeTime();
+console.log(duration);
+```
+
+- To'lov qilish uchun class yozish
