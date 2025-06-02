@@ -919,3 +919,65 @@ console.log(duration);
 ```
 
 - To'lov qilish uchun class yozish
+
+---
+
+# **21-dars Overload methods**
+
+`overload methods` — bu bitta funksiyani turli xil argumentlar bilan chaqirish imkonini beradigan usuldir. Ya'ni, bir nechta funksiya imzolari (signature) beriladi, lekin faqat bitta funksiyaning tanasi (body) bo‘ladi. Agar biror funksiya har xil turdagi yoki sonli argumentlar bilan ishlashi kerak bo‘lsa, overload orqali turli chaqiruvlarni qulay tarzda boshqarish mumkin.
+
+```ts
+enum Provider {
+  PAYME,
+  CLICK,
+  UZUM,
+}
+
+enum Status {
+  PENDING,
+  APPROVED,
+  REJECTED,
+}
+
+class Payment {
+  id: Provider;
+  status: Status;
+  createdAt: Date;
+  updatedAt: Date;
+  providers: string[];
+
+  constructor(id: Provider) {
+    this.id = id;
+    this.status = Status.PENDING;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+    this.providers = [];
+  }
+
+  // providerlarni olib beradigan methodga overload usulida type yozish
+  getProviders(provider: string): void;
+  getProviders(providers: string[]): void;
+
+  // methodning asl tanasi
+  getProviders(providerOrProviders: string | string[]): void {
+    // keladigan qiymatni tekshirish
+    if (typeof providerOrProviders === "string") {
+      // string bo'lsa arrayga qo'shadi
+      this.providers.push(providerOrProviders);
+    } else {
+      // array kelsa oldingi qiymar bilan yangi array qiymatlarini birlashtiradi
+      this.providers = this.providers.concat(providerOrProviders);
+    }
+  }
+}
+
+const payme = new Payment(Provider.PAYME);
+
+// getProviders methodiga murojaat qilish (string yuborish)
+payme.getProviders("Payme");
+console.log(payme.providers);
+
+// getProviders methodiga murojaat qilish (array yuborish)
+payme.getProviders(["click", "uzum"]);
+console.log(payme.providers);
+```

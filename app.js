@@ -506,6 +506,7 @@ class Payment {
         this.status = Status.PENDING;
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        this.providers = [];
     }
     getLifeTime() {
         return new Date().getTime() - this.createdAt.getTime();
@@ -517,9 +518,17 @@ class Payment {
         this.status = Status.REJECTED;
         this.updatedAt = new Date();
     }
+    getProviders(providerOrProviders) {
+        if (typeof providerOrProviders === "string") {
+            this.providers.push(providerOrProviders);
+        }
+        else {
+            this.providers = this.providers.concat(providerOrProviders);
+        }
+    }
 }
-const payme = new Payment(Provider.CLICK);
-payme.rejectPayment();
-console.log(payme);
-const duration = payme.getLifeTime();
-console.log(duration);
+const payme = new Payment(Provider.PAYME);
+payme.getProviders("Payme");
+console.log(payme.providers);
+payme.getProviders(["click", "uzum"]);
+console.log(payme.providers);
