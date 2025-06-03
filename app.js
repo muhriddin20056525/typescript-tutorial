@@ -488,47 +488,83 @@
 // }
 // const user1 = new Person("Muhriddin");
 // console.log(user1.greeting(20));
-var Provider;
-(function (Provider) {
-    Provider[Provider["PAYME"] = 0] = "PAYME";
-    Provider[Provider["CLICK"] = 1] = "CLICK";
-    Provider[Provider["UZUM"] = 2] = "UZUM";
-})(Provider || (Provider = {}));
-var Status;
-(function (Status) {
-    Status[Status["PENDING"] = 0] = "PENDING";
-    Status[Status["APPROVED"] = 1] = "APPROVED";
-    Status[Status["REJECTED"] = 2] = "REJECTED";
-})(Status || (Status = {}));
-class Payment {
-    constructor(id) {
-        this.id = id;
-        this.status = Status.PENDING;
-        this.createdAt = new Date();
-        this.updatedAt = new Date();
-        this.providers = [];
+// enum Provider {
+//   PAYME,
+//   CLICK,
+//   UZUM,
+// }
+// enum Status {
+//   PENDING,
+//   APPROVED,
+//   REJECTED,
+// }
+// class Payment {
+//   id: Provider;
+//   status: Status;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   providers: string[];
+//   constructor(id: Provider) {
+//     this.id = id;
+//     this.status = Status.PENDING;
+//     this.createdAt = new Date();
+//     this.updatedAt = new Date();
+//     this.providers = [];
+//   }
+//   getLifeTime() {
+//     return new Date().getTime() - this.createdAt.getTime();
+//   }
+//   rejectPayment(): void {
+//     if (this.status == Status.APPROVED) {
+//       throw new Error("Payment is already approved");
+//     }
+//     this.status = Status.REJECTED;
+//     this.updatedAt = new Date();
+//   }
+//   getProviders(provider: string): void;
+//   getProviders(providers: string[]): void;
+//   getProviders(providerOrProviders: string | string[]): void {
+//     if (typeof providerOrProviders === "string") {
+//       this.providers.push(providerOrProviders);
+//     } else {
+//       this.providers = this.providers.concat(providerOrProviders);
+//     }
+//   }
+// }
+// const payme = new Payment(Provider.PAYME);
+// payme.getProviders("Payme");
+// console.log(payme.providers);
+// payme.getProviders(["click", "uzum"]);
+// console.log(payme.providers);
+// class Employee {
+//   _salary: number;
+//   _password: string;
+//   set salary(num: number) {
+//     this._salary = num * 100;
+//   }
+//   get salary(): number {
+//     return this._salary;
+//   }
+// }
+// const john = new Employee();
+// john.salary = 10;
+// const salary = john.salary;
+// console.log(salary);
+class Person {
+    constructor(name) {
+        this._name = name;
     }
-    getLifeTime() {
-        return new Date().getTime() - this.createdAt.getTime();
+    get changeName() {
+        return this._name.toUpperCase();
     }
-    rejectPayment() {
-        if (this.status == Status.APPROVED) {
-            throw new Error("Payment is already approved");
+    set changeName(newName) {
+        if (newName.length < 3) {
+            throw new Error("Ism kamida 3 ta belgidan iborat bo'lishi kerak.");
         }
-        this.status = Status.REJECTED;
-        this.updatedAt = new Date();
-    }
-    getProviders(providerOrProviders) {
-        if (typeof providerOrProviders === "string") {
-            this.providers.push(providerOrProviders);
-        }
-        else {
-            this.providers = this.providers.concat(providerOrProviders);
-        }
+        this._name = newName;
     }
 }
-const payme = new Payment(Provider.PAYME);
-payme.getProviders("Payme");
-console.log(payme.providers);
-payme.getProviders(["click", "uzum"]);
-console.log(payme.providers);
+const user = new Person("Ali");
+console.log(user.changeName);
+user.changeName = "Vali";
+console.log(user.changeName);

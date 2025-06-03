@@ -981,3 +981,47 @@ console.log(payme.providers);
 payme.getProviders(["click", "uzum"]);
 console.log(payme.providers);
 ```
+
+---
+
+# **22-dars Getter & Setter**
+
+`getter va setter` — bu class ichida xossalar (property) bilan ishlashda foydalaniladigan maxsus metodlardir. Ular ma'lumotni o'qish (getter) va o‘zgartirish (setter) imkonini beradi, lekin bu jarayonlarni nazorat ostida bajaradi.
+
+```ts
+class Person {
+  // private: shu methodni classdan tashqarida ishlatishni qaqiqlaydi. (_name) getter va setter ishlatiladigan class xossalari (_) bilan boshlanishi kerak
+  private _name: string;
+
+  constructor(name: string) {
+    this._name = name;
+  }
+
+  // Getter: _name ni o'qib olish uchun
+  get name(): string {
+    return this._name;
+  }
+
+  // Setter: _name ga yangi qiymat berish uchun
+  set name(newName: string) {
+    if (newName.length < 3) {
+      throw new Error("Ism kamida 3 ta belgidan iborat bo'lishi kerak.");
+    }
+    this._name = newName;
+  }
+}
+
+const user = new Person("Ali");
+
+// Getter chaqirilyapti
+console.log(user.name); // Ali
+
+// Setter orqali yangi ism berilyapti
+user.name = "Vali";
+
+// Yangi ismni chiqaramiz
+console.log(user.name); // Vali
+
+// Xato qiymat
+// user.name = "Al"; // ❌ Error: Ism kamida 3 ta belgidan iborat bo'lishi kerak.
+```
