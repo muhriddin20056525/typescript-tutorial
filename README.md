@@ -1025,3 +1025,55 @@ console.log(user.name); // Vali
 // Xato qiymat
 // user.name = "Al"; // ❌ Error: Ism kamida 3 ta belgidan iborat bo'lishi kerak.
 ```
+
+---
+
+# **23-dars Implements**
+
+`Implements` - kalit so‘zi class (sinf) orqali interface (interfeys) ni amalga oshirish (ya'ni, undan foydalanish) uchun ishlatiladi.
+
+```ts
+// Interface yaratish
+interface Drivable {
+  startEngine(): void;
+  drive(speed: number): void;
+}
+
+// implements dan foydalanib interfaceni classga bog'lash
+class Car implements Drivable {
+  model: string;
+
+  constructor(model: string) {
+    this.model = model;
+  }
+
+  startEngine(): void {
+    console.log("Engine Started");
+  }
+
+  drive(speed: number): void {
+    console.log(`${this.model}: driving at ${speed} km/h`);
+  }
+}
+
+const toyota = new Car("Toyota");
+toyota.startEngine();
+toyota.drive(240);
+```
+
+- Implementsdan foydalanish
+
+```ts
+interface Drivable {
+  startEngine(): void;
+  drive(speed: number): void;
+}
+
+interface Flayable {
+  fly(speed: number): void;
+}
+
+class Car implements Drivable, Flayable {}
+```
+
+- Implements orqali bir nechta interfaceni classga bog'lash

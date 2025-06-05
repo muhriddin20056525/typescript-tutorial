@@ -711,28 +711,67 @@
 // const salary = john.salary;
 // console.log(salary);
 
-class Person {
-  private _name: string;
+// class Person {
+//   private _name: string;
 
-  constructor(name: string) {
-    this._name = name;
+//   constructor(name: string) {
+//     this._name = name;
+//   }
+
+//   get changeName(): string {
+//     return this._name.toUpperCase();
+//   }
+
+//   set changeName(newName: string) {
+//     if (newName.length < 3) {
+//       throw new Error("Ism kamida 3 ta belgidan iborat bo'lishi kerak.");
+//     }
+//     this._name = newName;
+//   }
+// }
+
+// const user = new Person("Ali");
+
+// console.log(user.changeName);
+// user.changeName = "Vali";
+
+// console.log(user.changeName);
+
+interface Drivable {
+  startEngine(): void;
+  drive(speed: number): void;
+}
+
+interface Flayable {
+  fly(speed: number): void;
+}
+
+class Car implements Drivable, Flayable {
+  model: string;
+
+  constructor(model: string) {
+    this.model = model;
   }
 
-  get changeName(): string {
-    return this._name.toUpperCase();
+  startEngine(): void {
+    console.log("Engine Started");
   }
 
-  set changeName(newName: string) {
-    if (newName.length < 3) {
-      throw new Error("Ism kamida 3 ta belgidan iborat bo'lishi kerak.");
-    }
-    this._name = newName;
+  drive(speed: number): void {
+    console.log(`${this.model}: driving at ${speed} km/h`);
+  }
+
+  fly(speed: number): void {
+    console.log(`${this.model}: flying at ${speed} km/h`);
   }
 }
 
-const user = new Person("Ali");
+const toyota = new Car("Toyota");
+toyota.startEngine();
+toyota.drive(240);
+toyota.fly(230);
 
-console.log(user.changeName);
-user.changeName = "Vali";
-
-console.log(user.changeName);
+const honda = new Car("Honda");
+honda.startEngine();
+honda.drive(240);
+honda.fly(569);
