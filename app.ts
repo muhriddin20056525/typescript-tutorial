@@ -737,41 +737,101 @@
 
 // console.log(user.changeName);
 
-interface Drivable {
-  startEngine(): void;
-  drive(speed: number): void;
+// interface Drivable {
+//   startEngine(): void;
+//   drive(speed: number): void;
+// }
+
+// interface Flayable {
+//   fly(speed: number): void;
+// }
+
+// class Car implements Drivable, Flayable {
+//   model: string;
+
+//   constructor(model: string) {
+//     this.model = model;
+//   }
+
+//   startEngine(): void {
+//     console.log("Engine Started");
+//   }
+
+//   drive(speed: number): void {
+//     console.log(`${this.model}: driving at ${speed} km/h`);
+//   }
+
+//   fly(speed: number): void {
+//     console.log(`${this.model}: flying at ${speed} km/h`);
+//   }
+// }
+
+// const toyota = new Car("Toyota");
+// toyota.startEngine();
+// toyota.drive(240);
+// toyota.fly(230);
+
+// const honda = new Car("Honda");
+// honda.startEngine();
+// honda.drive(240);
+// honda.fly(569);
+
+// class Animal {
+//   id: number;
+//   name: string;
+
+//   constructor(name: string, id: number) {
+//     this.name = name;
+//     this.id = id;
+//   }
+
+//   speak() {
+//     this.id = 10 * this.id;
+//     console.log(`${this.name} makes a sound.`);
+//   }
+
+//   showInfo() {
+//     console.log(`name: ${this.name}, id: ${this.id}`);
+//   }
+// }
+
+// class Cat extends Animal {
+//   constructor(name: string) {
+//     const id = Math.random();
+//     super(name, id);
+//   }
+
+//   override speak() {
+//     super.speak();
+//     console.log(`${this.name} meaws.`);
+//   }
+// }
+
+// const cat = new Cat("Kitty");
+
+// cat.speak();
+// cat.showInfo();
+
+class Shape {
+  color: string;
+
+  constructor(color: string) {
+    this.color = color;
+  }
+
+  describe() {
+    console.log(`This is shape is ${this.color}`);
+  }
 }
 
-interface Flayable {
-  fly(speed: number): void;
-}
+class Circle extends Shape {
+  radius: number;
 
-class Car implements Drivable, Flayable {
-  model: string;
-
-  constructor(model: string) {
-    this.model = model;
-  }
-
-  startEngine(): void {
-    console.log("Engine Started");
-  }
-
-  drive(speed: number): void {
-    console.log(`${this.model}: driving at ${speed} km/h`);
-  }
-
-  fly(speed: number): void {
-    console.log(`${this.model}: flying at ${speed} km/h`);
+  constructor(color: string, radius: number) {
+    super(color);
+    this.radius = radius;
   }
 }
 
-const toyota = new Car("Toyota");
-toyota.startEngine();
-toyota.drive(240);
-toyota.fly(230);
-
-const honda = new Car("Honda");
-honda.startEngine();
-honda.drive(240);
-honda.fly(569);
+const circle = new Circle("red", 23);
+circle.describe();

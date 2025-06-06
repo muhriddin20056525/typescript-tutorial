@@ -1077,3 +1077,55 @@ class Car implements Drivable, Flayable {}
 ```
 
 - Implements orqali bir nechta interfaceni classga bog'lash
+
+---
+
+# **24-dars Extends (super)**
+
+`Extends` - deb bir classdan boshqa class meros olishiga (uning xossalari va methodlaridan nusxa olishiga) aytiladi
+
+```ts
+// Animal nomli class e'lon qilinmoqda
+class Animal {
+  id: number;
+  name: string;
+
+  // constructor - yangi obyekt yaratilganda ishga tushadi
+  constructor(name: string, id: number) {
+    this.name = name;
+    this.id = id;
+  }
+
+  // speak() metodi - ovoz chiqarish xatti-harakati
+  speak() {
+    this.id = 10 * this.id; // id ni 10 barobar oshiradi
+    console.log(`${this.name} makes a sound.`);
+  }
+
+  // showInfo() metodi - obyekt haqidagi ma'lumotlarni ko‘rsatadi
+  showInfo() {
+    console.log(`name: ${this.name}, id: ${this.id}`); // Konsolga ism va id ni chiqaradi
+  }
+}
+// Cat klassi - Animal klassidan meros oladi
+class Cat extends Animal {
+  // constructor - faqat name ni qabul qiladi
+  constructor(name: string) {
+    const id = Math.random(); // 0 dan 1 gacha bo‘lgan tasodifiy id yaratadi
+    super(name, id); // Animal klassining constructoriga uzatadi
+  }
+
+  // speak() metodini override qiladi - ya'ni o‘zgartirib yozadi
+  override speak() {
+    super.speak(); // Animal klassining speak metodini chaqiradi (id *= 10 bo‘ladi)
+    console.log(`${this.name} meaws.`); // Qo‘shimcha qilib mushukning ovozini chiqaradi
+  }
+}
+
+const cat = new Cat("Kitty");
+cat.speak();
+
+cat.showInfo();
+```
+
+- `Extends` dan foydalanib meros olish
