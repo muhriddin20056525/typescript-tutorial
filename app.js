@@ -627,19 +627,75 @@
 // const cat = new Cat("Kitty");
 // cat.speak();
 // cat.showInfo();
-class Shape {
-    constructor(color) {
-        this.color = color;
-    }
-    describe() {
-        console.log(`This is shape is ${this.color}`);
+// class Shape {
+//   color: string;
+//   constructor(color: string) {
+//     this.color = color;
+//   }
+//   describe() {
+//     console.log(`This is shape is ${this.color}`);
+//   }
+// }
+// class Circle extends Shape {
+//   radius: number;
+//   constructor(color: string, radius: number) {
+//     super(color);
+//     this.radius = radius;
+//   }
+// }
+// const circle = new Circle("red", 23);
+// circle.describe();
+// class User {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   sayHello() {
+//     console.log(`Hello ${this.name}`);
+//   }
+// }
+// class Payment {
+//   amount: number;
+//   constructor(amount: number) {
+//     this.amount = amount;
+//   }
+//   pay() {
+//     console.log(`You paid ${this.amount}`);
+//   }
+// }
+// class UserWithPayment {
+//   user: User;
+//   payment: Payment;
+//   constructor(user: User, payement: Payment) {
+//     this.payment = payement;
+//     this.user = user;
+//   }
+//   showInfo() {
+//     this.user.sayHello();
+//     this.payment.pay();
+//   }
+// }
+// const userWithPayment = new UserWithPayment(new User("John"), new Payment(100));
+// userWithPayment.showInfo();
+class Person {
+    constructor(age) {
+        this.age = age;
     }
 }
-class Circle extends Shape {
-    constructor(color, radius) {
-        super(color);
-        this.radius = radius;
+class Employee extends Person {
+    constructor(name, salary, age) {
+        super(age);
+        this.name = name;
+        this.salary = salary;
+    }
+    showBonus() {
+        return this.salary * 0.2;
+    }
+    showAge() {
+        return this.age;
     }
 }
-const circle = new Circle("red", 23);
-circle.describe();
+const employee = new Employee("John Doe", 1000, 40);
+console.log(employee.name);
+console.log(employee.showBonus());
+console.log(employee.showAge());

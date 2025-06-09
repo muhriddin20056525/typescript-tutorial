@@ -1129,3 +1129,108 @@ cat.showInfo();
 ```
 
 - `Extends` dan foydalanib meros olish
+
+---
+
+# **25-dars Composition & access modifier**
+
+`Composition` - bu bitta class boshqa classni ichida ishlatishi, ya’ni "has-a" munosabatidir. OOP’da inheritance (meros) o‘rniga ko‘pincha composition ishlatiladi, chunki bu yanada modul va qayta foydalanish mumkin bo‘lgan kod beradi.
+
+```ts
+// 1-class user
+class User {
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  sayHello() {
+    console.log(`Hello ${this.name}`);
+  }
+}
+
+// 2-class payment
+class Payment {
+  amount: number;
+
+  constructor(amount: number) {
+    this.amount = amount;
+  }
+
+  pay() {
+    console.log(`You paid ${this.amount}`);
+  }
+}
+
+// 3-class yuqoridagi har ikkala class xossalarini jamlagan class
+class UserWithPayment {
+  // User class shu xossaga yuklanadi
+  user: User;
+  // Payment class shu xossaga yuklanadi
+  payment: Payment;
+
+  // constructor orqali user va payment classlari olinadi
+  constructor(user: User, payement: Payment) {
+    this.payment = payement;
+    this.user = user;
+  }
+
+  showInfo() {
+    // User class dagi xossadan foydalanish
+    this.user.sayHello();
+
+    // Payment class dagi xossadan foydalanish
+    this.payment.pay();
+  }
+}
+
+// contructorga user va payment classlarini argument sifatida yuborish
+const userWithPayment = new UserWithPayment(new User("John"), new Payment(100));
+```
+
+- Bu yerda 2 ta class bor va shu ikki class ni uchunchi class ga xossalar orqali berib qolgan ikki class dagi metodlardan foydalanish mumkin
+
+```ts
+class Person {
+  // Protected class bu xossadan faqat shu classda va shu classdan meros olgan class ichida foydalanish mumkin
+  protected age: number;
+
+  constructor(age: number) {
+    this.age = age;
+  }
+}
+
+class Employee extends Person {
+  // Public bu xossadan shu class ichida va tashqarida yani shu classdan object yaratilgandda ham foydalanish mumkin
+  public name: string;
+
+  // Private bu xossadan faqatgina shu class ichida foydalanish mumkin
+  private salary: number;
+
+  constructor(name: string, salary: number, age: number) {
+    super(age);
+    this.name = name;
+    this.salary = salary;
+  }
+
+  showBonus() {
+    return this.salary * 0.2;
+  }
+
+  showAge() {
+    return this.age;
+  }
+}
+
+// class dan object yaratish
+const employee = new Employee("John Doe", 1000, 40);
+// name -> public classdan tashqarida ham foydalanish mumkin
+console.log(employee.name);
+// salary -> private u classdan tashqarida ishlatilmaydi ammo classda method yaratib undan foydalanish mumkin
+console.log(employee.showBonus());
+// age -> protected undan o'zi turgan classda va undan meros olan classda foydalanish mumkin
+console.log(employee.showAge());
+```
+
+- `Public`, `Private` va `Protected` class yaratish
