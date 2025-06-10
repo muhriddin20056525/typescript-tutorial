@@ -878,34 +878,68 @@
 // const userWithPayment = new UserWithPayment(new User("John"), new Payment(100));
 // userWithPayment.showInfo();
 
-class Person {
-  protected age: number;
+// class Person {
+//   protected age: number;
 
-  constructor(age: number) {
-    this.age = age;
+//   constructor(age: number) {
+//     this.age = age;
+//   }
+// }
+
+// class Employee extends Person {
+//   public name: string;
+//   private salary: number;
+
+//   constructor(name: string, salary: number, age: number) {
+//     super(age);
+//     this.name = name;
+//     this.salary = salary;
+//   }
+
+//   showBonus() {
+//     return this.salary * 0.2;
+//   }
+
+//   showAge() {
+//     return this.age;
+//   }
+// }
+
+// const employee = new Employee("John Doe", 1000, 40);
+// console.log(employee.name);
+// console.log(employee.showBonus());
+// console.log(employee.showAge());
+
+class Counter {
+  static count: number = 0;
+  private static secretKey: string = "123456";
+  title: string;
+
+  constructor(title: string) {
+    this.title = title;
+  }
+
+  static increment() {
+    this.count++;
+  }
+
+  static add(a: number, b: number) {
+    return a + b;
+  }
+
+  static getSecretKey() {
+    return this.secretKey;
+  }
+
+  getTitle() {
+    return this.title;
   }
 }
 
-class Employee extends Person {
-  public name: string;
-  private salary: number;
+const c = new Counter("c1");
+console.log(c.title);
 
-  constructor(name: string, salary: number, age: number) {
-    super(age);
-    this.name = name;
-    this.salary = salary;
-  }
+Counter.increment();
+console.log(Counter.count);
 
-  showBonus() {
-    return this.salary * 0.2;
-  }
-
-  showAge() {
-    return this.age;
-  }
-}
-
-const employee = new Employee("John Doe", 1000, 40);
-console.log(employee.name);
-console.log(employee.showBonus());
-console.log(employee.showAge());
+console.log(Counter.add(34, 56));

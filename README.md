@@ -1234,3 +1234,51 @@ console.log(employee.showAge());
 ```
 
 - `Public`, `Private` va `Protected` class yaratish
+
+---
+
+# **26-dars Static & C# farqi (1-qism)**
+
+`static` kalit so‘zi class tegishli xususiyat yoki metodni aniqlash uchun ishlatiladi. Ya’ni, bu xususiyat yoki metod obyektga emas, classning o‘ziga tegishli bo‘ladi.
+
+```ts
+class Counter {
+  // xossani static qilish va default qiymat berish
+  static count: number = 0;
+
+  // Static method yaratish static methodlar faqat static xossalarni o'zgartira oladi
+  static increment() {
+    this.count++;
+  }
+}
+
+// Static methodga murojaat qilish
+Counter.increment();
+// Static xossaga murojaat qilish
+console.log(Counter.count);
+```
+
+- `Static` method va xossa yaratish va ularga `Class` nomi orqali murojaat qilish
+
+```ts
+class Counter {
+  static count: number = 0;
+  title: string;
+
+  constructor(title: string) {
+    this.title = title;
+  }
+
+  static increment() {
+    this.count++;
+  }
+
+  // title xossasidan foydalanish static bo'lmagan xossalarga faqat static bo'lmagan methodlar murojaat qila oladi
+  getTitle() {
+    return this.title;
+  }
+}
+```
+
+- Method ichida oddiy xossadan foydalanish
+- Static method ichida oddiy xossani ishlatib bo'lmaydi
