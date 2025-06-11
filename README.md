@@ -1282,3 +1282,33 @@ class Counter {
 
 - Method ichida oddiy xossadan foydalanish
 - Static method ichida oddiy xossani ishlatib bo'lmaydi
+
+---
+
+# **27-dars Static & C# farqi (2-qism)**
+
+```ts
+class Parent {
+  static message: string = "Hello World";
+}
+
+// Meros olgan class
+class Child extends Parent {}
+
+// Meros olgan class orqali Meros olingan class ichidagi xossani chaqirish
+console.log(Child.message);
+```
+
+- `Static` xossalarni bir `class` dan meros olgan boshqa `class` orqali ham chaqirish mumkin
+
+```ts
+namespace MathHelper {
+  export function add(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+console.log(MathHelper.add(10, 3));
+```
+
+- `Static` yaratishni eski uslubi.

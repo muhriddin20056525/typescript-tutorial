@@ -702,27 +702,41 @@
 // console.log(employee.name);
 // console.log(employee.showBonus());
 // console.log(employee.showAge());
-class Counter {
-    constructor(title) {
-        this.title = title;
-    }
-    static increment() {
-        this.count++;
-    }
-    static add(a, b) {
+// class Counter {
+//   static count: number = 0;
+//   private static secretKey: string = "123456";
+//   title: string;
+//   constructor(title: string) {
+//     this.title = title;
+//   }
+//   static increment() {
+//     this.count++;
+//   }
+//   static add(a: number, b: number) {
+//     return a + b;
+//   }
+//   static getSecretKey() {
+//     return this.secretKey;
+//   }
+//   getTitle() {
+//     return this.title;
+//   }
+// }
+// const c = new Counter("c1");
+// console.log(c.title);
+// Counter.increment();
+// console.log(Counter.count);
+// console.log(Counter.add(34, 56));
+// class Parent {
+//   static message: string = "Hello World";
+// }
+// class Child extends Parent {}
+// console.log(Child.message);
+var MathHelper;
+(function (MathHelper) {
+    function add(a, b) {
         return a + b;
     }
-    static getSecretKey() {
-        return this.secretKey;
-    }
-    getTitle() {
-        return this.title;
-    }
-}
-Counter.count = 0;
-Counter.secretKey = "123456";
-const c = new Counter("c1");
-console.log(c.title);
-Counter.increment();
-console.log(Counter.count);
-console.log(Counter.add(34, 56));
+    MathHelper.add = add;
+})(MathHelper || (MathHelper = {}));
+console.log(MathHelper.add(10, 3));
