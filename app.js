@@ -738,19 +738,42 @@
 //   }
 // }
 // console.log(MathHelper.add(10, 3));
-class Animal {
-    constructor(name) {
-        this.name = name;
+// abstract class Animal {
+//   constructor(public name: string) {}
+//   abstract makeSound(): void;
+//   move(): void {
+//     console.log(`Moving ${this.name}`);
+//   }
+// }
+// class Cat extends Animal {
+//   makeSound(): void {
+//     console.log("Meow! Meow!");
+//   }
+// }
+// const cat = new Cat("Kitty");
+// cat.move();
+// cat.makeSound();
+// class Person {
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   greeting() {
+//     console.log(`Hello ${this.name}`);
+//   }
+// }
+class Counter {
+    constructor() {
+        this.count = 0;
     }
-    move() {
-        console.log(`Moving ${this.name}`);
+    increment() {
+        console.log(this.count);
+        this.count++;
     }
 }
-class Cat extends Animal {
-    makeSound() {
-        console.log("Meow! Meow!");
-    }
-}
-const cat = new Cat("Kitty");
-cat.move();
-cat.makeSound();
+const c = new Counter();
+const incrementFn = c.increment.bind(c);
+incrementFn();
+incrementFn();
+incrementFn();
+incrementFn();

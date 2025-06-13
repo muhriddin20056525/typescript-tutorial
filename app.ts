@@ -960,21 +960,50 @@
 
 // console.log(MathHelper.add(10, 3));
 
-abstract class Animal {
-  constructor(public name: string) {}
-  abstract makeSound(): void;
+// abstract class Animal {
+//   constructor(public name: string) {}
+//   abstract makeSound(): void;
 
-  move(): void {
-    console.log(`Moving ${this.name}`);
+//   move(): void {
+//     console.log(`Moving ${this.name}`);
+//   }
+// }
+
+// class Cat extends Animal {
+//   makeSound(): void {
+//     console.log("Meow! Meow!");
+//   }
+// }
+
+// const cat = new Cat("Kitty");
+// cat.move();
+// cat.makeSound();
+
+// class Person {
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   greeting() {
+//     console.log(`Hello ${this.name}`);
+//   }
+// }
+
+class Counter {
+  count: number = 0;
+
+  increment() {
+    console.log(this.count);
+    this.count++;
   }
 }
 
-class Cat extends Animal {
-  makeSound(): void {
-    console.log("Meow! Meow!");
-  }
-}
+const c = new Counter();
 
-const cat = new Cat("Kitty");
-cat.move();
-cat.makeSound();
+const incrementFn = c.increment.bind(c);
+incrementFn();
+incrementFn();
+incrementFn();
+incrementFn();

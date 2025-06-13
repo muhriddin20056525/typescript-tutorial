@@ -1339,3 +1339,49 @@ cat.makeSound();
 ```
 
 - `Abstract` class yaratish va undan meros olish
+
+---
+
+# **29-dars This (1-qism)**
+
+`This` - Object ichida ishlatiladigan kalit so'z bo'lib kontextga ishora qiladi. `This` ning qiymati qachon va qanday ishlatayotganimizga bog'liq
+
+```ts
+class Person {
+  name: string;
+
+  constructor(name: string) {
+    // Bu yerda `this` — yangi yaratilayotgan Person obyektiga teng
+    this.name = name;
+  }
+
+  greeting() {
+    // Bu yerda `this` — greeting metodini chaqirayotgan obyektga teng
+    console.log(`Hello ${this.name}`);
+  }
+}
+```
+
+- `This` dan class ichida foydalanish
+
+```ts
+class Counter {
+  count: number = 0;
+
+  increment() {
+    console.log(this.count);
+    this.count++;
+  }
+}
+
+const c = new Counter();
+
+// bu mustaqil funksiyaga aylanadi shunda va ushbu funksiya qaysi objectga tengligini bilmaydi natijada this = undefined bo'ladi bind esa thisni objectga bog'laydi
+const incrementFn = c.increment.bind(c);
+incrementFn();
+incrementFn();
+incrementFn();
+incrementFn();
+```
+
+- `Bind` orqali `This` ni objectga bog'lash
