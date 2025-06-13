@@ -1312,3 +1312,30 @@ console.log(MathHelper.add(10, 3));
 ```
 
 - `Static` yaratishni eski uslubi.
+
+---
+
+# **28-dars Abstract class**
+
+`abstract class` — bu asosiy (bazaviy) class bo‘lib, undan bevosita obyekt yaratib bo‘lmaydi. U faqat boshqa class'lar tomonidan meros olish (inheritance) uchun mo‘ljallangan va ko‘pincha umumiy funksionallikni belgilashda ishlatiladi.
+
+```ts
+// Abstract class
+abstract class Animal {
+  // Abstract method
+  abstract makeSound(): void;
+}
+
+// Abstract class dan meros olish ichidagi abstract method ishlatuilmaguncha xatolik chiqadi
+class Cat extends Animal {
+  // Abstract methoddan foydalanish
+  makeSound(): void {
+    console.log("Meow! Meow!");
+  }
+}
+
+const cat = new Cat();
+cat.makeSound();
+```
+
+- `Abstract` class yaratish va undan meros olish

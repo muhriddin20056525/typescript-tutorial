@@ -732,11 +732,25 @@
 // }
 // class Child extends Parent {}
 // console.log(Child.message);
-var MathHelper;
-(function (MathHelper) {
-    function add(a, b) {
-        return a + b;
+// namespace MathHelper {
+//   export function add(a: number, b: number): number {
+//     return a + b;
+//   }
+// }
+// console.log(MathHelper.add(10, 3));
+class Animal {
+    constructor(name) {
+        this.name = name;
     }
-    MathHelper.add = add;
-})(MathHelper || (MathHelper = {}));
-console.log(MathHelper.add(10, 3));
+    move() {
+        console.log(`Moving ${this.name}`);
+    }
+}
+class Cat extends Animal {
+    makeSound() {
+        console.log("Meow! Meow!");
+    }
+}
+const cat = new Cat("Kitty");
+cat.move();
+cat.makeSound();
