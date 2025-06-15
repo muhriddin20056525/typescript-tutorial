@@ -1016,29 +1016,57 @@
 //   }
 // }
 
-class Calculator {
-  value: number = 0;
+// class Calculator {
+//   value: number = 0;
 
-  add(num: number): this {
-    this.value += num;
-    return this;
-  }
+//   add(num: number): this {
+//     this.value += num;
+//     return this;
+//   }
 
-  subtract(num: number): this {
-    this.value -= num;
-    return this;
-  }
+//   subtract(num: number): this {
+//     this.value -= num;
+//     return this;
+//   }
 
-  multiply(num: number): this {
-    this.value *= num;
-    return this;
-  }
+//   multiply(num: number): this {
+//     this.value *= num;
+//     return this;
+//   }
 
-  getValue(): number {
-    return this.value;
-  }
-}
+//   getValue(): number {
+//     return this.value;
+//   }
+// }
 
-const cacl = new Calculator();
-const result = cacl.add(5).subtract(3).multiply(2).getValue();
-console.log(result);
+// const cacl = new Calculator();
+// const result = cacl.add(5).subtract(3).multiply(2).getValue();
+// console.log(result);
+
+// function identity<T>(arg: T): T {
+//   return arg;
+// }
+
+// identity<number>(5);
+// identity<string>("sam");
+
+// interface IUser {
+//   name: string;
+//   age: number;
+// }
+
+// const users: Array<IUser> = [{ name: "Muhriddin", age: 20 }];
+
+// enum Roles {
+//   ADMIN,
+//   USER,
+// }
+
+// type UserRoles = Record<string, number>;
+
+// const roles: UserRoles = {
+//   sam: Roles.ADMIN,
+//   john: Roles.USER,
+// };
+
+// console.log(roles);

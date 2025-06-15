@@ -1441,3 +1441,33 @@ cacl.add(5).subtract(3).multiply(2);
 ```
 
 - Agar `add()`, `subtract()` va `multiply()` metodlari this ni qaytarmaganida, har bir metoddan keyin yangi chaqirish bo'lmas edi.
+
+---
+
+# **31-dars Generic nima**
+
+`Generic` – bu qayta ishlatiladigan (reusable), turga bog‘liq bo‘lmagan (type-independent) kod yozish imkonini beruvchi vosita. Generic’lar orqali funksiya, interface yoki class'ni turli xil ma'lumot turlari bilan ishlaydigan qilib yozish mumkin.
+
+```ts
+// <T> bu generic
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Generic orqali type berilgan funksiyaga malumot uzatayotganda uzatayotgan malumotimiz qansi turdaligini berishimiz kerak shunda funksiyadagi generik bu typeni olib funksiyada qo''laydi
+identity<number>(5);
+identity<string>("sam");
+```
+
+- `Generic` dan funksiyada foydalanish
+
+```ts
+interface IUser {
+  name: string;
+  age: number;
+}
+
+const users: Array<IUser> = [{ name: "Muhriddin", age: 20 }];
+```
+
+- `Interface` ni arrayga `Generic` sifatida berish
