@@ -762,18 +762,45 @@
 //     console.log(`Hello ${this.name}`);
 //   }
 // }
-class Counter {
+// class Counter {
+//   count: number = 0;
+//   increment() {
+//     console.log(this.count);
+//     this.count++;
+//   }
+// }
+// const c = new Counter();
+// const incrementFn = c.increment.bind(c);
+// incrementFn();
+// incrementFn();
+// incrementFn();
+// incrementFn();
+// class User {
+//   name: string = "John";
+//   log(this: User) {
+//     console.log(this.name);
+//   }
+// }
+class Calculator {
     constructor() {
-        this.count = 0;
+        this.value = 0;
     }
-    increment() {
-        console.log(this.count);
-        this.count++;
+    add(num) {
+        this.value += num;
+        return this;
+    }
+    subtract(num) {
+        this.value -= num;
+        return this;
+    }
+    multiply(num) {
+        this.value *= num;
+        return this;
+    }
+    getValue() {
+        return this.value;
     }
 }
-const c = new Counter();
-const incrementFn = c.increment.bind(c);
-incrementFn();
-incrementFn();
-incrementFn();
-incrementFn();
+const cacl = new Calculator();
+const result = cacl.add(5).subtract(3).multiply(2).getValue();
+console.log(result);

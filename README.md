@@ -1385,3 +1385,59 @@ incrementFn();
 ```
 
 - `Bind` orqali `This` ni objectga bog'lash
+
+---
+
+# **30-dars This (2-qism)**
+
+```ts
+// Calculator nomli class e'lon qilinmoqda
+class Calculator {
+  // Class ichidagi "value" nomli o'zgaruvchi, boshlang'ich qiymati 0
+  value: number = 0;
+
+  // add metodi: parametr sifatida raqam oladi va value'ga qo'shadi
+  add(num: number): this {
+    this.value += num; // value = value + num
+    return this; // this qaytmoqda, ya'ni classning o'zini (Calculator obyekti)
+  }
+
+  // subtract metodi: parametr sifatida raqam oladi va value'dan ayriladi
+  subtract(num: number): this {
+    this.value -= num;
+    return this; // classning o'zini qaytaryapti
+  }
+
+  // multiply metodi: parametr sifatida raqam oladi va value'ni ko'paytiradi
+  multiply(num: number): this {
+    this.value *= num;
+    return this; // yana classning o'zini qaytaryapti
+  }
+
+  // getValue metodi: value qiymatini qaytaradi
+  getValue(): number {
+    return this.value;
+  }
+}
+
+// Calculator classidan yangi obyekt yaratilmoqda
+const cacl = new Calculator();
+
+// Method chaining orqali ketma-ket amallar bajarilmoqda
+const result = cacl
+  .add(5) // value = 0 + 5 = 5
+  .subtract(3) // value = 5 - 3 = 2
+  .multiply(2) // value = 2 * 2 = 4
+  .getValue(); // 4 ni qaytaradi
+
+console.log(result); // Konsolga 4 chiqadi
+```
+
+- Metodlar `this` qaytargani bu `method chaining` (metodlarni zanjirga ulab chaqirish) imkonini beradi.
+- `this` bu yerda Calculator klassining o'zini bildiradi, va har bir metod thisni qaytarib, navbatdagi metodni chaqirishga imkon beradi.
+
+```ts
+cacl.add(5).subtract(3).multiply(2);
+```
+
+- Agar `add()`, `subtract()` va `multiply()` metodlari this ni qaytarmaganida, har bir metoddan keyin yangi chaqirish bo'lmas edi.

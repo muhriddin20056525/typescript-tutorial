@@ -991,19 +991,54 @@
 //   }
 // }
 
-class Counter {
-  count: number = 0;
+// class Counter {
+//   count: number = 0;
 
-  increment() {
-    console.log(this.count);
-    this.count++;
+//   increment() {
+//     console.log(this.count);
+//     this.count++;
+//   }
+// }
+
+// const c = new Counter();
+
+// const incrementFn = c.increment.bind(c);
+// incrementFn();
+// incrementFn();
+// incrementFn();
+// incrementFn();
+
+// class User {
+//   name: string = "John";
+
+//   log(this: User) {
+//     console.log(this.name);
+//   }
+// }
+
+class Calculator {
+  value: number = 0;
+
+  add(num: number): this {
+    this.value += num;
+    return this;
+  }
+
+  subtract(num: number): this {
+    this.value -= num;
+    return this;
+  }
+
+  multiply(num: number): this {
+    this.value *= num;
+    return this;
+  }
+
+  getValue(): number {
+    return this.value;
   }
 }
 
-const c = new Counter();
-
-const incrementFn = c.increment.bind(c);
-incrementFn();
-incrementFn();
-incrementFn();
-incrementFn();
+const cacl = new Calculator();
+const result = cacl.add(5).subtract(3).multiply(2).getValue();
+console.log(result);
