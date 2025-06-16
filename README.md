@@ -1471,3 +1471,101 @@ const users: Array<IUser> = [{ name: "Muhriddin", age: 20 }];
 ```
 
 - `Interface` ni arrayga `Generic` sifatida berish
+
+---
+
+# **32-dars Generic function**
+
+`Generic` - funksiyalarda kodni qayta foydalaniladigan qiladi.
+
+```ts
+// <T> bu generik bunga type keladi va shu typeni funksiyaga qo'llaydi
+function identity<T>(val: T): T {
+  return val;
+}
+
+// <string> - Genericga string type yuborish
+const stringIdentity = identity<string>("Hello");
+// <number> - Genericga number type yuborish
+const numberIdentity = identity<number>(10);
+// <boolean> - Genericga booles type yuborish
+const booleanIdentity = identity<boolean>(true);
+```
+
+- Funksiyada generic bilan ishlash
+
+```ts
+// Funksiyaning har bir argumentiga alohida generic berildi va bu funksiya array qaytaradi
+function identity<T, U>(val1: T, val2: U): [T, U] {
+  return [val1, val2];
+}
+
+const stringIdentity = identity<string, number>("Hello", 42);
+const numberIdentity = identity<number, string>(10, "Hello");
+const booleanIdentity = identity<boolean, number>(true, 42);
+```
+
+- Bitta funsiyada 2 ta genericdan foydalanish
+
+```ts
+interface Name {
+  name: string;
+}
+
+interface Age {
+  age: number;
+}
+
+interface Married {
+  isMarried: boolean;
+}
+
+// 3 ta generic qabul qiladi va 3 ta object qaytaradi qiymat sifatida object keladi
+function merge<T, U, K>(obj1: T, obj2: U, obj3: K): T & U & K {
+  return { ...obj1, ...obj2, ...obj3 };
+}
+
+// Interfacelarni generic sifatida yuborish
+const user = merge<Name, Age, Married>(
+  { name: "Jack" },
+  { age: 23 },
+  { isMarried: false }
+);
+```
+
+- Interfecedan generic sifatida foydalanish
+
+```ts
+interface IUser {
+  name: string;
+}
+
+// Genericni array sifatida qabul qiladi funksiyaning parametri
+function getFirstElement<T>(arr: T[]): T {
+  return arr[0];
+}
+// Number array yuborish generic bilan
+const firstNumber = getFirstElement<number>([1, 2, 3]);
+// String array yuborish generic bilan
+const firstString = getFirstElement<string>(["a", "b", "c"]);
+// Generic sifatida interfacedan foydalanilganligi uchun object berish kerak bo'ladi array ichida
+const firstUser = getFirstElement<IUser>([{ name: "John" }, { name: "Jane" }]);
+```
+
+- Funksiyada array genericdan foydalanish
+
+```ts
+// Interfacega Generic Berish
+interface Shape<T> {
+  radius: T;
+}
+
+function createShape<T>(val: T): Shape<T> {
+  return { radius: val };
+}
+
+const firstShape = createShape<number>(10);
+const secondShape = createShape<string>("10deg");
+```
+
+- Interface da Genericdan foydalanish
