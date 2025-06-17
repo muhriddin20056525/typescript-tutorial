@@ -1569,3 +1569,36 @@ const secondShape = createShape<string>("10deg");
 ```
 
 - Interface da Genericdan foydalanish
+
+---
+
+# **33-dars Promise**
+
+```ts
+interface IUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+}
+
+async function fetchData<T>(): Promise<T> {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data: T = await response.json();
+  return data;
+}
+
+async function getUsers() {
+  const users = await fetchData<IUser[]>();
+  console.log(users);
+}
+
+getUsers();
+```
+
+- Fetch orqali apiga so'rov yuborganda genericdan foydalanish

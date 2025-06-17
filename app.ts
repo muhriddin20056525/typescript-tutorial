@@ -1113,13 +1113,52 @@
 // const firstString = getFirstElement<string>(["a", "b", "c"]);
 // const firstUser = getFirstElement<IUser>([{ name: "John" }, { name: "Jane" }]);
 
-interface Shape<T> {
-  radius: T;
+// interface Shape<T> {
+//   radius: T;
+// }
+
+// function createShape<T>(val: T): Shape<T> {
+//   return { radius: val };
+// }
+
+// const firstShape = createShape<number>(10);
+// const secondShape = createShape<string>("10deg");
+
+interface IUser {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
 }
 
-function createShape<T>(val: T): Shape<T> {
-  return { radius: val };
+interface IPost {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 }
 
-const firstShape = createShape<number>(10);
-const secondShape = createShape<string>("10deg");
+async function fetchData<T>(endpoint: string): Promise<T> {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/${endpoint}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const data: T = await response.json();
+  return data;
+}
+
+async function getUsers() {
+  const users = await fetchData<IUser[]>("users");
+  users.forEach((c) => console.log(c.name));
+}
+
+async function getPosts() {
+  const posts = await fetchData<IPost[]>("posts");
+  posts.forEach((c) => console.log(c.title));
+}
+
+getPosts();
