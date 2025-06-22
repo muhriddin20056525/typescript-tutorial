@@ -1124,41 +1124,66 @@
 // const firstShape = createShape<number>(10);
 // const secondShape = createShape<string>("10deg");
 
-interface IUser {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
+// interface IUser {
+//   id: number;
+//   name: string;
+//   username: string;
+//   email: string;
+// }
+
+// interface IPost {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
+
+// async function fetchData<T>(endpoint: string): Promise<T> {
+//   const response = await fetch(
+//     `https://jsonplaceholder.typicode.com/${endpoint}`
+//   );
+
+//   if (!response.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
+
+//   const data: T = await response.json();
+//   return data;
+// }
+
+// async function getUsers() {
+//   const users = await fetchData<IUser[]>("users");
+//   users.forEach((c) => console.log(c.name));
+// }
+
+// async function getPosts() {
+//   const posts = await fetchData<IPost[]>("posts");
+//   posts.forEach((c) => console.log(c.title));
+// }
+
+// getPosts();
+
+// type Pair<T, U> = [T, U];
+
+// const pair1: Pair<number, string> = [1, "one"];
+// const pair2: Pair<string, number> = ["one", 1];
+
+// interface IUser<T, U> {
+//   name: T;
+//   showAge(age: U): void;
+// }
+
+// const user1: IUser<string, number> = {
+//   name: "John",
+//   showAge(age) {
+//     console.log(`Name: ${this.name}, Age: ${age}`);
+//   },
+// };
+
+// user1.showAge(25);
+
+function getLength<T extends { length: number }>(item: T): number {
+  return item.length;
 }
 
-interface IPost {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-async function fetchData<T>(endpoint: string): Promise<T> {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/${endpoint}`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const data: T = await response.json();
-  return data;
-}
-
-async function getUsers() {
-  const users = await fetchData<IUser[]>("users");
-  users.forEach((c) => console.log(c.name));
-}
-
-async function getPosts() {
-  const posts = await fetchData<IPost[]>("posts");
-  posts.forEach((c) => console.log(c.title));
-}
-
-getPosts();
+console.log(getLength("Hello World"));

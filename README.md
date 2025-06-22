@@ -1602,3 +1602,47 @@ getUsers();
 ```
 
 - Fetch orqali apiga so'rov yuborganda genericdan foydalanish
+
+---
+
+# **34-dars Type in generic**
+
+```ts
+type Pair<T, U> = [T, U];
+
+const pair1: Pair<number, string> = [1, "one"];
+const pair2: Pair<string, number> = ["one", 1];
+```
+
+- `Type` da `generic` dan foydalanish
+
+```ts
+// Ikkita generic qabul qiladi
+interface IUser<T, U> {
+  name: T;
+  showAge(age: U): void;
+}
+// Ikkita genericga (string va number) typelarini jo'natyapdi
+const user1: IUser<string, number> = {
+  name: "John",
+  showAge(age) {
+    console.log(`Name: ${this.name}, Age: ${age}`);
+  },
+};
+
+user1.showAge(25);
+```
+
+- `Interface` da `Generic` dan foydalanish
+
+```ts
+// <T extends { length: number }> - Faqatgina legth metodini ko'rsatish uchun cheklov o'rnatish
+function getLength<T extends { length: number }>(item: T): number {
+  // Faqatgina length methodini ishlatish mumkin
+  return item.length;
+}
+
+console.log(getLength("Hello World"));
+```
+
+- `Generic` larda cheklov qo'yish (qaysi methodlarni ko'rsatishini cheklash bu yerda faqat `length` methodini ko'rsatadi)
