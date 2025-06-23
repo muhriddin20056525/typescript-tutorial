@@ -907,7 +907,17 @@
 //   },
 // };
 // user1.showAge(25);
-function getLength(item) {
-    return item.length;
+// function getLength<T extends { length: number }>(item: T): number {
+//   return item.length;
+// }
+// console.log(getLength("Hello World"));
+function getProperty(obj, key) {
+    return obj[key];
 }
-console.log(getLength("Hello World"));
+const user = {
+    id: 1,
+    name: "John Doe",
+    email: "john@gmail.com",
+};
+const userName = getProperty(user, "name");
+console.log(userName);

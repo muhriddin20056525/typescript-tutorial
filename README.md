@@ -1646,3 +1646,44 @@ console.log(getLength("Hello World"));
 ```
 
 - `Generic` larda cheklov qo'yish (qaysi methodlarni ko'rsatishini cheklash bu yerda faqat `length` methodini ko'rsatadi)
+
+```ts
+// Generik funksiya: T - obyekt turi, K - T ichidagi mavjud kalitlardan biri
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  // obj[key] - berilgan kalit orqali obyekt ichidan qiymat olinmoqda
+  return obj[key];
+}
+
+// user - oddiy obyekt: id, name va email degan 3 ta property bor
+const user = {
+  id: 1,
+  name: "John Doe",
+  email: "john@gmail.com",
+};
+
+// getProperty orqali 'user' obyektidan 'name' property qiymatini olyapmiz
+const userName = getProperty(user, "name");
+
+// Olingan qiymatni konsolga chiqaramiz: "John Doe"
+console.log(userName);
+```
+
+- `Object` da `Generic` dan foydalanish va ishlatiladigan xossalarga cheklov o'rnatish
+
+```ts
+interface HasId {
+  id: number;
+}
+
+const user = {
+  id: 1,
+  name: "John",
+};
+// Interfaceni generic sifatida berish
+// <T extends HasId> - faqatgina (HasId) ichidagi xossani qaytaradi
+function getById<T extends HasId>(obj: T) {
+  return obj.id;
+}
+```
+
+- Interface ni generic sifatida berib funksiya qaytaradigan xossaga cheklov qo'ysih

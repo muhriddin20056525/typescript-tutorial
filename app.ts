@@ -1182,8 +1182,34 @@
 
 // user1.showAge(25);
 
-function getLength<T extends { length: number }>(item: T): number {
-  return item.length;
+// function getLength<T extends { length: number }>(item: T): number {
+//   return item.length;
+// }
+
+// console.log(getLength("Hello World"));
+
+// function getProperty<T, K extends keyof T>(obj: T, key: K) {
+//   return obj[key];
+// }
+
+// const user = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "john@gmail.com",
+// };
+
+// const userName = getProperty(user, "name");
+// console.log(userName);
+
+interface HasId {
+  id: number;
 }
 
-console.log(getLength("Hello World"));
+const user = {
+  id: 1,
+  name: "John",
+};
+
+function getById<T extends HasId>(obj: T) {
+  return obj.id;
+}
