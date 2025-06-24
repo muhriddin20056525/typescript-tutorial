@@ -1201,15 +1201,40 @@
 // const userName = getProperty(user, "name");
 // console.log(userName);
 
-interface HasId {
-  id: number;
+// interface HasId {
+//   id: number;
+// }
+
+// const user = {
+//   id: 1,
+//   name: "John",
+// };
+
+// function getById<T extends HasId>(obj: T) {
+//   return obj.id;
+// }
+
+class Shape<T, U> {
+  private content: T;
+  radius: U;
+
+  constructor(content: T, radius: U) {
+    this.content = content;
+    this.radius = radius;
+  }
+
+  getValue(): T {
+    return this.content;
+  }
+
+  getRasius(): U {
+    return this.radius;
+  }
 }
 
-const user = {
-  id: 1,
-  name: "John",
-};
+const shape = new Shape<string, number>("Hello", 20);
+shape.getValue();
+shape.getRasius();
 
-function getById<T extends HasId>(obj: T) {
-  return obj.id;
-}
+const shape2 = new Shape<number, string>(123, "42deg");
+shape2.getValue();

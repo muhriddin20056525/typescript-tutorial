@@ -911,13 +911,35 @@
 //   return item.length;
 // }
 // console.log(getLength("Hello World"));
-function getProperty(obj, key) {
-    return obj[key];
+// function getProperty<T, K extends keyof T>(obj: T, key: K) {
+//   return obj[key];
+// }
+// const user = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "john@gmail.com",
+// };
+// const userName = getProperty(user, "name");
+// console.log(userName);
+// interface HasId {
+//   id: number;
+// }
+// const user = {
+//   id: 1,
+//   name: "John",
+// };
+// function getById<T extends HasId>(obj: T) {
+//   return obj.id;
+// }
+class Shape {
+    constructor(content) {
+        this.content = content;
+    }
+    getValue() {
+        return this.content;
+    }
 }
-const user = {
-    id: 1,
-    name: "John Doe",
-    email: "john@gmail.com",
-};
-const userName = getProperty(user, "name");
-console.log(userName);
+const shape = new Shape("Hello");
+shape.getValue();
+const shape2 = new Shape(123);
+shape2.getValue();

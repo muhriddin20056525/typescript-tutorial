@@ -1687,3 +1687,66 @@ function getById<T extends HasId>(obj: T) {
 ```
 
 - Interface ni generic sifatida berib funksiya qaytaradigan xossaga cheklov qo'ysih
+
+---
+
+# **35-dars Class**
+
+```ts
+// Classga Generic berish
+class Shape<T> {
+  // Class xossasiga Generic berish
+  private content: T;
+
+  // Constructorga Generic berish
+  constructor(content: T) {
+    this.content = content;
+  }
+
+  // Class methodiga Generic berish
+  getValue(): T {
+    return this.content;
+  }
+}
+
+// Classdan object yaratishda Generic berish
+const shape = new Shape<string>("Hello");
+shape.getValue();
+
+const shape2 = new Shape<number>(123);
+shape2.getValue();
+```
+
+- `Class` larda `Generic` dan foydalanish
+
+```ts
+// T - bu content u-n Generic
+// U - bu radius u-n Generic
+class Shape<T, U> {
+  // Xossalarga Generic lar berish
+  private content: T;
+  radius: U;
+
+  // Consturctorga Generic lar berish
+  constructor(content: T, radius: U) {
+    this.content = content;
+    this.radius = radius;
+  }
+  // Methodda generic ishlatish
+  getValue(): T {
+    return this.content;
+  }
+
+  // Methodda generic ishlatish
+  getRasius(): U {
+    return this.radius;
+  }
+}
+
+// Class dan object yaratishda Generic ishlatish (1-qiymat T, 2-qiymat U)
+const shape = new Shape<string, number>("Hello", 20);
+shape.getValue();
+shape.getRasius();
+```
+
+- `Class` da 2 ta `Generic` dan foydalanish
