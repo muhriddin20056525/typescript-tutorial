@@ -1272,16 +1272,43 @@
 
 // type UserKeys = keyof typeof user;
 
-const config = {
-  apiUrl: "https://example.com",
-  port: 3000,
-  debug: true,
-};
+// const config = {
+//   apiUrl: "https://example.com",
+//   port: 3000,
+//   debug: true,
+// };
 
-type ConfigKeys = keyof typeof config;
+// type ConfigKeys = keyof typeof config;
 
-function getConfigValue(key: ConfigKeys) {
-  return config[key];
+// function getConfigValue(key: ConfigKeys) {
+//   return config[key];
+// }
+
+// console.log(getConfigValue("apiUrl"));
+
+// type User = {
+//   id: number;
+//   name: string;
+//   age: number;
+//   isMarried: boolean;
+// };
+
+// type UserName = User["name"];
+
+// type IsBoolean<T> = T extends boolean ? "Yes" : "No";
+
+// type A = IsBoolean<boolean>;
+
+interface IAdmin {
+  role: "admin";
+  access: true;
 }
 
-console.log(getConfigValue("apiUrl"));
+interface IGuest {
+  role: "guest";
+  access: false;
+}
+
+type RoleAccess<T> = T extends { role: "admin" } ? true : false;
+type AdminAccess = RoleAccess<IAdmin>;
+type GuestAccess = RoleAccess<IGuest>;

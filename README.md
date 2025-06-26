@@ -1795,3 +1795,50 @@ getUserKey("age");
 ```
 
 - Keyof orqali objectning barcha keylarini (xossalarini) olish
+
+---
+
+# **37-dars Indexed access & Conditional type**
+
+`Indexed access type` - objectning muayyan qiymatini typeini olish uchun ishlatiladi.
+
+```ts
+type User = {
+  id: number;
+  name: string;
+  age: number;
+  isMarried: boolean;
+};
+
+// User typeining qiymati orqali yangi type yaratildi
+type UserName = User["name"];
+```
+
+- Type ning muayyan bit qiymatini typini olish
+
+```ts
+// T dan kelgan typeni extends orqali boolen yoki yo'qligi tekshirilyapdi
+type IsBoolean<T> = T extends boolean ? "Yes" : "No";
+
+type A = IsBoolean<boolean>;
+```
+
+- Generic orqali kelgan qiymatni shart asosida tekshirish
+
+```ts
+interface IAdmin {
+  role: "admin";
+  access: true;
+}
+
+interface IGuest {
+  role: "guest";
+  access: false;
+}
+// Role Access bu yangi type u T generic ga kelayotgan role xossasi orqali shart qo'yilib qiymat olyapdi
+type RoleAccess<T> = T extends { role: "admin" } ? true : false;
+type AdminAccess = RoleAccess<IAdmin>;
+type GuestAccess = RoleAccess<IGuest>;
+```
+
+- Interfacelar orqali condition typedan foydalanish
