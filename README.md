@@ -1750,3 +1750,48 @@ shape.getRasius();
 ```
 
 - `Class` da 2 ta `Generic` dan foydalanish
+
+---
+
+# **36-dars Keyof va Typeof**
+
+```ts
+// Object
+const user = {
+  name: "John",
+  age: 30,
+};
+
+// Bu usul orqali user objectinig typelari olinadi agarda user objectiga yangi xossa qo'shilsa ham bu type UserType o'zgaruvchisiga avtomatik yoziladi
+type UserType = typeof user;
+
+// Funksiyada UserType dan foydalanish
+function logger(user: UserType) {
+  console.log(user);
+}
+
+logger(user);
+```
+
+- Typeof orqali dinamic objectlarda type berish
+
+```ts
+// Type
+type IUser = {
+  name: string;
+  age: number;
+  isMarried: boolean;
+};
+
+// IUser typedagi barcha kalitlarni Keyof orqali UserKeys o'zgaruvchisiga yuklaydi
+type UserKeys = keyof IUser;
+
+// UserKeys o'zgaruvchisida funksiyada foydalanish
+function getUserKey(key: UserKeys) {
+  console.log(key);
+}
+
+getUserKey("age");
+```
+
+- Keyof orqali objectning barcha keylarini (xossalarini) olish

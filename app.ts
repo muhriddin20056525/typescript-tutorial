@@ -1214,27 +1214,74 @@
 //   return obj.id;
 // }
 
-class Shape<T, U> {
-  private content: T;
-  radius: U;
+// class Shape<T, U> {
+//   private content: T;
+//   radius: U;
 
-  constructor(content: T, radius: U) {
-    this.content = content;
-    this.radius = radius;
-  }
+//   constructor(content: T, radius: U) {
+//     this.content = content;
+//     this.radius = radius;
+//   }
 
-  getValue(): T {
-    return this.content;
-  }
+//   getValue(): T {
+//     return this.content;
+//   }
 
-  getRasius(): U {
-    return this.radius;
-  }
+//   getRasius(): U {
+//     return this.radius;
+//   }
+// }
+
+// const shape = new Shape<string, number>("Hello", 20);
+// shape.getValue();
+// shape.getRasius();
+
+// const shape2 = new Shape<number, string>(123, "42deg");
+// shape2.getValue();
+
+// const user = {
+//   name: "John",
+//   age: 30,
+// };
+
+// type UserType = typeof user;
+
+// function logger(user: UserType) {
+//   console.log(user);
+// }
+
+// logger(user);
+
+// type IUser = {
+//   name: string;
+//   age: number;
+//   isMarried: boolean;
+// };
+
+// type UserKeys = keyof IUser;
+// function getUserKey(key: UserKeys) {
+//   console.log(key);
+// }
+
+// getUserKey("age");
+
+// const user = {
+//   name: "John",
+//   age: 30,
+// };
+
+// type UserKeys = keyof typeof user;
+
+const config = {
+  apiUrl: "https://example.com",
+  port: 3000,
+  debug: true,
+};
+
+type ConfigKeys = keyof typeof config;
+
+function getConfigValue(key: ConfigKeys) {
+  return config[key];
 }
 
-const shape = new Shape<string, number>("Hello", 20);
-shape.getValue();
-shape.getRasius();
-
-const shape2 = new Shape<number, string>(123, "42deg");
-shape2.getValue();
+console.log(getConfigValue("apiUrl"));
