@@ -1842,3 +1842,65 @@ type GuestAccess = RoleAccess<IGuest>;
 ```
 
 - Interfacelar orqali condition typedan foydalanish
+
+---
+
+# **38-dars Readonly, Partial, Required**
+
+`Partial` - generic qabul qiladi va undagi barcha xususiyatlarni berishni ixtiyoriy qilib beradi.
+
+```ts
+interface IProduct {
+  name: string;
+  price: string;
+  id: number;
+}
+
+// Partial orqali interfaceni funksiya argumentiga type sifatida berish
+function createProduct(product: Partial<IProduct>) {
+  console.log(product);
+}
+
+createProduct({ name: "Shoes", price: "20" });
+```
+
+- Bu yerda funksiya argumenti `partial` yordamida `type` berildi va unga `id` berilmadi lekin `partial` dan foydalanilganligi sababli xatolik chiqmaydi
+
+```ts
+interface IProduct {
+  id: number;
+  name: string;
+  price?: string;
+}
+// Required orqali interfaceni funksiya argumentiga type sifatida berish
+function createProduct(product: Required<IProduct>) {
+  console.log(product);
+}
+
+createProduct({ name: "Shoes", price: "20" });
+```
+
+- `Required` interface ichidagi barcha typelarni qatiy qilib qo'yadi
+- `price?: string;` bu ham qatiy bo'ladi `required` ishlatilganligi uchun. `?` belgisi bo'lsa ham
+
+```ts
+interface IProduct {
+  id: number;
+  name: string;
+  price: string;
+}
+
+// Interfaceni readonly ga aylantirish yangi type ochish orqali
+type ReadonlyProduct = Readonly<IProduct>;
+
+const product: ReadonlyProduct = {
+  id: 1,
+  name: "Shoes",
+  price: "20",
+};
+
+// Bu xatolik beradi
+product.name = "adidas";
+```
+
+- `Readonly` orqali type berilganda undagi xossalarni o'qish mumkin bo'ladi lekin o'zgartirish emas.

@@ -1299,16 +1299,32 @@
 
 // type A = IsBoolean<boolean>;
 
-interface IAdmin {
-  role: "admin";
-  access: true;
+// interface IAdmin {
+//   role: "admin";
+//   access: true;
+// }
+
+// interface IGuest {
+//   role: "guest";
+//   access: false;
+// }
+
+// type RoleAccess<T> = T extends { role: "admin" } ? true : false;
+// type AdminAccess = RoleAccess<IAdmin>;
+// type GuestAccess = RoleAccess<IGuest>;
+
+interface IProduct {
+  id: number;
+  name: string;
+  price: string;
 }
 
-interface IGuest {
-  role: "guest";
-  access: false;
-}
+type ReadonlyProduct = Readonly<IProduct>;
 
-type RoleAccess<T> = T extends { role: "admin" } ? true : false;
-type AdminAccess = RoleAccess<IAdmin>;
-type GuestAccess = RoleAccess<IGuest>;
+const product: ReadonlyProduct = {
+  id: 1,
+  name: "Shoes",
+  price: "20",
+};
+
+product.name = "adidas";
