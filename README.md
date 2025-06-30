@@ -2004,3 +2004,80 @@ type commonProperties = Exclude<keyof IAnimal, keyof IPlant>;
 ```
 
 - `Exclude` dan foydalanib birinchi interfacedan ikkinchi interfaceda mavjud bo'lmagan xossani olib type yaratish
+
+---
+
+# **40-dars ReturnType, Parametr, Awaited**
+
+`ReturnType<T>` — bu utility type bo‘lib, u berilgan funksiya turining qaytargan qiymati (return type) ni ajratib oladi.
+
+```ts
+function calc(a: number, b: number): number {
+  return a + b;
+}
+
+// ReturnTpe dan foydalanib funksiya return qilgan typeni olish
+type CalcType = ReturnType<typeof calc>;
+
+// Undan Foydalanish
+const result: CalcType = calc(1, 2);
+```
+
+- `ReturnType` orqali funksiya qaytaradigan type ni yangi typega olish
+
+`Parameters<T>` — bu utility type bo‘lib, berilgan funksiya turining argumentlar (parametrlar) ro‘yxatini ajratib oladi tuple (`[]`) shaklida.
+
+```ts
+// Ikki sonni qabul qilib, ularning yig'indisini qaytaruvchi funksiya
+function calc(a: number, b: number): number {
+  return a + b;
+}
+
+// `CalcType` tipi `calc` funksiyasining qaytaradigan (return) turini oladi.
+// Bu holda: number, chunki `calc` number qaytaradi
+type CalcType = ReturnType<typeof calc>;
+
+// `CalcParams` esa `calc` funksiyasining parametrlarini oladi.
+// Bu holda: [a: number, b: number]
+type CalcParams = Parameters<typeof calc>;
+
+// `params` degan o'zgaruvchi `calc` funksiyasining parametrlariga mos qiymatlarni oladi.
+// Bu yerda `[1, 2]` bu `[number, number]` tipiga to'g'ri keladi
+const params: CalcParams = [1, 2];
+
+// `result` degan o'zgaruvchi `calc` funksiyasining natijasini saqlaydi.
+// Typeni oldindan `CalcType` deb berganimiz uchun u `number` bo'ladi.
+// Bu yerda `...params` orqali `[1, 2]` massivni `calc`'ga argument sifatida uzatyapmiz
+const result: CalcType = calc(...params);
+```
+
+- `ReturnType` va `Parameters` dan foydalanish
+
+```ts
+class Person {
+  constructor(public name: string, age: number) {}
+}
+
+type PersonParams = ConstructorParameters<typeof Person>;
+
+const personParams: PersonParams = ["John", 30];
+const person = new Person(...personParams);
+```
+
+- `Class` `Constructordagi` parametr typeini olish
+
+`Awaited<T>` — bu TypeScript'dagi utility type bo‘lib, u Promise tipini ochib beradi, ya’ni await qilgandagi natijani beradi.
+
+```ts
+async function getName(): Promise<string> {
+  return "Muhriddin";
+}
+
+// Typeni olish:
+type NameType = Awaited<ReturnType<typeof getName>>;
+
+// Bu bilan aynan shunday deyilyapti:
+const name: NameType = "Muhriddin";
+```
+
+- `Awaited` dan foydalanish

@@ -1351,14 +1351,42 @@
 //   phone: "99 108 65 25",
 // };
 
-interface IAnimal {
-  name: string;
-  spaceies: string;
+// interface IAnimal {
+//   name: string;
+//   spaceies: string;
+// }
+
+// interface IPlant {
+//   name: string;
+//   color: string;
+// }
+
+// type commonProperties = Exclude<keyof IAnimal, keyof IPlant>;
+
+// function calc(a: number, b: number): number {
+//   return a + b;
+// }
+
+// type CalcType = ReturnType<typeof calc>;
+// type CalcParams = Parameters<typeof calc>;
+
+// const params: CalcParams = [1, 2];
+
+// const result: CalcType = calc(...params);
+
+// class Person {
+//   constructor(public name: string, age: number) {}
+// }
+
+// type PersonParams = ConstructorParameters<typeof Person>;
+
+// const personParams: PersonParams = ["John", 30];
+// const person = new Person(...personParams);
+
+async function fetchData(): Promise<string> {
+  return "Data";
 }
 
-interface IPlant {
-  name: string;
-  color: string;
-}
+type FetchDataReturnType = Awaited<ReturnType<typeof fetchData>>;
 
-type commonProperties = Exclude<keyof IAnimal, keyof IPlant>;
+const data: FetchDataReturnType = "Data";
