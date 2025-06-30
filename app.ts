@@ -1313,18 +1313,52 @@
 // type AdminAccess = RoleAccess<IAdmin>;
 // type GuestAccess = RoleAccess<IGuest>;
 
-interface IProduct {
-  id: number;
+// interface IProduct {
+//   id: number;
+//   name: string;
+//   price: string;
+// }
+
+// type ReadonlyProduct = Readonly<IProduct>;
+
+// const product: ReadonlyProduct = {
+//   id: 1,
+//   name: "Shoes",
+//   price: "20",
+// };
+
+// product.name = "adidas";
+
+// interface IUser {
+//   name: string;
+//   age: number;
+//   addres: string;
+//   email: string;
+//   avatar: string;
+//   phone: string;
+//   password: string;
+//   secretKey: string;
+// }
+
+// type UserContactInfo = Omit<IUser, "password" | "secretKey">;
+
+// const contact: UserContactInfo = {
+//   name: "Muhriddin",
+//   age: 20,
+//   email: "example.gmail.com",
+//   addres: "Uzbekistan Peshku",
+//   avatar: "https://image.com",
+//   phone: "99 108 65 25",
+// };
+
+interface IAnimal {
   name: string;
-  price: string;
+  spaceies: string;
 }
 
-type ReadonlyProduct = Readonly<IProduct>;
+interface IPlant {
+  name: string;
+  color: string;
+}
 
-const product: ReadonlyProduct = {
-  id: 1,
-  name: "Shoes",
-  price: "20",
-};
-
-product.name = "adidas";
+type commonProperties = Exclude<keyof IAnimal, keyof IPlant>;

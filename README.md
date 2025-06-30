@@ -1904,3 +1904,103 @@ product.name = "adidas";
 ```
 
 - `Readonly` orqali type berilganda undagi xossalarni o'qish mumkin bo'ladi lekin o'zgartirish emas.
+
+---
+
+# **39-dars Pick, Omit, Extract, Exclude**
+
+`Pick` — bu mavjud obyekt (interface yoki type) dan faqat kerakli property (xususiyatlar) ni ajratib olishga xizmat qiladi.
+
+```ts
+// Interface
+interface IUser {
+  name: string;
+  age: number;
+  addres: string;
+  email: string;
+}
+// Pick orqali interfacedagi xossalar orqali type yaratish
+// IUser - Intnerface
+// email | address - bu IUser interfacidan tanlab olinadigan xossalar
+type UserContactInfo = Pick<IUser, "email" | "addres">;
+
+// Pick va Interface orqali yaratilgan typedan foydalanish
+const contact: UserContactInfo = {
+  email: "example.gmail.com",
+  addres: "Uzbekistan Peshku",
+};
+```
+
+- `Pick` orqali Interfacedan kerakli xossalarni ajratib olish
+
+`Omit` — bu Pickning teskarisi: berilgan interfacedan ba'zi property’larni tashlab yuboradi, qolganlarini oladi.
+
+```ts
+// Intetface
+interface IUser {
+  name: string;
+  age: number;
+  addres: string;
+  email: string;
+  avatar: string;
+  phone: string;
+  password: string;
+  secretKey: string;
+}
+
+// Omit orqali interfacedagi xossalar orqali type yaratish
+// IUser - Intnerface
+// password | secretKey - bu IUser interfacidan tashlab yuborilaadigan xossalar
+type UserContactInfo = Omit<IUser, "password" | "secretKey">;
+
+// Omit va Interface orqali yaratilgan typedan foydalanish
+const contact: UserContactInfo = {
+  name: "Muhriddin",
+  age: 20,
+  email: "example.gmail.com",
+  addres: "Uzbekistan Peshku",
+  avatar: "https://image.com",
+  phone: "99 108 65 25",
+};
+```
+
+- `Omit` orqali interfacedagi kerak bo'lmagan xossalarii tashlab yuborib yangi type yaratish
+
+`Extract` — bu ikki type orasidagi umumiy qismlarni ajratib oladi. Ya’ni, ikkinchi type ichida bor bo‘lgan birinchi type elementlarini tanlaydi.
+
+```ts
+// Interface
+interface IAnimal {
+  name: string;
+  spaceies: string;
+}
+// Interface
+interface IPlant {
+  name: string;
+  color: string;
+}
+// ikki interfaceda mavjud bo'lgan qiymatlarni Extract orqli birlashtirib type yaratish
+// Extract ishlashi uchun Interfacedagi xossalarni kaliti kerak qiymati emas shuning uchun keyof dan foydalanilgan
+type commonProperties = Extract<keyof IAnimal, keyof IPlant>;
+```
+
+- `Extract` orqali ikki interfaceda mavjud bo'lgan qiymatlar orqali yangi type yaratish
+
+`Exclude` — bu Extractning teskarisi: birinchi type (odatda union) dan ikkinchi type’dagi qiymatlarni olib tashlaydi.
+
+```ts
+interface IAnimal {
+  name: string;
+  spaceies: string;
+}
+
+interface IPlant {
+  name: string;
+  color: string;
+}
+//  IAnimal interfaceidan IPlant interfacida mavjud bo'lmagan qiymatlardan Exclude orqali yangi type yaratish
+// Exclude ishlashi uchun Interfacedagi xossalarni kaliti kerak qiymati emas shuning uchun keyof dan foydalanilgan
+type commonProperties = Exclude<keyof IAnimal, keyof IPlant>;
+```
+
+- `Exclude` dan foydalanib birinchi interfacedan ikkinchi interfaceda mavjud bo'lmagan xossani olib type yaratish
