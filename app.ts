@@ -1383,10 +1383,62 @@
 // const personParams: PersonParams = ["John", 30];
 // const person = new Person(...personParams);
 
-async function fetchData(): Promise<string> {
-  return "Data";
+// async function fetchData(): Promise<string> {
+//   return "Data";
+// }
+
+// type FetchDataReturnType = Awaited<ReturnType<typeof fetchData>>;
+
+// const data: FetchDataReturnType = "Data";
+
+// type Constructor<T = {}> = new (...args: any[]) => T;
+
+// function DrawShape<TBase extends Constructor>(Base: TBase) {
+//   return class extends Base {
+//     draw() {
+//       console.log("Drawing Shape");
+//     }
+//   };
+// }
+
+// function FillShape<TBase extends Constructor>(Base: TBase) {
+//   return class extends Base {
+//     fill() {
+//       console.log("Filling Shape");
+//     }
+//   };
+// }
+
+// class Shape {}
+
+// const MixedShape = FillShape(DrawShape(Shape));
+
+// class Circle extends MixedShape {}
+
+// const circle = new Circle();
+// circle.draw();
+// circle.fill();
+
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+function CanLog<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    log(message: string) {
+      console.log(`[Log]: ${message}`);
+    }
+  };
 }
 
-type FetchDataReturnType = Awaited<ReturnType<typeof fetchData>>;
+function CanAccess<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    role: string = "guest";
 
-const data: FetchDataReturnType = "Data";
+    setRole(role: string) {
+      this.role = role;
+    }
+
+    canAccess(requiredRole: string): boolean {
+      return this.role === requiredRole;
+    }
+  };
+}

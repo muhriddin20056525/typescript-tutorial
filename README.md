@@ -2081,3 +2081,59 @@ const name: NameType = "Muhriddin";
 ```
 
 - `Awaited` dan foydalanish
+
+---
+
+# **41-dars Mixin (part-1)**
+
+`Mixin` — bu funksiya bo‘lib, u klassni parametr sifatida oladi va unga yangi metodlar yoki xususiyatlar qo‘shgan yangi klassni qaytaradi.
+
+```ts
+// 1. Generic konstruktor tipini aniqlayapmiz:
+// Har qanday klass uchun ishlaydigan umumiy konstruktor turi.
+// new (...args: any[]) => T — bu har qanday argumentlar bilan chaqiriladigan konstruktor.
+type Constructor<T = {}> = new (...args: any[]) => T;
+
+// 2. DrawShape mixin funksiyasi:
+// Klassni argument sifatida oladi va unga `draw()` metodini qo‘shib, yangi klass qaytaradi.
+function DrawShape<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    draw() {
+      console.log("Drawing Shape"); // draw() chaqirilganda konsolga chiqariladi
+    }
+  };
+}
+
+// 3. FillShape mixin funksiyasi:
+// Bu ham klassni oladi va `fill()` metodini qo‘shadi.
+function FillShape<TBase extends Constructor>(Base: TBase) {
+  return class extends Base {
+    fill() {
+      console.log("Filling Shape"); // fill() chaqirilganda konsolga chiqariladi
+    }
+  };
+}
+
+// 4. Oddiy bo‘sh klass: bu bazaviy klass sifatida ishlatiladi.
+class Shape {}
+
+// 5. Mixinlarni ketma-ket qo‘llayapmiz:
+// Avval Shape ga DrawShape ni qo‘shyapti, so‘ngra unga FillShape ni.
+// Tartib: FillShape(DrawShape(Shape))
+const MixedShape = FillShape(DrawShape(Shape));
+
+// 6. Endi Circle klassi MixedShape'dan meros oladi:
+// MixedShape ichida draw() va fill() metodlari bor.
+class Circle extends MixedShape {}
+
+// 7. Circle obyektini yaratamiz.
+const circle = new Circle();
+
+// 8. draw() metodi chaqirilmoqda — bu DrawShape dan kelgan.
+circle.draw(); // → "Drawing Shape"
+
+// 9. fill() metodi chaqirilmoqda — bu FillShape dan kelgan.
+circle.fill(); // → "Filling Shape"
+```
+
+- `Mixin` dan foydalanish
