@@ -2176,3 +2176,72 @@ const shape = new Circle();
 ```
 
 - `Class` uchun `Decorator` Yaratish
+
+---
+
+# **43-dars Decorators (part-2)**
+
+```ts
+interface IShape {
+  name: string;
+  getValue: () => string;
+}
+
+function Logger(constructor: Function) {
+  console.log(`Class Created: ${constructor.name}`);
+}
+
+function FirstDecorator(constructor: Function) {
+  console.log(`First Decorator: ${constructor.name}`);
+}
+
+@FirstDecorator
+@Logger
+class Circle implements IShape {
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+const shape = new Circle();
+```
+
+- Bir Nechta Decoratorni ketma ket ishlatish
+- Decoratorlarni pastdan tepaga qarab o'qiydi yani birinchi `@Logger` keyin esa `@FirstDecorator` ishga tushadi
+
+```ts
+interface IShape {
+  name: string;
+  getValue: () => string;
+}
+
+// Bu class xossasini o'zgartieish uchun Decorator
+// Lekin u ishlamaydi chunki Decorator class yaratilishidan oldin ishga tushadi bu Decorator esa classning prototype.name xossasini o'zgartiryapdi class yaratilganda esa bu kodni yangilab yuboradi yani o'zinig xossalarini bu kod ustidan yozib yuboradi
+function ChangeShape(constructor: Function) {
+  constructor.prototype.name = "Triangle";
+}
+
+@ChangeShape
+class Circle implements IShape {
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+const shape = new Circle();
+console.log(shape);
+```
+
+- `Class` xossa qiymatini o'zgartirish uchun `Decorator` yaratish (bu usul ishlamaydi)

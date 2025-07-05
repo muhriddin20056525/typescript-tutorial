@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(constructor) {
-    console.log(`Class Created: ${constructor.name}`);
+function ChangeShape(constructor) {
+    constructor.prototype.name = "Triangle";
 }
 let Circle = class Circle {
     constructor() {
-        this.name = "Square";
+        this.name = "Circle";
         console.log(`Cirlce Created`);
     }
     getValue() {
@@ -21,16 +21,7 @@ let Circle = class Circle {
     }
 };
 Circle = __decorate([
-    Logger
+    ChangeShape
 ], Circle);
 const shape = new Circle();
-// function changeShape(shape: IShape) {
-//   shape.name = "Triangle";
-//   return shape;
-// }
-// function nullShape(shape: IShape) {
-//   shape.name = "null";
-//   return shape;
-// }
-// const shape = nullShape(changeShape(new Circle()));
-// console.log(shape);
+console.log(shape);

@@ -1448,11 +1448,11 @@ interface IShape {
   getValue: () => string;
 }
 
-function Logger(constructor: Function) {
-  console.log(`Class Created: ${constructor.name}`);
+function ChangeShape(constructor: Function) {
+  constructor.prototype.name = "Triangle";
 }
 
-@Logger
+@ChangeShape
 class Circle implements IShape {
   name: string = "Circle";
 
@@ -1466,17 +1466,4 @@ class Circle implements IShape {
 }
 
 const shape = new Circle();
-
-// function changeShape(shape: IShape) {
-//   shape.name = "Triangle";
-//   return shape;
-// }
-
-// function nullShape(shape: IShape) {
-//   shape.name = "null";
-//   return shape;
-// }
-
-// const shape = nullShape(changeShape(new Circle()));
-
-// console.log(shape);
+console.log(shape);
