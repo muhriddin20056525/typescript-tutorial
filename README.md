@@ -2084,7 +2084,7 @@ const name: NameType = "Muhriddin";
 
 ---
 
-# **41-dars Mixin (part-1)**
+# **41-dars Mixin**
 
 `Mixin` — bu funksiya bo‘lib, u klassni parametr sifatida oladi va unga yangi metodlar yoki xususiyatlar qo‘shgan yangi klassni qaytaradi.
 
@@ -2137,3 +2137,42 @@ circle.fill(); // → "Filling Shape"
 ```
 
 - `Mixin` dan foydalanish
+
+# **42-dars Decorators (part-1)**
+
+`Decorator` — bu klasslarga, metodlarga, property'larga yoki parameter'larga qo‘shimcha funksiya yoki ma'lumot qo‘shish uchun ishlatiladigan maxsus funksiya. Ular ko‘pincha meta-programming (ya'ni kodni kod orqali o‘zgartirish) uchun ishlatiladi.
+
+```ts
+// Interface Class Uchun
+interface IShape {
+  name: string;
+  getValue: () => string;
+}
+
+// Bu class decorator funksiyasi
+// U klass yaratilganda uning nomini konsolga chiqaradi
+function Logger(constructor: Function) {
+  console.log(`Class Created: ${constructor.name}`);
+}
+
+// @Logger bu yerda Circle klassiga decorator sifatida qo‘shildi
+// Bu Circle klassi yaratilganida Logger funksiyasi avtomatik ishga tushadi
+@Logger
+class Circle implements IShape {
+  // IShape interfeysidan kelgan name property
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+// Yangi Object Yaratish
+const shape = new Circle();
+```
+
+- `Class` uchun `Decorator` Yaratish

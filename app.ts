@@ -1419,26 +1419,64 @@
 // circle.draw();
 // circle.fill();
 
-type Constructor<T = {}> = new (...args: any[]) => T;
+// type Constructor<T = {}> = new (...args: any[]) => T;
 
-function CanLog<TBase extends Constructor>(Base: TBase) {
-  return class extends Base {
-    log(message: string) {
-      console.log(`[Log]: ${message}`);
-    }
-  };
+// function CanLog<TBase extends Constructor>(Base: TBase) {
+//   return class extends Base {
+//     log(message: string) {
+//       console.log(`[Log]: ${message}`);
+//     }
+//   };
+// }
+
+// function CanAccess<TBase extends Constructor>(Base: TBase) {
+//   return class extends Base {
+//     role: string = "guest";
+
+//     setRole(role: string) {
+//       this.role = role;
+//     }
+
+//     canAccess(requiredRole: string): boolean {
+//       return this.role === requiredRole;
+//     }
+//   };
+// }
+
+interface IShape {
+  name: string;
+  getValue: () => string;
 }
 
-function CanAccess<TBase extends Constructor>(Base: TBase) {
-  return class extends Base {
-    role: string = "guest";
-
-    setRole(role: string) {
-      this.role = role;
-    }
-
-    canAccess(requiredRole: string): boolean {
-      return this.role === requiredRole;
-    }
-  };
+function Logger(constructor: Function) {
+  console.log(`Class Created: ${constructor.name}`);
 }
+
+@Logger
+class Circle implements IShape {
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+const shape = new Circle();
+
+// function changeShape(shape: IShape) {
+//   shape.name = "Triangle";
+//   return shape;
+// }
+
+// function nullShape(shape: IShape) {
+//   shape.name = "null";
+//   return shape;
+// }
+
+// const shape = nullShape(changeShape(new Circle()));
+
+// console.log(shape);
