@@ -1448,11 +1448,31 @@ interface IShape {
   getValue: () => string;
 }
 
-function ChangeShape(constructor: Function) {
-  constructor.prototype.name = "Triangle";
+function ChangeShape<TBase extends { new (...args: any[]): {} }>(
+  constructor: TBase
+) {
+  return class extends constructor {
+    name: string = "Tiangle";
+    color: string = "red";
+
+    getInfo() {
+      return this.name + this.color;
+    }
+  };
+}
+
+function WithVersion(version: string) {
+  return function <TBase extends { new (...args: any[]): {} }>(
+    constructor: TBase
+  ) {
+    return class extends constructor {
+      version: string = version;
+    };
+  };
 }
 
 @ChangeShape
+@WithVersion("4.2.4")
 class Circle implements IShape {
   name: string = "Circle";
 

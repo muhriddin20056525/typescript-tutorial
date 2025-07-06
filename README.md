@@ -2245,3 +2245,84 @@ console.log(shape);
 ```
 
 - `Class` xossa qiymatini o'zgartirish uchun `Decorator` yaratish (bu usul ishlamaydi)
+
+---
+
+# **44-dars Class decorator**
+
+`Class decorator` — bu klassga qo‘shimcha funksionallik qo‘shish yoki uni o‘zgartirish uchun ishlatiladigan funktsiya bo‘lib, u to‘g‘ridan-to‘g‘ri klassga qo‘llanadi.
+
+```ts
+// Class uchun interface
+interface IShape {
+  name: string;
+  getValue: () => string;
+}
+
+// Classni o'zgartiradigan funksiya
+// TBase - Generic
+// (...args: any[]) -  bu konstruktor har qanday miqdordagi argumentlarni olishi mumkin degani
+function ChangeShape<TBase extends { new (...args: any[]): {} }>(
+  constructor: TBase
+) {
+  // Argumentdagi constructordan meros olinib yangi class qaytarilyapdi
+  return class extends constructor {
+    // Class dagi eski xossa o'zgartirilyapdi
+    name: string = "Tiangle";
+    // Class ga yangi xossa qo'shilyapdi
+    color: string = "red";
+  };
+}
+
+// Decoratordan foydalanish
+@ChangeShape
+// Class Yaratish
+class Circle implements IShape {
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+const shape = new Circle();
+console.log(shape);
+```
+
+- Class dagi xossani o'zgartirish va unga yangi xossa qo'shish
+
+```ts
+interface IShape {
+  name: string;
+  getValue: () => string;
+}
+//  Bu oddiy decorator factory — ya’ni dekoratorga parametr berish imkonini beradi
+function Logger(prefix: string) {
+  return function (constructor: Function) {
+    // Konstruktorda ismi bilan birga prefiks chiqariladi
+    console.log(`${prefix} - ${constructor.name}`);
+  };
+}
+
+@Logger("CREATE-CIRCLE")
+class Circle implements IShape {
+  name: string = "Circle";
+
+  constructor() {
+    console.log(`Cirlce Created`);
+  }
+
+  getValue(): string {
+    return this.name;
+  }
+}
+
+const shape = new Circle();
+console.log(shape);
+```
+
+- Decorator Factorydan foydalanish
