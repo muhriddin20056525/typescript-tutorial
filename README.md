@@ -2326,3 +2326,49 @@ console.log(shape);
 ```
 
 - Decorator Factorydan foydalanish
+
+---
+
+# **45-dars CreatedAt decorator (Kichik Amalyot)**
+
+```ts
+// Decorator Funcksiya
+// T - Generic orqali type berish
+function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+  // Eski classdan meros olib yangi class yaratish
+  return class extends constructor {
+    // Ushbu decorator qaysi classga ishlasa unga yangi createdAt xossasi qo'shiladi
+    readonly createdAt = new Date();
+  };
+}
+
+// Decoratordan foydalanish
+@CreatedAt
+// Class Yaratish
+class Course {
+  // Class Xossalari
+  name: string = "TypeScript";
+  excerpt: string = "Learn stypscript from scratch";
+}
+
+// Decoratordan foydalanish
+@CreatedAt
+// Class Yaratish
+class Lesson {
+  // Class Xossalari
+  name: string = "What is TypeScript";
+  content: string = "Introdcution to TypeScript";
+}
+
+// Type Yaratish Class xossalariga createdAt typeini qo'shish uchun kerak
+type CreatedEntity = { createdAt: Date };
+
+// TypeScript orqali Classlaar typiga createdAt ni ham qo'shish
+const course = new Course() as Course & CreatedEntity;
+const lesson = new Lesson() as Lesson & CreatedEntity;
+
+console.log(course);
+console.log(lesson);
+```
+
+- TypeScript orqali `createdAt` loyihasini bajarish

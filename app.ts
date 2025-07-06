@@ -1443,47 +1443,80 @@
 //   };
 // }
 
-interface IShape {
-  name: string;
-  getValue: () => string;
-}
+// interface IShape {
+//   name: string;
+//   getValue: () => string;
+// }
 
-function ChangeShape<TBase extends { new (...args: any[]): {} }>(
-  constructor: TBase
-) {
+// function ChangeShape<TBase extends { new (...args: any[]): {} }>(
+//   constructor: TBase
+// ) {
+//   return class extends constructor {
+//     name: string = "Tiangle";
+//     color: string = "red";
+
+//     getInfo() {
+//       return this.name + this.color;
+//     }
+//   };
+// }
+
+// function WithVersion(version: string) {
+//   return function <TBase extends { new (...args: any[]): {} }>(
+//     constructor: TBase
+//   ) {
+//     return class extends constructor {
+//       version: string = version;
+//     };
+//   };
+// }
+
+// @ChangeShape
+// @WithVersion("4.2.4")
+// class Circle implements IShape {
+//   name: string = "Circle";
+
+//   constructor() {
+//     console.log(`Cirlce Created`);
+//   }
+
+//   getValue(): string {
+//     return this.name;
+//   }
+// }
+
+// const shape = new Circle();
+// console.log(shape);
+
+// 1 Decorator
+
+function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
-    name: string = "Tiangle";
-    color: string = "red";
-
-    getInfo() {
-      return this.name + this.color;
-    }
+    readonly createdAt = new Date();
   };
 }
 
-function WithVersion(version: string) {
-  return function <TBase extends { new (...args: any[]): {} }>(
-    constructor: TBase
-  ) {
-    return class extends constructor {
-      version: string = version;
-    };
-  };
+// 2 Course
+@CreatedAt
+class Course {
+  name: string = "TypeScript";
+  excerpt: string = "Learn stypscript from scratch";
 }
 
-@ChangeShape
-@WithVersion("4.2.4")
-class Circle implements IShape {
-  name: string = "Circle";
+// 3 Lesson Class
 
-  constructor() {
-    console.log(`Cirlce Created`);
-  }
-
-  getValue(): string {
-    return this.name;
-  }
+@CreatedAt
+class Lesson {
+  name: string = "What is TypeScript";
+  content: string = "Introdcution to TypeScript";
 }
 
-const shape = new Circle();
-console.log(shape);
+// Type assertion
+
+type CreatedEntity = { createdAt: Date };
+
+const course = new Course() as Course & CreatedEntity;
+const lesson = new Lesson() as Lesson & CreatedEntity;
+
+console.log(course);
+console.log(lesson);
