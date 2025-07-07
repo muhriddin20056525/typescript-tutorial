@@ -2372,3 +2372,44 @@ console.log(lesson);
 ```
 
 - TypeScript orqali `createdAt` loyihasini bajarish
+
+---
+
+# **46-dars Method decorator (part-1)**
+
+`Method decorator` - Bu class ning malum bir methodiga qo'llanadigan typescript xossasi. U methodning ishlashini o'zgartirishi yoki kengaytirishi mumkin.
+
+```ts
+// Method dekoratori sifatida ishlatiladigan funksiya
+function Logger(
+  // Dekoratsiya qilinayotgan klass (yoki prototip)
+  target: Object,
+  // Metod nomi (masalan, "greeting")
+  propertyKey: string,
+  // Metod haqidagi meta-ma’lumot (get, set, value, writable)
+  descriptor: PropertyDescriptor
+) {
+  // Asl metodni almashtiruvchi yangi funksiya
+  descriptor.value = function (...args: any[]) {
+    // Konsolga xabar chiqaradi
+    console.log("Method not implemented");
+    return args;
+  };
+  // O‘zgartirilgan metod descriptorini qaytarish
+  return descriptor;
+}
+
+class User {
+  constructor(public name: string, public age: number) {}
+  // Metodga Logger dekoratori qo‘llash
+  @Logger
+  greeting() {
+    throw new Error("Method not implemented");
+  }
+}
+
+const user = new User("John", 30);
+user.greeting();
+```
+
+- Decorator yordamida `greeting` methodi qaytarayotgan xatolikni olib uni boshqacha formatda ko'rsatish

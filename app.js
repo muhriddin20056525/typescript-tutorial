@@ -1145,36 +1145,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 // }
 // const shape = new Circle();
 // console.log(shape);
-// 1 Decorator
-function CreatedAt(constructor) {
-    return class extends constructor {
-        constructor() {
-            super(...arguments);
-            this.createdAt = new Date();
-        }
+// // 1 Decorator
+// function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+//   return class extends constructor {
+//     readonly createdAt = new Date();
+//   };
+// }
+// // 2 Course
+// @CreatedAt
+// class Course {
+//   name: string = "TypeScript";
+//   excerpt: string = "Learn stypscript from scratch";
+// }
+// // 3 Lesson Class
+// @CreatedAt
+// class Lesson {
+//   name: string = "What is TypeScript";
+//   content: string = "Introdcution to TypeScript";
+// }
+// // Type assertion
+// type CreatedEntity = { createdAt: Date };
+// const course = new Course() as Course & CreatedEntity;
+// const lesson = new Lesson() as Lesson & CreatedEntity;
+// console.log(course);
+// console.log(lesson);
+function Logger(target, propertyKey, descriptor) {
+    descriptor.value = function (...args) {
+        console.log("Method not implemented");
+        return args;
     };
+    return descriptor;
 }
-// 2 Course
-let Course = class Course {
-    constructor() {
-        this.name = "TypeScript";
-        this.excerpt = "Learn stypscript from scratch";
+class User {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
     }
-};
-Course = __decorate([
-    CreatedAt
-], Course);
-// 3 Lesson Class
-let Lesson = class Lesson {
-    constructor() {
-        this.name = "What is TypeScript";
-        this.content = "Introdcution to TypeScript";
+    greeting() {
+        throw new Error("Method not implemented");
     }
-};
-Lesson = __decorate([
-    CreatedAt
-], Lesson);
-const course = new Course();
-const lesson = new Lesson();
-console.log(course);
-console.log(lesson);
+}
+__decorate([
+    Logger
+], User.prototype, "greeting", null);
+const user = new User("John", 30);
+user.greeting();

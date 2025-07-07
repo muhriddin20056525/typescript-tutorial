@@ -1488,35 +1488,60 @@
 // const shape = new Circle();
 // console.log(shape);
 
-// 1 Decorator
+// // 1 Decorator
 
-function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
-  return class extends constructor {
-    readonly createdAt = new Date();
+// function CreatedAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+//   return class extends constructor {
+//     readonly createdAt = new Date();
+//   };
+// }
+
+// // 2 Course
+// @CreatedAt
+// class Course {
+//   name: string = "TypeScript";
+//   excerpt: string = "Learn stypscript from scratch";
+// }
+
+// // 3 Lesson Class
+
+// @CreatedAt
+// class Lesson {
+//   name: string = "What is TypeScript";
+//   content: string = "Introdcution to TypeScript";
+// }
+
+// // Type assertion
+
+// type CreatedEntity = { createdAt: Date };
+
+// const course = new Course() as Course & CreatedEntity;
+// const lesson = new Lesson() as Lesson & CreatedEntity;
+
+// console.log(course);
+// console.log(lesson);
+
+function Logger(
+  target: Object,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  descriptor.value = function (...args: any[]) {
+    console.log("Method not implemented");
+    return args;
   };
+
+  return descriptor;
 }
 
-// 2 Course
-@CreatedAt
-class Course {
-  name: string = "TypeScript";
-  excerpt: string = "Learn stypscript from scratch";
+class User {
+  constructor(public name: string, public age: number) {}
+
+  @Logger
+  greeting() {
+    throw new Error("Method not implemented");
+  }
 }
 
-// 3 Lesson Class
-
-@CreatedAt
-class Lesson {
-  name: string = "What is TypeScript";
-  content: string = "Introdcution to TypeScript";
-}
-
-// Type assertion
-
-type CreatedEntity = { createdAt: Date };
-
-const course = new Course() as Course & CreatedEntity;
-const lesson = new Lesson() as Lesson & CreatedEntity;
-
-console.log(course);
-console.log(lesson);
+const user = new User("John", 30);
+user.greeting();
