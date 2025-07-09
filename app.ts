@@ -1534,14 +1534,41 @@ function Logger(
   return descriptor;
 }
 
+function Admin(
+  target: Object,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+) {
+  const originalMethod = descriptor.value;
+  descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
+    if (!this.isAdmin) {
+      console.log("Access denied: You are not an admin");
+      return;
+    }
+
+    return originalMethod.apply(this, args);
+  };
+  return descriptor;
+}
+
 class User {
-  constructor(public name: string, public age: number) {}
+  constructor(
+    public name: string,
+    public age: number,
+    public isAdmin: boolean
+  ) {}
 
   @Logger
   greeting() {
     throw new Error("Method not implemented");
   }
+
+  @Admin
+  deleteUser() {
+    console.log("Deleting User...");
+  }
 }
 
-const user = new User("John", 30);
+const user = new User("John", 30, true);
 user.greeting();
+user.deleteUser();

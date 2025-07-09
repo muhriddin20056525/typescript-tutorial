@@ -2413,3 +2413,55 @@ user.greeting();
 ```
 
 - Decorator yordamida `greeting` methodi qaytarayotgan xatolikni olib uni boshqacha formatda ko'rsatish
+
+---
+
+# **47-dars Method decorator (part-2)**
+
+```ts
+// Bu decorator faqat admin foydalanuvchilar deleteUser() metodini ishlatishini ta'minlaydi
+function Admin(
+  target: Object, // Dekoratsiya qilinayotgan klass (yoki uning prototipi)
+  propertyKey: string, // Metod nomi (masalan, "deleteUser")
+  descriptor: PropertyDescriptor // Metod haqida meta-ma’lumot (get, set, value, writable va hokazo)
+) {
+  const originalMethod = descriptor.value; // Asl (o‘zgartirilmagan) metodni saqlab qo‘yamiz
+
+  // Metodni o‘zgartiramiz — endi u adminlikni tekshiradi
+  descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
+    if (!this.isAdmin) {
+      // Agar foydalanuvchi admin bo'lmasa
+      console.log("Access denied: You are not an admin"); // Kirish rad etildi degan xabar chiqadi
+      return; // Metod bajarilmaydi
+    }
+
+    // Aks holda, asl metodni chaqiramiz
+    return originalMethod.apply(this, args);
+  };
+
+  return descriptor; // O‘zgartirilgan metodni qaytaramiz
+}
+
+// Foydalanuvchini ifodalovchi klass
+class User {
+  // Konstruktor: foydalanuvchining ismi, yoshi va adminligini qabul qiladi
+  constructor(
+    public name: string,
+    public age: number,
+    public isAdmin: boolean
+  ) {}
+
+  @Admin // Bu metod faqat adminlar tomonidan chaqirilishi kerak
+  deleteUser() {
+    console.log("Deleting User..."); // Foydalanuvchini o‘chirish amali bajariladi
+  }
+}
+
+// Yangi foydalanuvchi yaratamiz: ismi John, yoshi 30, admin = true
+const user = new User("John", 30, true);
+
+// deleteUser() metodini chaqiramiz — foydalanuvchi admin bo‘lgani uchun ishlaydi
+user.deleteUser();
+```
+
+- Decorator orqali Adminni aniqlash

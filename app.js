@@ -1176,17 +1176,36 @@ function Logger(target, propertyKey, descriptor) {
     };
     return descriptor;
 }
+function Admin(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args) {
+        if (!this.isAdmin) {
+            console.log("Access denied: You are not an admin");
+            return;
+        }
+        return originalMethod.apply(this, args);
+    };
+    return descriptor;
+}
 class User {
-    constructor(name, age) {
+    constructor(name, age, isAdmin) {
         this.name = name;
         this.age = age;
+        this.isAdmin = isAdmin;
     }
     greeting() {
         throw new Error("Method not implemented");
+    }
+    deleteUser() {
+        console.log("Deleting User...");
     }
 }
 __decorate([
     Logger
 ], User.prototype, "greeting", null);
-const user = new User("John", 30);
+__decorate([
+    Admin
+], User.prototype, "deleteUser", null);
+const user = new User("John", 30, true);
 user.greeting();
+user.deleteUser();
