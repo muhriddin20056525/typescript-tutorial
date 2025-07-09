@@ -1521,54 +1521,111 @@
 // console.log(course);
 // console.log(lesson);
 
-function Logger(
-  target: Object,
-  propertyKey: string,
-  descriptor: PropertyDescriptor
-) {
-  descriptor.value = function (...args: any[]) {
-    console.log("Method not implemented");
-    return args;
-  };
+// function Logger(
+//   target: Object,
+//   propertyKey: string,
+//   descriptor: PropertyDescriptor
+// ) {
+//   descriptor.value = function (...args: any[]) {
+//     console.log("Method not implemented");
+//     return args;
+//   };
 
-  return descriptor;
+//   return descriptor;
+// }
+
+// function Admin(
+//   target: Object,
+//   propertyKey: string,
+//   descriptor: PropertyDescriptor
+// ) {
+//   const originalMethod = descriptor.value;
+//   descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
+//     if (!this.isAdmin) {
+//       console.log("Access denied: You are not an admin");
+//       return;
+//     }
+
+//     return originalMethod.apply(this, args);
+//   };
+//   return descriptor;
+// }
+
+// class User {
+//   constructor(
+//     public name: string,
+//     public age: number,
+//     public isAdmin: boolean
+//   ) {}
+
+//   @Logger
+//   greeting() {
+//     throw new Error("Method not implemented");
+//   }
+
+//   @Admin
+//   deleteUser() {
+//     console.log("Deleting User...");
+//   }
+// }
+
+// const user = new User("John", 30, true);
+// user.greeting();
+// user.deleteUser();
+
+// Created At Decorator
+function CreatedAt<TBase extends { new (...args: any[]): {} }>(
+  constructor: TBase
+) {
+  return class extends constructor {
+    readonly createdAt: Date = new Date();
+  };
 }
 
-function Admin(
+// Logmethod Decorator
+function LogMethod(
   target: Object,
   propertyKey: string,
   descriptor: PropertyDescriptor
 ) {
   const originalMethod = descriptor.value;
-  descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
-    if (!this.isAdmin) {
-      console.log("Access denied: You are not an admin");
-      return;
-    }
-
+  descriptor.value = function (...args: any[]) {
+    console.log(`Calling ${propertyKey} with arguments: `, new Date());
     return originalMethod.apply(this, args);
   };
   return descriptor;
 }
 
+// User class
+@CreatedAt
 class User {
-  constructor(
-    public name: string,
-    public age: number,
-    public isAdmin: boolean
-  ) {}
+  constructor(public name: string, public age: number) {}
 
-  @Logger
-  greeting() {
-    throw new Error("Method not implemented");
-  }
-
-  @Admin
-  deleteUser() {
-    console.log("Deleting User...");
+  @LogMethod
+  getUserInfo() {
+    console.log(`user info: ${this.name}, ${this.age}`);
   }
 }
 
-const user = new User("John", 30, true);
-user.greeting();
-user.deleteUser();
+// Product Class
+@CreatedAt
+class Product {
+  constructor(public name: string, public price: number) {}
+
+  @LogMethod
+  getProductInfo() {
+    console.log(`Product Info: ${this.name}, ${this.price}`);
+  }
+}
+
+// Create instance call methods
+
+type CreatedEnitity = { createdAt: Date };
+
+const user = new User("Alice", 30) as User & CreatedEnitity;
+const product = new Product("Laptop", 300) as Product & CreatedEnitity;
+
+// Call Methods
+
+user.getUserInfo();
+product.getProductInfo();

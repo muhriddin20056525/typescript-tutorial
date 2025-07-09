@@ -1169,43 +1169,102 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 // const lesson = new Lesson() as Lesson & CreatedEntity;
 // console.log(course);
 // console.log(lesson);
-function Logger(target, propertyKey, descriptor) {
-    descriptor.value = function (...args) {
-        console.log("Method not implemented");
-        return args;
+// function Logger(
+//   target: Object,
+//   propertyKey: string,
+//   descriptor: PropertyDescriptor
+// ) {
+//   descriptor.value = function (...args: any[]) {
+//     console.log("Method not implemented");
+//     return args;
+//   };
+//   return descriptor;
+// }
+// function Admin(
+//   target: Object,
+//   propertyKey: string,
+//   descriptor: PropertyDescriptor
+// ) {
+//   const originalMethod = descriptor.value;
+//   descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
+//     if (!this.isAdmin) {
+//       console.log("Access denied: You are not an admin");
+//       return;
+//     }
+//     return originalMethod.apply(this, args);
+//   };
+//   return descriptor;
+// }
+// class User {
+//   constructor(
+//     public name: string,
+//     public age: number,
+//     public isAdmin: boolean
+//   ) {}
+//   @Logger
+//   greeting() {
+//     throw new Error("Method not implemented");
+//   }
+//   @Admin
+//   deleteUser() {
+//     console.log("Deleting User...");
+//   }
+// }
+// const user = new User("John", 30, true);
+// user.greeting();
+// user.deleteUser();
+// Created At Decorator
+function CreatedAt(constructor) {
+    return class extends constructor {
+        constructor() {
+            super(...arguments);
+            this.createdAt = new Date();
+        }
     };
-    return descriptor;
 }
-function Admin(target, propertyKey, descriptor) {
+// Logmethod Decorator
+function LogMethod(target, propertyKey, descriptor) {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args) {
-        if (!this.isAdmin) {
-            console.log("Access denied: You are not an admin");
-            return;
-        }
+        console.log(`Calling ${propertyKey} with arguments: `, args);
         return originalMethod.apply(this, args);
     };
     return descriptor;
 }
-class User {
-    constructor(name, age, isAdmin) {
+// User class
+let User = class User {
+    constructor(name, age) {
         this.name = name;
         this.age = age;
-        this.isAdmin = isAdmin;
     }
-    greeting() {
-        throw new Error("Method not implemented");
+    getUserInfo() {
+        console.log(`user info: ${this.name}, ${this.age}`);
     }
-    deleteUser() {
-        console.log("Deleting User...");
-    }
-}
+};
 __decorate([
-    Logger
-], User.prototype, "greeting", null);
+    LogMethod
+], User.prototype, "getUserInfo", null);
+User = __decorate([
+    CreatedAt
+], User);
+// Product Class
+let Product = class Product {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+    getProductInfo() {
+        console.log(`Product Info: ${this.name}, ${this.price}`);
+    }
+};
 __decorate([
-    Admin
-], User.prototype, "deleteUser", null);
-const user = new User("John", 30, true);
-user.greeting();
-user.deleteUser();
+    LogMethod
+], Product.prototype, "getProductInfo", null);
+Product = __decorate([
+    CreatedAt
+], Product);
+const user = new User("Alice", 30);
+const product = new Product("Laptop", 300);
+// Call Methods
+user.getUserInfo();
+product.getProductInfo();
