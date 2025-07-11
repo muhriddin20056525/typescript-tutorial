@@ -2465,3 +2465,56 @@ user.deleteUser();
 ```
 
 - Decorator orqali Adminni aniqlash
+
+---
+
+# **48-dars Declare**
+
+`declare` — bu kalit so‘z bo‘lib, u biror narsa (masalan: o'zgaruvchi, funksiya, modul, klass) tashqi kutubxonada yoki boshqa joyda mavjudligini TypeScript’ga e'lon qilish uchun ishlatiladi, lekin uning haqiqiy implementatsiyasi hozircha bu yerda yo‘q degan ma’noni bildiradi.
+
+```ts
+// Declaredan foydalanish
+// trackEvent - bu declare qilinadigan funksiyaning nomi
+declare function trackEvent(name: string, data: { userId: string }): void;
+
+// Bu funksiya boshqa faylda turibdi
+trackEvent("user_login", { userId: "12345" });
+```
+
+- Declaredan foydalanish tashqi kutubxonadan kelgan funksiyalarni declare qilganda xussi oddiy propsdan kelgan fnksiyaga type bergandek type beramiz
+
+```ts
+// lib/math.js
+
+function add(a, b) {
+  return a + b;
+}
+
+function subtrack(a, b) {
+  return a - b;
+}
+
+function PI() {
+  return 3.14;
+}
+
+// lib/math.d.ts
+declare module "math" {
+  export function add(a: number, b: number): number;
+  export function subtrack(a: number, b: number): number;
+  export function PI(): number;
+}
+
+// app.ts
+import { add, subtrack, PI } from "math";
+
+console.log(add(1, 2));
+console.log(subtrack(30, 23));
+console.log(PI());
+```
+
+- `lib/math.js` bu bizda npm orqali yuklab olingan kutubxona vazifasini bajarmoqda bu faylda 3 ta oddiy funksiya bor
+
+- `lib/math.d.ts` `math.js` faylidagi funksiyalarni modul orqali `declare` qilish vazifasini bajaryapdi bu fayl
+
+- `app.ts` faylida `math.js` faylidagi funksiyalar chaqirib ishlatilyapdi
