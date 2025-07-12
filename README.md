@@ -2518,3 +2518,51 @@ console.log(PI());
 - `lib/math.d.ts` `math.js` faylidagi funksiyalarni modul orqali `declare` qilish vazifasini bajaryapdi bu fayl
 
 - `app.ts` faylida `math.js` faylidagi funksiyalar chaqirib ishlatilyapdi
+
+---
+
+# **49-dars File bilan ishlash**
+
+```ts
+// tsconfig.json
+"files": ["app.ts"]
+```
+
+- Bu kod faqat `app.ts` fayli compilyatsiya qilishni belgilaydi. Boshqa faylar kompilyatsiya qilinmaydi
+
+```ts
+// tsconfig.json
+"include": ["services/*.ts"]
+```
+
+- Bu kod faqatgina `services` papkasi ichidagi barcha `.ts` faylarni kompilyatsiya qiladi
+
+```ts
+// tsconfig.json
+"exclude": ["auth.ts"]
+```
+
+- Bu kod faqatgina `auth.ts` faylini kompilyatsiya qilmaydi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
+```
+
+- `outDir` ts fayllar qaysi papkaga kompilyatsiya qilinishini belgilaydi
+- Bu holatda barcha `ts` fayllar `dist` papkasi ichiga kompilyatsiya qilinadi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "removeComments": true
+  }
+}
+```
+
+- `removeComments` ts faylida komentariya yozilgan bo'lsa js faylga bu komentariyani kompilyatsiya qilmaydi

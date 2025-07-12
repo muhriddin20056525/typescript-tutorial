@@ -1,11 +1,7 @@
-// Declare
+// File bilan ishlash
 
-import { add, subtrack, PI } from "math";
+class Person {
+  constructor(public name: string, public age: number) {}
+}
 
-console.log(add(1, 2));
-console.log(subtrack(30, 23));
-console.log(PI());
-
-// declare function trackEvent(name: string, data: { userId: string }): void;
-
-// trackEvent("user_login", { userId: "12345" });
+const user = new Person("Ali", 34);
