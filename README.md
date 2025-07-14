@@ -2625,3 +2625,76 @@ console.log(PI());
 ```
 
 - boshqa kutubxonalar (masalan, `node_modules`) ichidagi `.d.ts` tip fayllarini tekshirishni o'tkazib yuboradi.
+
+---
+
+# **51-dars Kerakli konfiguratsiya (part - 1)**
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}
+```
+
+- `baseUrl` import yo‘llarini soddalashtirish uchun ishlatiladi.
+- `"baseUrl": "./src"` — bu src papkasini asosiy ildiz yo‘l (root path) sifatida belgilaydi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/": ["*"]
+    }
+  }
+}
+```
+
+- TypeScript uchun import yo‘llarini qisqartirish (alias) vazifasini bajaradi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+     "strictNullChecks": true
+  }
+}
+```
+
+- Bu sozlama `null` va `undefined` qiymatlarini qat’iy tekshirishni yoqadi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noUnusedLocals": true
+  }
+}
+```
+
+- Foydalanilmagan o'zgaruvchilar uchun ogohlantirish beradi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noUnusedParameters": true
+  }
+}
+```
+
+- Foydalanilmagan funksiya parametrlari uchun ogohlantirish beradi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+   "noImplicitReturns": true
+  }
+}
+```
+
+- Funksiya doimiy nimadir qaytarishi kerakligini belgilaydi
