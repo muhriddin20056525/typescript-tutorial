@@ -2566,3 +2566,62 @@ console.log(PI());
 ```
 
 - `removeComments` ts faylida komentariya yozilgan bo'lsa js faylga bu komentariyani kompilyatsiya qilmaydi
+
+---
+
+# **50-dars Asosiy konfiguratsiya**
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es2020"
+  }
+}
+```
+
+- `target` JavaScript versiyasini o'rnatadi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
+
+- `experimentalDecorators` Loyihada Decoratorlardan foydalanish uchun kerak
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+  }
+}
+```
+
+- Loyihada `any` type bo'lsa fayl compilyatsiya qilinmaydi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": false
+  }
+}
+```
+
+- `strictPropertyInitialization` `false` bo'lsa class ichida constructor ishlatilmasa xatolik bermaydi `true` bo'lsa constructor ishlatish majburiy bo'ladi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
+
+- boshqa kutubxonalar (masalan, `node_modules`) ichidagi `.d.ts` tip fayllarini tekshirishni o'tkazib yuboradi.
