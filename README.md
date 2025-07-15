@@ -2698,3 +2698,77 @@ console.log(PI());
 ```
 
 - Funksiya doimiy nimadir qaytarishi kerakligini belgilaydi
+
+---
+
+# **52-dars Kerakli konfiguratsiya (part - 2)**
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noFallthroughCasesInSwitch": true
+  }
+}
+```
+
+- `noFallthroughCasesInSwitch` - Swtich/Case da `break` xossasini berishni majburiy qiladi
+  yoki `return` dan foydalanish kerak
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "resolveJsonModule": true
+  }
+}
+```
+
+- `resolveJsonModule` - JSON fayllarni import qilish imkonini beradi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  }
+}
+```
+
+- `allowJs` - TypeScript'ga .js fayllarni ham loyihaga kiritishga ruxsat beradi.
+- `checkJs` - TypeScript'ga .js fayllarda ham tahlil (type checking) qilishni buyuradi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+   "declaration": true
+  }
+}
+```
+
+- `declaration` TypeScript kompilyatoriga `.ts` fayllardan `.d.ts` ya’ni declaration fayllarini yarat deb buyuradi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+   "sourceMap": true
+  }
+}
+```
+
+- `sourceMap` - TypeScript kompilyatoriga har bir `.ts` fayl bilan birga `source map (.map)` fayl yaratishni buyuradi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
+```
+
+- `noEmit`“Hech qanday fayl yaratma (ya’ni emit qilma), faqat tahlil (type checking) qil
+  degan buyruq beradi.
