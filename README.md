@@ -2772,3 +2772,86 @@ console.log(PI());
 
 - `noEmit`“Hech qanday fayl yaratma (ya’ni emit qilma), faqat tahlil (type checking) qil
   degan buyruq beradi.
+
+---
+
+# **53-dars Foydali konfiguratsiya**
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "alwaysStrict": true
+  }
+}
+```
+
+- `alwaysStrict` har bir javascript fayda `use strict` ni yoqadi
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "downlevelIteration": true
+  }
+}
+```
+
+- `downlevelIteration` `for...of va spread operatorlari` kabi iteratsiya operatorlarini eski JavaScript versiyalarida ham to‘g‘ri ishlashini ta'minlaydi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true
+  }
+}
+```
+
+- `declarationMap` TypeScript fayllari uchun `.d.ts` turdagi deklaratsiya fayllarini va ularga mos xarita (`.d.ts.map`) fayllarini yaratadi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+- `emitDecoratorMetadata` TypeScript'da dekoratorlardan foydalanishga va ular haqidagi metadata ma’lumotlarni kompilyatsiya vaqtida qo‘shishga ruxsat beradi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "preserveConstEnums": true
+  }
+}
+```
+
+- `preserveConstEnums` const enum tipidagi enumlarni kompilyatsiya qilinganda kod ichida saqlab qoladi, ularni butunlay olib tashlamaydi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noUncheckedIndexedAccess": true
+  }
+}
+```
+
+- `noUncheckedIndexedAccess` indeks orqali kiriladigan obyekt yoki massiv elementlariga kirishda har doim undefined ehtimolini hisobga olishni majburiy qiladi.
+
+```ts
+// tsconfig.json
+{
+  "compilerOptions": {
+    "noPropertyAccessFromIndexSignature": true
+  }
+}
+```
+
+- `noPropertyAccessFromIndexSignature` indeks imzolari (`[key: string]: type`) orqali aniqlangan xossalarga nuqta (`.`) orqali emas, faqat kvadrat qavs (`[]`) orqali murojaat qilishga majbur qiladi.
