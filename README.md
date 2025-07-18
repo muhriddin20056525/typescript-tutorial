@@ -2855,3 +2855,44 @@ console.log(PI());
 ```
 
 - `noPropertyAccessFromIndexSignature` indeks imzolari (`[key: string]: type`) orqali aniqlangan xossalarga nuqta (`.`) orqali emas, faqat kvadrat qavs (`[]`) orqali murojaat qilishga majbur qiladi.
+
+---
+
+# **54-dars Namespace & Reference**
+
+`namespace` — bu nomlar to‘plami bo‘lib, TypeScript’da bitta faylda yoki globalda kodlarni guruhlash uchun ishlatiladi.
+
+```ts
+// modules/math.ts
+
+// `MathUtils` nomli namespace (ya'ni nomlar to'plami) e'lon qilinyapti.
+// Bu namespace ichida funksiyalarni guruhlab saqlash mumkin.
+namespace MathUtils {
+  // `add` funksiyasi e'lon qilinyapti va `export` orqali tashqariga chiqarilyapti.
+  // U ikkita son (a va b) qabul qiladi va ularning yig'indisini qaytaradi.
+  export function add(a: number, b: number): number {
+    return a + b;
+  }
+
+  // `abstract` funksiyasi ham `export` qilingan.
+  // Bu funksiyada ikkita son (a va b) olinadi va ularning ayirmasi qaytariladi.
+  export function abstract(a: number, b: number): number {
+    return a - b;
+  }
+}
+
+// app.ts
+
+// Bu qatorda TypeScript kompilyatoriga "modules/math.ts" faylini shu faylga ulash kerakligi aytilyapti.
+// U faylda `MathUtils` nomli namespace va uning funksiyalari joylashgan bo'lishi kerak.
+
+/// <reference path="modules/math.ts" />
+
+// Bu yerda `MathUtils` namespace ichidagi `add` funksiyasi chaqirilyapti.
+// `add(4, 9)` funksiyasi 4 va 9 ni qo‘shib, natija sifatida 13 ni qaytaradi.
+// `console.log(...)` esa bu natijani konsolga chiqaradi.
+console.log(MathUtils.add(4, 9));
+```
+
+- `namespace` yaratish
+  va undan foydalanish
