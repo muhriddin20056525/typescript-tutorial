@@ -2896,3 +2896,49 @@ console.log(MathUtils.add(4, 9));
 
 - `namespace` yaratish
   va undan foydalanish
+
+---
+
+# **55-dars Packages**
+
+Ayrim kutubxonalar Typescriptni qo'llab quvvatlamaydi shuning uchun ularga o'zimiz qo'lda type yozishimiz kerak. Bunday typelar `decloration type` deyiladi va odatda `types.d.ts` faylida yoziladi
+
+```ts
+// types.d.ts
+
+// "safe-json-parse/callback" degan modul borligini TypeScriptga bildiradi
+declare module "safe-json-parse/callback" {
+  // Callback funksiyasining turini e'lon qilayapmiz.
+  // Bu funksiya ikki argument oladi: xatolik (Error yoki null) va natija (har qanday turdagi)
+  type SafeParseCallback = (err: Error | null, result: any) => void;
+
+  // Bu yerda `safeParse` funksiyasi e'lon qilinmoqda
+  // U JSON formatdagi matn (`jsonString`) qabul qiladi
+  // Istalgancha (optional) callback funksiyasini ham qabul qilishi mumkin
+  // Va u [Error | null, any] ko‘rinishida array qaytaradi:
+  //   - Birinchi element: agar xatolik bo‘lsa `Error`, bo‘lmasa `null`
+  //   - Ikkinchi element: parse qilingan natija (yoki undefined)
+  export function safeParse(
+    jsonString: string,
+    callback?: SafeParseCallback
+  ): [Error | null, any];
+
+  // safeParse funksiyasi default eksport qilinmoqda,
+  // shuning uchun uni `import safeParse from "safe-json-parse/callback"` deb import qilish mumkin
+  export default safeParse;
+}
+
+// app.ts
+
+// "safe-json-parse/callback" modulidan default eksport qilingan `safeParse` funksiyasini import qilamiz
+import safeParse from "safe-json-parse/callback";
+
+// `safeParse` funksiyasini chaqiramiz, unga JSON matn va callback beramiz
+safeParse('{ "x": 42 }', (err, result) => {
+  // Agar JSON matn noto'g'ri bo'lsa `err` o'zida `Error` obyektini saqlaydi va shu yerda chiqariladi
+  if (err) console.error(err);
+  // Aks holda (`err` null bo'lsa), parse qilingan natijani chiqaramiz
+  // Masalan: { x: 42 }
+  else console.log(result);
+});
+```

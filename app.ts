@@ -1,3 +1,6 @@
-/// <reference path="modules/math.ts" />
+import safeParse from "safe-json-parse/callback";
 
-console.log(MathUtils.add(4, 9));
+safeParse('{ "x": 42 }', (err, result) => {
+  if (err) console.error(err);
+  else console.log(result);
+});

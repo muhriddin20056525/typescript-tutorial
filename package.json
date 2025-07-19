@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "parse-json": "^8.3.0",
+    "safe-json-parse": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0"
+  }
+}
