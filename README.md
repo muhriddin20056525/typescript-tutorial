@@ -2942,3 +2942,131 @@ safeParse('{ "x": 42 }', (err, result) => {
   else console.log(result);
 });
 ```
+
+---
+
+# **56-dars Singleton pattern**
+
+`Singleton pattern` bu Design Pattern bo‘lib, birgina instance (nusxa) yaratish va unga global tarzda kirish imkonini beradi. Ya’ni, classning faqat bitta nusxasi mavjud bo‘ladi, va shu nusxa butun loyiha bo‘ylab ishlatiladi.
+
+```ts
+// Singleton nomli class e'lon qilinmoqda
+class Singleton {
+  // static instance property — bu classning yagona nusxasini saqlaydi
+  private static instance: Singleton;
+
+  // constructor private — tashqaridan new Singleton() qilib bo‘lmasligini belgilaydi
+  private constructor() {
+    console.log("Singleton instance created");
+  }
+
+  // static metod — instance ni olish uchun ishlatiladi
+  static getInstance(): Singleton {
+    // Agar hali instance yaratilmagan bo‘lsa
+    if (!Singleton.instance) {
+      // Instance ni yaratadi
+      Singleton.instance = new Singleton();
+    }
+
+    // Instance ni qaytaradi (yaratilgan yoki mavjud bo‘lsa)
+    return Singleton.instance;
+  }
+
+  // public method — istalgan tashqi joydan chaqirish mumkin
+  public someMethod(): void {
+    console.log("Method called on singleton instance");
+  }
+}
+
+// getInstance orqali birinchi marta instance olinmoqda
+const s1 = Singleton.getInstance();
+
+// getInstance orqali ikkinchi marta instance olinmoqda (lekin yangi emas, mavjud instance qaytadi)
+const s2 = Singleton.getInstance();
+
+// Ikkala obyektni konsolga chiqaramiz — ular bir xil bo‘lganini ko‘rish uchun
+console.log(s1);
+console.log(s2);
+```
+
+- `Singleton` patterndan foydalanish
+
+```ts
+// MongoConnection nomli Singleton class
+class MongoConnection {
+  // Singleton instance saqlanadigan static property
+  private static instance: MongoConnection;
+
+  // MongoDB bilan ulanish uchun kerakli client
+  private client: MongoClient;
+
+  // MongoDB database obyektini saqlash uchun (boshlanishda null)
+  private db: Db | null = null;
+
+  // private constructor — tashqaridan new MongoConnection() qilib bo‘lmaydi
+  private constructor() {
+    // MongoClient obyektini yaratamiz — bu ulanish uchun kerak
+    this.client = new MongoClient(
+      "mongodb+srv://muhriddindavlatov89:nqkMVpTrLPrrWNeV@cluster0.nnjstnl.mongodb.net/netflix"
+    );
+  }
+
+  // Singleton instance ni olish uchun static metod
+  static getIntance(): MongoConnection {
+    // Agar instance hali mavjud bo‘lmasa, yangisini yaratamiz
+    if (!this.instance) {
+      this.instance = new MongoConnection();
+    }
+
+    // Mavjud (yoki yangi) instance ni qaytaramiz
+    return this.instance;
+  }
+
+  // Bazaga ulanish funksiyasi (asinxron)
+  async connect(): Promise<Db> {
+    // Agar avval ulanish bo‘lgan bo‘lsa, shu db ni qaytaramiz
+    if (this.db) {
+      console.log(`Already connected to database`);
+      return this.db;
+    }
+
+    // Aks holda, ulanishni boshlaymiz
+    console.log(`Connecting to database...`);
+
+    // MongoDB serverga ulanamiz
+    await this.client.connect();
+
+    // Ulanishdan so‘ng, ma'lumotlar bazasini tanlaymiz
+    this.db = this.client.db("mydatabase");
+
+    // Ulanganini konsolga chiqaramiz
+    console.log(`Connected to the database`);
+
+    // Bazani qaytaramiz
+    return this.db;
+  }
+}
+
+// Asosiy ishga tushirish funksiyasi
+async function bootstrap() {
+  // Birinchi instance va bazani olamiz
+  const mongo1 = MongoConnection.getIntance();
+  const db1 = await mongo1.connect();
+
+  // Ikkinchi instance va bazani olamiz
+  const mongo2 = MongoConnection.getIntance();
+  const db2 = await mongo2.connect();
+
+  // Har ikkala db instance bir xilmi, tekshiramiz
+  if (db1 === db2) {
+    console.log("Both instance are the same"); // Agar singleton ishlagan bo‘lsa, shu chiqadi
+  } else {
+    console.log("Instances are different"); // Aks holda (noto‘g‘ri yozilgan bo‘lsa)
+  }
+}
+
+// Dastur ishga tushadi
+bootstrap();
+```
+
+- `Singleton` pattern bilan `MongoDb` malumotlar bazasiga ulanish
