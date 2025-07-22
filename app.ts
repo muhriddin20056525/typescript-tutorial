@@ -1,76 +1,124 @@
-import { MongoClient, Db } from "mongodb";
+// interface Person {
+//   greeting(): void;
+// }
 
-// class Singleton {
-//   private static instance: Singleton;
+// enum PersonType {
+//   Employee = "Employee",
+//   Manager = "Manager",
+// }
 
-//   private constructor() {
-//     console.log("Singleton instace created");
-//   }
-
-//   static getInstance(): Singleton {
-//     if (!Singleton.instance) {
-//       Singleton.instance = new Singleton();
-//     }
-
-//     return Singleton.instance;
-//   }
-
-//   public someMethod(): void {
-//     console.log("Method called on singleton instance");
+// class Employee implements Person {
+//   greeting() {
+//     console.log("Hello from Employee");
 //   }
 // }
 
-// const s1 = Singleton.getInstance();
-// const s2 = Singleton.getInstance();
+// class Manager implements Person {
+//   greeting() {
+//     console.log("Hello from Manager");
+//   }
+// }
 
-// console.log(s1);
-// console.log(s2);
+// class PersonFactory {
+//   static createPerson(type: string): Person {
+//     if (type === PersonType.Employee) {
+//       return new Employee();
+//     } else if (type === PersonType.Manager) {
+//       return new Manager();
+//     } else {
+//       throw new Error("Invalid person type");
+//     }
+//   }
+// }
 
-class MongoConnection {
-  private static instance: MongoConnection;
-  private client: MongoClient;
-  private db: Db | null = null;
+// const employee = PersonFactory.createPerson(PersonType.Employee);
+// employee.greeting();
 
-  private constructor() {
-    this.client = new MongoClient(
-      "mongodb+srv://muhriddindavlatov89:nqkMVpTrLPrrWNeV@cluster0.nnjstnl.mongodb.net/netflix"
-    );
-  }
+// const manager = PersonFactory.createPerson(PersonType.Manager);
+// manager.greeting();
 
-  static getIntance(): MongoConnection {
-    if (!this.instance) {
-      this.instance = new MongoConnection();
-    }
+// interface PaymentMethod {
+//   pay(amount: number): void;
+// }
 
-    return this.instance;
-  }
+// enum PaymentType {
+//   UZUM,
+//   CLICK,
+//   PAYME,
+//   QIWI,
+// }
 
-  async connect(): Promise<Db> {
-    if (this.db) {
-      console.log(`Already connected to database`);
-      return this.db;
-    }
+// class UzumPayment implements PaymentMethod {
+//   pay(amount: number): void {
+//     console.log(`Paying ${amount} using Uzum`);
+//   }
+// }
 
-    console.log(`Connecting to database...`);
-    await this.client.connect();
-    this.db = this.client.db("mydatabase");
-    console.log(`Connected to the database`);
-    return this.db;
+// class ClickPayment implements PaymentMethod {
+//   pay(amount: number): void {
+//     console.log(`Paying ${amount} using Click`);
+//   }
+// }
+
+// class PaymePayment implements PaymentMethod {
+//   pay(amount: number): void {
+//     console.log(`Paying ${amount} using Payme`);
+//   }
+// }
+
+// class QiwiPayment implements PaymentMethod {
+//   pay(amount: number): void {
+//     console.log(`Paying ${amount} using Qiwi`);
+//   }
+// }
+
+// class PaymentFactory {
+//   static create(type: PaymentType): PaymentMethod {
+//     switch (type) {
+//       case PaymentType.UZUM:
+//         return new UzumPayment();
+//       case PaymentType.CLICK:
+//         return new ClickPayment();
+//       case PaymentType.PAYME:
+//         return new PaymePayment();
+//       case PaymentType.QIWI:
+//         return new QiwiPayment();
+//       default:
+//         throw new Error("Invalid payment type");
+//     }
+//   }
+// }
+
+// const uzumPayment = PaymentFactory.create(PaymentType.UZUM);
+// uzumPayment.pay(1000); // Paying 1000 using Uzum
+
+// const clickPayment = PaymentFactory.create(PaymentType.CLICK);
+// clickPayment.pay(2000); // Paying 2000 using Click
+
+// const paymePayment = PaymentFactory.create(PaymentType.PAYME);
+// paymePayment.pay(3000); // Paying 3000 using Payme
+
+// const qiwiPayment = PaymentFactory.create(PaymentType.QIWI);
+// qiwiPayment.pay(4000); // Paying 4000 using Qiwi
+
+type Constructor<T> = new (...args: any[]) => T;
+
+class Factory {
+  static create<T>(Ctor: Constructor<T>, ...args: any[]): T {
+    return new Ctor(...args);
   }
 }
 
-async function bootstrap() {
-  const mongo1 = MongoConnection.getIntance();
-  const db1 = await mongo1.connect();
-
-  const mongo2 = MongoConnection.getIntance();
-  const db2 = await mongo2.connect();
-
-  if (db1 === db2) {
-    console.log("Both instance are the same");
-  } else {
-    console.log("Instances are different");
-  }
+class User {
+  constructor(public name: string) {}
 }
 
-bootstrap();
+class Product {
+  constructor(public title: string) {}
+}
+
+const user = Factory.create(User, "John Doe");
+console.log(user);
+
+const product = Factory.create(Product, "Laptop");
+console.log(product);

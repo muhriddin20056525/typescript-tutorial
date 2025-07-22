@@ -3070,3 +3070,104 @@ bootstrap();
 ```
 
 - `Singleton` pattern bilan `MongoDb` malumotlar bazasiga ulanish
+
+---
+
+# **57-dars Factory pattern**
+
+`Factory Pattern` — bu Object yaratish uchun maxsus funksiya yoki klass bo‘lib, har safar bir xil interfeysga ega bo‘lgan, lekin turli xil turlardagi obyektlarni yaratishga imkon beradi.
+
+```ts
+// Person interfeysi - barcha odam turlarida greeting() funksiyasi bo‘lishi kerak
+interface Person {
+  greeting(): void;
+}
+
+// PersonType enum - bizda faqat shu ikki turdagi odamlar mavjud
+enum PersonType {
+  Employee = "Employee", // Ishchi
+  Manager = "Manager", // Boshqaruvchi
+}
+
+// Employee klassi - Person interfeysini implement qiladi
+class Employee implements Person {
+  // greeting() funksiyasi - ishchi salomlashuvi
+  greeting() {
+    console.log("Hello from Employee");
+  }
+}
+
+// Manager klassi - ham Person interfeysiga amal qiladi
+class Manager implements Person {
+  // greeting() funksiyasi - manager salomlashuvi
+  greeting() {
+    console.log("Hello from Manager");
+  }
+}
+
+// PersonFactory klassi - obyektlarni yaratish uchun factory pattern
+class PersonFactory {
+  // createPerson() - static metod, parametr sifatida tur (type) oladi
+  static createPerson(type: string): Person {
+    // Agar type - Employee bo‘lsa, Employee obyektini qaytar
+    if (type === PersonType.Employee) {
+      return new Employee();
+    }
+    // Agar type - Manager bo‘lsa, Manager obyektini qaytar
+    else if (type === PersonType.Manager) {
+      return new Manager();
+    }
+    // Noto‘g‘ri type bo‘lsa, xatolik qaytar
+    else {
+      throw new Error("Invalid person type");
+    }
+  }
+}
+
+// PersonFactory orqali Employee obyektini yaratamiz
+const employee = PersonFactory.createPerson(PersonType.Employee);
+// Uning greeting metodini chaqiramiz
+employee.greeting(); // Hello from Employ ee
+
+// PersonFactory orqali Manager obyektini yaratamiz
+const manager = PersonFactory.createPerson(PersonType.Manager);
+// Uning greeting metodini chaqiramiz
+manager.greeting(); // Hello from Manager
+```
+
+- Factory Pattern
+
+```ts
+// Klass konstruktorlarini ifodalovchi generic type
+// Har qanday klassni (new bilan chaqiriladigan) parametr sifatida qabul qiladi
+type Constructor<T> = new (...args: any[]) => T;
+
+// Factory klassi - istalgan klassdan obyekt yaratish uchun universal funksiya
+class Factory {
+  // create - static va generic metod
+  // Ctor - konstruktor funksiyasi (klass), args - unga beriladigan argumentlar
+  static create<T>(Ctor: Constructor<T>, ...args: any[]): T {
+    return new Ctor(...args); // Yangi obyekt yaratiladi va qaytariladi
+  }
+}
+
+// User klassi - konstruktorida 'name' parametrini oladi
+class User {
+  constructor(public name: string) {} // public name bilan avtomatik property bo‘ladi
+}
+
+// Product klassi - konstruktorida 'title' parametrini oladi
+class Product {
+  constructor(public title: string) {} // public title bilan avtomatik property bo‘ladi
+}
+
+// User klassidan obyekt yaratamiz, Factory orqali
+const user = Factory.create(User, "John Doe");
+console.log(user); // Natija: User { name: 'John Doe' }
+
+// Product klassidan obyekt yaratamiz, Factory orqali
+const product = Factory.create(Product, "Laptop");
+console.log(product); // Natija: Product { title: 'Laptop' }
+```
+
+- Generic orqali Factory Patterndan Foydalanish
