@@ -3171,3 +3171,49 @@ console.log(product); // Natija: Product { title: 'Laptop' }
 ```
 
 - Generic orqali Factory Patterndan Foydalanish
+
+---
+
+# **58-dars Prototype pattern**
+
+`Prototype Pattern` — bu Object-Oriented Design Pattern bo‘lib, yangi obyektlarni mavjud obyektning nusxasini ko‘chirish (clone qilish) orqali yaratishga asoslanadi. Bu usul yangi obyektni noldan yaratmasdan, mavjud obyektni nusxalash orqali tezroq va samaraliroq yaratishni ta’minlaydi.
+
+```ts
+// Prototype interfeysini yaratamiz, u generik turga ega bo‘lib,
+// har qanday o‘zidan nusxa qaytaradigan klass uni implement qilishi mumkin
+interface Prototype<T> {
+  clone(): T; // clone metodi T turidagi yangi obyektni qaytaradi
+}
+
+// Person klassi Prototype interfeysini implement qiladi.
+// Bu klassning obyekti o‘zidan nusxa (klon) ola oladi.
+class Person implements Prototype<Person> {
+  // Constructor orqali obyektga name va role qiymatlari beriladi
+  constructor(public name: string, public role: string) {}
+
+  // clone metodi mavjud obyektning yangi nusxasini qaytaradi
+  clone(): Person {
+    // Yangi Person obyektini shu obyektning xususiyatlari bilan yaratadi
+    return new Person(this.name, this.role);
+  }
+}
+
+// john nomli yangi Person obyektini yaratamiz
+const john = new Person("John Doe", "Software Engineer");
+
+// john obyektidan klon (nusxa) olib, unga yangi nom beramiz
+const jane = john.clone(); // jane - bu john ning nusxasi
+jane.name = "Jane Doe"; // jane ning name'ini o‘zgartiramiz
+
+// jane dan ham yangi klon olib, name va role qiymatlarini o‘zgartiramiz
+const walter = jane.clone(); // walter - bu jane ning nusxasi
+walter.name = "Walter White"; // yangi ism
+walter.role = "Manager"; // yangi lavozim
+
+// Natijalarni konsolga chiqaramiz
+console.log("John:", john); // asl obyekt: John Doe - Software Engineer
+console.log("Jane:", jane); // klonlangan va nomi o‘zgargan: Jane Doe - Software Engineer
+console.log("Walter:", walter); // yana klon va qiymatlar o‘zgartirilgan: Walter White - Manager
+```
+
+- Prototype Orqali Clone Olish
