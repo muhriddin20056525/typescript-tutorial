@@ -3217,3 +3217,114 @@ console.log("Walter:", walter); // yana klon va qiymatlar o‘zgartirilgan: Walt
 ```
 
 - Prototype Orqali Clone Olish
+- Kamchiligi Nested Objectdan Nusxa Olinganda Asosiy Objectni Ham O'zgartiradi
+
+---
+
+# **59-dars Builder pattern**
+
+`Builder pattern` — bu obyektlarni bosqichma-bosqich, murakkab konfiguratsiyalar bilan yaratish uchun ishlatiladigan dizayn patternidir.
+
+```ts
+// Foydalanuvchi (User) klassi – bu model bo‘lib, barcha kerakli ma'lumotlarni oladi
+class User {
+  constructor(
+    public id: number, // foydalanuvchi ID raqami
+    public name: string, // foydalanuvchi ismi
+    public email: string, // foydalanuvchi email manzili
+    public password: string, // foydalanuvchi paroli
+    public phone: string, // telefon raqami
+    public address: string, // uy manzili
+    public city: string, // shahar
+    public state: string // viloyat (yoki davlat holat)
+  ) {}
+}
+
+// UserBuilder klassi – bu builder pattern orqali User obyektini yaratish uchun
+class UserBuilder {
+  // Har bir property `private` qilingan va `!:` bilan belgilangan
+  // bu shuni anglatadiki, qiymat keyinroq belgilanadi (definitely assigned later)
+  private id!: number;
+  private name!: string;
+  private email!: string;
+  private password!: string;
+  private phone!: string;
+  private address!: string;
+  private city!: string;
+  private state!: string;
+
+  // Quyidagi setter funksiyalar har bir property uchun yozilgan
+  // Ular o‘zgaruvchiga qiymat belgilab, `this` ni qaytaradi (chain qilish uchun)
+
+  setId(id: number): this {
+    this.id = id;
+    return this; // method chaining imkonini beradi
+  }
+
+  setName(name: string): this {
+    this.name = name;
+    return this;
+  }
+
+  setEmail(email: string): this {
+    this.email = email;
+    return this;
+  }
+
+  setPassword(password: string): this {
+    this.password = password;
+    return this;
+  }
+
+  setPhone(phone: string): this {
+    this.phone = phone;
+    return this;
+  }
+
+  setAddress(address: string): this {
+    this.address = address;
+    return this;
+  }
+
+  setCity(city: string): this {
+    this.city = city;
+    return this;
+  }
+
+  setState(state: string): this {
+    this.state = state;
+    return this;
+  }
+
+  // build() metodi – barcha property’lar tayyor bo‘lgach, asl User obyektini yaratadi
+  build(): User {
+    return new User(
+      this.id,
+      this.name,
+      this.email,
+      this.password,
+      this.phone,
+      this.address,
+      this.city,
+      this.state
+    );
+  }
+}
+
+// UserBuilder orqali User obyektini yaratish – builder patterndan foydalanish
+const user = new UserBuilder()
+  .setId(1) // ID ni belgilash
+  .setName("Muhriddin") // ism
+  .setEmail("muhriddin@example.com") // email
+  .setPassword("secure123") // parol
+  .setPhone("998901234567") // telefon
+  .setAddress("Olmazor 22") // manzil
+  .setCity("Tashkent") // shahar
+  .setState("Tashkent Region") // viloyat
+  .build(); // tayyor User obyektini yaratish
+
+// Natijani konsolga chiqarish
+console.log(user);
+```
+
+- Bulder Patterndan foydalanish

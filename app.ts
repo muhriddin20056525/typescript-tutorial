@@ -1,83 +1,176 @@
-// interface Prototype<T> {
-//   clone(): T;
+// class User {
+//   constructor(
+//     public id: number,
+//     public name: string,
+//     public email: string,
+//     public password: string,
+//     public phone: string,
+//     public address: string,
+//     public city: string,
+//     public state: string
+//   ) {}
 // }
 
-// class Person implements Prototype<Person> {
-//   constructor(
-//     public name: string,
-//     public role: string,
-//     public metadata: {
-//       date: string;
-//       tags: string[];
-//     } = { date: new Date().toISOString(), tags: [] }
-//   ) {}
+// class UserBuilder {
+//   private id!: number;
+//   private name!: string;
+//   private email!: string;
+//   private password!: string;
+//   private phone!: string;
+//   private address!: string;
+//   private city!: string;
+//   private state!: string;
 
-//   clone(): Person {
-//     const cloneData = JSON.parse(JSON.stringify(this.metadata));
-//     return new Person(cloneData.name, cloneData.role, cloneData.metadata);
+//   setId(id: number): this {
+//     this.id = id;
+//     return this;
+//   }
+
+//   setName(name: string): this {
+//     this.name = name;
+//     return this;
+//   }
+
+//   setEmail(email: string): this {
+//     this.email = email;
+//     return this;
+//   }
+
+//   setPassword(password: string): this {
+//     this.password = password;
+//     return this;
+//   }
+
+//   setPhone(phone: string): this {
+//     this.phone = phone;
+//     return this;
+//   }
+
+//   setAddress(address: string): this {
+//     this.address = address;
+//     return this;
+//   }
+
+//   setCity(city: string): this {
+//     this.city = city;
+//     return this;
+//   }
+
+//   setState(state: string): this {
+//     this.state = state;
+//     return this;
+//   }
+
+//   build(): User {
+//     return new User(
+//       this.id,
+//       this.name,
+//       this.email,
+//       this.password,
+//       this.phone,
+//       this.address,
+//       this.city,
+//       this.state
+//     );
 //   }
 // }
 
-// const john = new Person("John Doe", "Software Engineer", {
-//   date: "2023-10-01T12:00:00Z",
-//   tags: ["developer", "typescript"],
-// });
+// const user = new UserBuilder()
+//   .setId(1)
+//   .setName("Muhriddin")
+//   .setEmail("muhriddin@example.com")
+//   .setPassword("secure123")
+//   .setPhone("998901234567")
+//   .setAddress("Olmazor 22")
+//   .setCity("Tashkent")
+//   .setState("Tashkent Region")
+//   .build();
 
-// const jane = john.clone();
-// jane.name = "Jane Doe";
+// console.log(user);
 
-// const walter = jane.clone();
-// walter.name = "Walter White";
-// walter.role = "Manager";
-// walter.metadata.tags = ["manager", "leadership"];
-
-// console.log("John:", john);
-// console.log("Jane:", jane);
-// console.log("Walter:", walter);
-
-interface Prototype<T> {
-  clone(): T;
-}
-
-class Person implements Prototype<Person> {
+class Variant {
   constructor(
     public name: string,
-    public role: string,
-    public metadata: {
-      date: string;
-      tags: string[];
-    } = { date: new Date().toISOString(), tags: [] }
+    public price: number,
+    public stock: number
   ) {}
+}
 
-  clone(): Person {
-    const cloneData = JSON.parse(JSON.stringify(this.metadata));
-    return new Person(cloneData.name, cloneData.role, cloneData.metadata);
+class Product {
+  constructor(
+    public title: string,
+    public description: string,
+    public variants: Variant[] = []
+  ) {}
+}
+
+class VariantBuilder {
+  private name: string = "";
+  private price: number = 0;
+  private stock: number = 0;
+
+  setName(name: string) {
+    this.name = name;
+    return this;
+  }
+
+  setPrice(price: number) {
+    this.price = price;
+    return this;
+  }
+
+  setStock(stock: number) {
+    this.stock = stock;
+    return this;
+  }
+
+  build(): Variant {
+    return new Variant(this.name, this.price, this.stock);
   }
 }
 
-type PersonType = "Person" | "Employee" | "Manager";
+class ProductBuilder {
+  private title: string = "";
+  private description: string = "";
+  private variants: Variant[] = [];
 
-class PersonFactory {
-  private static templates: Record<PersonType, Person> = {
-    Person: new Person("John Doe", "Software Engineer"),
-    Employee: new Person("Jane Doe", "Software Engineer"),
-    Manager: new Person("Walter White", "Manager"),
-  };
+  setTitle(title: string): this {
+    this.title = title;
+    return this;
+  }
 
-  static create(type: PersonType): Person {
-    const template = this.templates[type];
-    return template.clone();
+  setDescription(description: string): this {
+    this.description = description;
+    return this;
+  }
+
+  addVariant(variant: Variant): this {
+    this.variants.push(variant);
+    return this;
+  }
+
+  build(): Product {
+    return new Product(this.title, this.description, this.variants);
   }
 }
 
-const person1 = PersonFactory.create("Person");
-person1.name = "John Doe";
-person1.role = "Software Engineer";
-const person2 = person1.clone();
+const variant1 = new VariantBuilder()
+  .setName("M1 Pro")
+  .setPrice(2000)
+  .setStock(10)
+  .build();
 
-person2.name = "walter white";
-person2.role = "Chemist";
-person2.metadata.tags = ["chemist", "science"];
+const variant2 = new VariantBuilder()
+  .setName("M1 Max")
+  .setPrice(3000)
+  .setStock(12)
+  .build();
 
-console.log(person1);
-console.log(person2);
+const product = new ProductBuilder()
+  .setTitle("Mackbook Pro")
+  .setDescription("Description")
+  .addVariant(variant1)
+  .addVariant(variant2)
+  .build();
+
+console.log(product);
