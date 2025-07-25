@@ -3328,3 +3328,82 @@ console.log(user);
 ```
 
 - Bulder Patterndan foydalanish
+
+---
+
+# **60-dars Bridge pattern**
+
+`Bridge pattern` — bu strukturaviy dizayn pattern bo‘lib, u abstraksiyani va uni amalga oshiruvchi (implementation) qismini bir-biridan mustaqil rivojlantirish imkonini beradi. Ya’ni, bu pattern koddagi qatlamlar orasidagi bog‘liqlikni zaiflashtirish (loosely coupled) uchun ishlatiladi.
+
+
+```ts
+interface PaymentMethod {
+  // Har qanday to'lov usuli 'pay' metodini amalga oshirishi kerak
+  pay(amount: number): void;
+}
+
+// Payme uchun to‘lov usuli
+class Payme implements PaymentMethod {
+  pay(amount: number): void {
+    // Konsolga to‘lov haqida ma’lumot chiqariladi
+    console.log(`Paid ${amount} using Payme`);
+  }
+}
+
+// Click uchun to‘lov usuli
+class Click implements PaymentMethod {
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using Click`);
+  }
+}
+
+// Uzum uchun to‘lov usuli
+class Uzum implements PaymentMethod {
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using Uzum`);
+  }
+}
+
+// PaymentGateway - bu 'abstraksiya' rolini bajaradi (Bridge Pattern'dagi)
+abstract class PaymentGateway {
+  // Bu class har doim biron bir to'lov usuli bilan bog'langan bo'ladi
+  constructor(protected method: PaymentMethod) {}
+
+  // checkout - bu abstrakt metod
+  abstract checkout(amount: number): void;
+}
+
+// Web uchun gateway, PaymentGateway'dan meros oladi
+class WebStoreGateway extends PaymentGateway {
+  checkout(amount: number): void {
+    // Web do'kondan checkout bosilganini bildiradi
+    console.log(`Checkout from Web Store`);
+    // Tanlangan to'lov usuli orqali to'lov bajariladi
+    this.method.pay(amount);
+  }
+}
+
+// Mobile uchun gateway
+class MobileStoreGateway extends PaymentGateway {
+  checkout(amount: number): void {
+    console.log(`Checkout from Mobile Store`);
+    this.method.pay(amount);
+  }
+}
+
+// Turli to'lov usullarini yaratamiz
+const payme = new Payme();
+const click = new Click();
+const uzum = new Uzum();
+
+// Web Store + Payme kombinatsiyasi
+const webPay = new WebStoreGateway(payme);
+// To'lovni amalga oshiramiz
+webPay.checkout(100);
+
+// Mobile Store + Click kombinatsiyasi
+const mobilePay = new MobileStoreGateway(click);
+mobilePay.checkout(200);
+```
+
+- Bridge Pattern dan foydalanish
