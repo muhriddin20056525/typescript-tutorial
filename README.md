@@ -3335,7 +3335,6 @@ console.log(user);
 
 `Bridge pattern` — bu strukturaviy dizayn pattern bo‘lib, u abstraksiyani va uni amalga oshiruvchi (implementation) qismini bir-biridan mustaqil rivojlantirish imkonini beradi. Ya’ni, bu pattern koddagi qatlamlar orasidagi bog‘liqlikni zaiflashtirish (loosely coupled) uchun ishlatiladi.
 
-
 ```ts
 interface PaymentMethod {
   // Har qanday to'lov usuli 'pay' metodini amalga oshirishi kerak
@@ -3407,3 +3406,64 @@ mobilePay.checkout(200);
 ```
 
 - Bridge Pattern dan foydalanish
+
+---
+
+# **60-dars Facade pattern**
+
+`Facade Pattern` — bu strukturaviy dizayn patterni bo‘lib, u murakkab tizimning ichki ishlarini yashirib, tashqi dunyoga oddiy interfeys taqdim etadi.
+
+```ts
+// AudioProccessor classi audio bilan ishlovchi komponent
+class AudioProccessor {
+  // Videodan audio qismini ajratib olish usuli
+  extractAudio() {
+    console.log("Extracting audio from video..."); // Konsolga xabar chiqaradi
+  }
+}
+
+// VideoProccessor classi video bilan ishlovchi komponent
+class VideoProccessor {
+  // Videoni dekodlash (ochish, o'qish) usuli
+  decodeVideo() {
+    console.log("Decoding video..."); // Konsolga xabar chiqaradi
+  }
+}
+
+// Encoder classi — yakuniy faylni kerakli formatga kodlash uchun javobgar
+class Encoder {
+  // format parametri orqali video/audio faylni kerakli formatga o‘zgartirish
+  encode(format: string) {
+    console.log(`Enkoding to format ${format}...`); // Formatni ko‘rsatib konsolga chiqaradi
+  }
+}
+
+// VideoConverterFacade — yuqoridagi uchta classi birlashtiruvchi "yuzaki" interfeys (facade)
+class VideoConverterFacade {
+  // Ichki komponentlar — audio, video va encoder'ni privat qilib olamiz
+  private audio = new AudioProccessor();
+  private video = new VideoProccessor();
+  private encoder = new Encoder();
+
+  // convert — umumiy convert qilish funksiyasi
+  convert(fileName: string, format: string) {
+    // Convert jarayoni boshlanganini bildiradi
+    console.log(`Converting ${fileName} to ${format}...`);
+    // Audio ajratiladi
+    this.audio.extractAudio();
+    // Video dekodlanadi
+    this.video.decodeVideo();
+    // Formatga kodlanadi
+    this.encoder.encode(format);
+    // Jarayon yakunlangani konsolga chiqariladi
+    console.log(`Conversion of ${fileName} to ${format} completed`);
+  }
+}
+
+// Mijoz (client) facade'ni chaqiradi, ichki murakkablikdan bexabar bo‘ladi
+const converter = new VideoConverterFacade();
+// Faqat bitta oddiy metod orqali video konvertatsiya qilinadi
+converter.convert("movie.mp4", "avi");
+```
+
+- `Facade pattern` dan foydalanish

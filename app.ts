@@ -1,62 +1,59 @@
-// #1. Interface for payment method
-interface PaymentMethod {
-  pay(amount: number): void;
-}
+// class AudioProccessor {
+//   extractAudio() {
+//     console.log("Extracting audio from video...");
+//   }
+// }
 
-// #2. Implementing of PaymentMethod for Payment Types
-class Payme implements PaymentMethod {
-  pay(amount: number): void {
-    console.log(`Paid ${amount} using Payme`);
+import { AuthFacade } from "./pattern/auth.facad";
+
+// class VideoProccessor {
+//   decodeVideo() {
+//     console.log("Decoding video...");
+//   }
+// }
+
+// class Encoder {
+//   encode(format: string) {
+//     console.log(`Enkoding to format ${format}...`);
+//   }
+// }
+
+// class VideoConverterFacade {
+//   private audio = new AudioProccessor();
+//   private video = new VideoProccessor();
+//   private encoder = new Encoder();
+
+//   convert(fileName: string, format: string) {
+//     console.log(`Converting ${fileName} to ${format}...`);
+//     this.audio.extractAudio();
+//     this.video.decodeVideo();
+//     this.encoder.encode(format);
+//     console.log(`Conversion of ${fileName} to ${format} completed`);
+//   }
+// }
+
+// const converter = new VideoConverterFacade();
+// converter.convert("movie.mp4", "avi");
+
+const auth = new AuthFacade();
+
+function register() {
+  try {
+    const token = auth.register("m@gmail.com", "123456");
+    console.log("Register Successful, token", token);
+  } catch (error) {
+    console.log("Register failed", error);
   }
 }
 
-class Click implements PaymentMethod {
-  pay(amount: number): void {
-    console.log(`Paid ${amount} using Click`);
+function login() {
+  try {
+    const token = auth.login("m@gmail.com", "123456");
+    console.log("Login Successful, token", token);
+  } catch (error) {
+    console.log("login failed", error);
   }
 }
 
-class Uzum implements PaymentMethod {
-  pay(amount: number): void {
-    console.log(`Paid ${amount} using Uzum`);
-  }
-}
-
-// #3. Bridge Pattern
-
-abstract class PaymentGateway {
-  constructor(protected method: PaymentMethod) {}
-
-  abstract checkout(amount: number): void;
-}
-
-// #4. Platform Class
-
-class WebStoreGateway extends PaymentGateway {
-  checkout(amount: number): void {
-    console.log(`Checkout from Web Store`);
-    this.method.pay(amount);
-  }
-}
-
-class MobileStoreGateway extends PaymentGateway {
-  checkout(amount: number): void {
-    console.log(`Checkout from Mobile Store`);
-    this.method.pay(amount);
-  }
-}
-
-
-// #5. Usage
-const payme = new Payme()
-const click = new Click()
-const uzum = new Uzum()
-
-// Web Store + Payme
-const webPay = new WebStoreGateway(payme)
-webPay.checkout(100)
-
-
-// Mobile Store Click
-const mobilePay = new MobileStoreGateway(click)
-mobilePay.checkout(200)
+register();
+login();
