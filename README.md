@@ -3409,7 +3409,7 @@ mobilePay.checkout(200);
 
 ---
 
-# **60-dars Facade pattern**
+# **61-dars Facade pattern**
 
 `Facade Pattern` — bu strukturaviy dizayn patterni bo‘lib, u murakkab tizimning ichki ishlarini yashirib, tashqi dunyoga oddiy interfeys taqdim etadi.
 
@@ -3467,3 +3467,48 @@ converter.convert("movie.mp4", "avi");
 ```
 
 - `Facade pattern` dan foydalanish
+
+---
+
+# **62-dars Adapter pattern**
+
+`Adapter Pattern` — bu Structural Design Pattern bo‘lib, u ikkita o‘zaro mos kelmaydigan interfeysga ega tizimlar o‘rtasida bog‘lovchi (adapter) vazifasini bajaradi.
+
+```ts
+// Eski (legacy) printer classi — eski tizim shunday ishlaydi
+class OldPrinter {
+  // Eski interfeys: faqat printText nomli metod bor
+  printText(text: string) {
+    console.log(`Printing Text ${text}`);
+  }
+}
+
+// Yangi tizimda ishlatiladigan interfeys — biz foydalanayotgan yangi standart
+interface NewPrinter {
+  // Yangi interfeysga ko‘ra printDocument degan metod bo'lishi kerak
+  printDocument: (document: string) => void;
+}
+
+// Adapter class — eski classni yangi interfeysga moslashtiradi
+class PrinterAdapter implements NewPrinter {
+  // Konstruktor orqali eski printerdan nusxa olamiz va uni private qilib saqlaymiz
+  constructor(private oldPrinter: OldPrinter) {}
+
+  // Yangi interfeysda kerak bo‘lgan metodni yozamiz
+  printDocument(document: string): void {
+    // Yangi metod aslida eski metodni chaqiradi — shu yerda moslashtirish bo‘lyapti
+    this.oldPrinter.printText(document);
+  }
+}
+
+// Eski printerdan nusxa yaratyapmiz (bu hali eski interfeys bilan ishlaydi)
+const legacyPrinter = new OldPrinter();
+
+// Adapter yordamida eski printerni yangi interfeysga moslashtiryapmiz
+const adapter = new PrinterAdapter(legacyPrinter);
+
+// Endi yangi interfeysga muvofiq bo‘lgan usulni chaqiryapmiz
+adapter.printDocument("Hello World");
+```
+
+- Adapter Patterndan foydalanish

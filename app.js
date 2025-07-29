@@ -1,53 +1,36 @@
 "use strict";
-// class AudioProccessor {
-//   extractAudio() {
-//     console.log("Extracting audio from video...");
+// class OldPrinter {
+//   printText(text: string) {
+//     console.log(`Printing Text ${text}`);
 //   }
 // }
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_facad_1 = require("./pattern/auth.facad");
-// class VideoProccessor {
-//   decodeVideo() {
-//     console.log("Decoding video...");
+// interface NewPrinter {
+//   printDocument: (document: string) => void;
+// }
+// class PrinterAdapter implements NewPrinter {
+//   constructor(private oldPrinter: OldPrinter) {}
+//   printDocument(document: string): void {
+//     this.oldPrinter.printText(document);
 //   }
 // }
-// class Encoder {
-//   encode(format: string) {
-//     console.log(`Enkoding to format ${format}...`);
-//   }
-// }
-// class VideoConverterFacade {
-//   private audio = new AudioProccessor();
-//   private video = new VideoProccessor();
-//   private encoder = new Encoder();
-//   convert(fileName: string, format: string) {
-//     console.log(`Converting ${fileName} to ${format}...`);
-//     this.audio.extractAudio();
-//     this.video.decodeVideo();
-//     this.encoder.encode(format);
-//     console.log(`Conversion of ${fileName} to ${format} completed`);
-//   }
-// }
-// const converter = new VideoConverterFacade();
-// converter.convert("movie.mp4", "avi");
-const auth = new auth_facad_1.AuthFacade();
-function register() {
-    try {
-        const token = auth.register("m@gmail.com", "123456");
-        console.log("Register Successful, token", token);
-    }
-    catch (error) {
-        console.log("Register failed", error);
-    }
+// const legacyPrinter = new OldPrinter();
+// const adapter = new PrinterAdapter(legacyPrinter);
+// adapter.printDocument("Hello World");
+const firebase_auth_adapter_1 = require("./adapters/firebase-auth.adapter");
+const legacy_auth_adapter_1 = require("./adapters/legacy-auth.adapter");
+const firebase_auth_service_1 = require("./services/firebase-auth.service");
+const legacy_auth_service_1 = require("./services/legacy-auth.service");
+async function bootstrap() {
+    const firebaseAdapter = new firebase_auth_adapter_1.FirebaseAuthAdapter(new firebase_auth_service_1.FirebaseAuth());
+    const legacyAdapter = new legacy_auth_adapter_1.LegacyAuthAdapter(new legacy_auth_service_1.LegacyAuth());
+    const firebaseLogin = await firebaseAdapter.login("m@gmail.com", "12345");
+    const firebaseRegister = await firebaseAdapter.register("d@gmail.com", "12345");
+    const legacyLogin = await legacyAdapter.login("m@gmail.com", "12345");
+    const legacyRegister = await legacyAdapter.register("d@gmail.com", "12345");
+    console.log("Firebase login", firebaseLogin);
+    console.log("Firebase Register", firebaseRegister);
+    console.log("Legacy login", legacyLogin);
+    console.log("Legacy Register", legacyRegister);
 }
-function login() {
-    try {
-        const token = auth.login("m@gmail.com", "123456");
-        console.log("Login Successful, token", token);
-    }
-    catch (error) {
-        console.log("login failed", error);
-    }
-}
-register();
-login();
+bootstrap();
