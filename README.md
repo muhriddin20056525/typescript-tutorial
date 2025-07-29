@@ -3512,3 +3512,60 @@ adapter.printDocument("Hello World");
 ```
 
 - Adapter Patterndan foydalanish
+
+---
+
+# **63-dars Proxy pattern**
+
+`Proxy Pattern` — bu Design Pattern (loyiha andozasi) bo‘lib, u asl obyektga to‘g‘ridan-to‘g‘ri murojaat qilish o‘rniga uning "vakili" orqali ishlashni ta’minlaydi.
+
+```ts
+// Bu interface har qanday hujjat xizmati `readDocument` metodiga ega bo‘lishi kerakligini bildiradi
+export interface DocumentService {
+  readDocument(): void;
+}
+
+// Asl hujjat xizmati bo'lib, interfeysni implement qiladi
+class RealDocument implements DocumentService {
+  readDocument(): void {
+    // Asl hujjat o'qilayotgani haqida xabar
+    console.log(`Reading secure document...`);
+  }
+}
+
+// Proxy klass — RealDocument'ga o'xshab harakat qiladi, lekin oldin tekshiruvdan o'tkazadi
+class DocumentProxy implements DocumentService {
+  // Asl hujjat xizmati — bu obyekt orqali real ish bajariladi
+  private realDocument: RealDocument;
+
+  // Proxy foydalanuvchining rolini qabul qiladi (masalan, 'admin' yoki 'user')
+  constructor(private userRole: string) {
+    // RealDocument'ni ichkarida yaratamiz
+    this.realDocument = new RealDocument();
+  }
+
+  // Interfeysdagi metodni implement qilamiz — bu orqali ruxsatni tekshiramiz
+  readDocument(): void {
+    // Agar foydalanuvchi "admin" bo'lsa, hujjatni o'qishga ruxsat beriladi
+    if (this.userRole === "admin") {
+      console.log("Access granted to read document");
+      this.realDocument.readDocument(); // Asl hujjat xizmatini chaqiramiz
+    } else {
+      // Agar "admin" bo'lmasa, ruxsat berilmaydi
+      console.log("Access denied to read document");
+    }
+  }
+}
+
+// "admin" rolidagi foydalanuvchi uchun proxy obyekt yaratamiz
+const admin = new DocumentProxy("admin");
+// Hujjatni o'qishga harakat qiladi — ruxsat beriladi
+admin.readDocument();
+
+// "user" rolidagi oddiy foydalanuvchi uchun proxy obyekt
+const user = new DocumentProxy("user");
+// Hujjatni o'qishga harakat qiladi — ruxsat rad etiladi
+user.readDocument();
+```
+
+- Proxy patterndan foydalanish

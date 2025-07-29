@@ -1,49 +1,69 @@
-// class OldPrinter {
-//   printText(text: string) {
-//     console.log(`Printing Text ${text}`);
+// export interface DocumentService {
+//   readDocument(): void;
+// }
+
+// class RealDocument implements DocumentService {
+//   readDocument(): void {
+//     console.log(`Reading secure document...`);
 //   }
 // }
 
-// interface NewPrinter {
-//   printDocument: (document: string) => void;
-// }
+// class DocumentProxy implements DocumentProxy {
+//   private realDocument: RealDocument;
 
-// class PrinterAdapter implements NewPrinter {
-//   constructor(private oldPrinter: OldPrinter) {}
+//   constructor(private userRole: string) {
+//     this.realDocument = new RealDocument();
+//   }
 
-//   printDocument(document: string): void {
-//     this.oldPrinter.printText(document);
+//   readDocument(): void {
+//     if (this.userRole === "admin") {
+//       console.log("Access granted to read document");
+//       this.realDocument.readDocument();
+//     } else {
+//       console.log("Access denied to read document");
+//     }
 //   }
 // }
 
-// const legacyPrinter = new OldPrinter();
-// const adapter = new PrinterAdapter(legacyPrinter);
+// const admin = new DocumentProxy("admin");
+// admin.readDocument();
 
-// adapter.printDocument("Hello World");
+// const user = new DocumentProxy("user");
+// user.readDocument();
 
-import { FirebaseAuthAdapter } from "./adapters/firebase-auth.adapter";
-import { LegacyAuthAdapter } from "./adapters/legacy-auth.adapter";
-import { FirebaseAuth } from "./services/firebase-auth.service";
-import { LegacyAuth } from "./services/legacy-auth.service";
-
-async function bootstrap() {
-  const firebaseAdapter = new FirebaseAuthAdapter(new FirebaseAuth());
-  const legacyAdapter = new LegacyAuthAdapter(new LegacyAuth());
-
-  const firebaseLogin = await firebaseAdapter.login("m@gmail.com", "12345");
-  const firebaseRegister = await firebaseAdapter.register(
-    "d@gmail.com",
-    "12345"
-  );
-
-  const legacyLogin = await legacyAdapter.login("m@gmail.com", "12345");
-  const legacyRegister = await legacyAdapter.register("d@gmail.com", "12345");
-
-  console.log("Firebase login", firebaseLogin);
-  console.log("Firebase Register", firebaseRegister);
-
-  console.log("Legacy login", legacyLogin);
-  console.log("Legacy Register", legacyRegister);
+interface DataService {
+  fetchData(id: number): string;
 }
 
-bootstrap();
+class DataService implements DataService {
+  fetchData(id: number): string {
+    console.log(`Fetching data for ID: ${id}`);
+    return `Data for ID ${id}`;
+  }
+}
+
+class CachedDataProxy implements DataService {
+  private dataService: DataService;
+  private cache: Map<number, string> = new Map();
+
+  constructor() {
+    this.dataService = new DataService();
+  }
+
+  fetchData(id: number): string {
+    if (this.cache.has(id)) {
+      console.log(`Cache hit for id: ${id}`);
+      return this.cache.get(id) as string;
+    }
+
+    const data = this.dataService.fetchData(id);
+    this.cache.set(id, data);
+    return data;
+  }
+}
+
+const proxy = new CachedDataProxy();
+console.log(proxy.fetchData(1));
+console.log(proxy.fetchData(1));
+console.log(proxy.fetchData(2));
+console.log(proxy.fetchData(1));
